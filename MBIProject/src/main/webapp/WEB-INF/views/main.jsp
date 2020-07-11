@@ -7,7 +7,7 @@
 </section>
 <!-- Footer Include -->
 <div>저는 서창재입니다. 잘부탁드립니다</div>
-<div>저는 서창재입니다.</div>
+<div>푸터 입니다 </div>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
