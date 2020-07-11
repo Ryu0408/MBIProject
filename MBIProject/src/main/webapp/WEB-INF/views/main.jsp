@@ -6,8 +6,8 @@
 	<h2>Main</h2>
 </section>
 <!-- Footer Include -->
-<div>저는 서창재입니다. 잘부탁드립니다</div>
-<div>푸터 입니다 </div>
+<div>네번재 GIT - 네번째 커밋 테스트 입니다.</div>
+<div>테스트:허정식 Date: 2020-07-11 PM:10:34 </div>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
