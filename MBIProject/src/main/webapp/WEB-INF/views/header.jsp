@@ -15,10 +15,16 @@
 <body>
 <header>
 <div class="row">
-	<div class="col-sm-2 bg-danger text-white">좌측 스팬</div>
-	<div class="col-sm-4 bg-primary text-white" >중앙 스팬1</div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-4" >
+		<a class="navbar-brand" href="#"><img src="https://lh3.googleusercontent.com/proxy/xKaAS5_RywmD1MdN-leLCXJjZoxV4AFQ6Rc1Hsb4miIjr9kMMusvKeIs_FG84-cNntgkY6C3I9FILKhoyqwby63dOMuHXq9arb1QLb3177GObDlCKkN2WZov4DxmrJ5BUCjFXMw" class="rounded-circle" alt="Cinque Terre"
+		style="width: 200px;height: 100px"></a>
+		<button type="button" class="btn btn-secondary" style ="width: 80px; margin-right: 70px">가이드</button>
+		<button type="button" class="btn btn-secondary" style ="width: 80px; margin-right: 70px">24시</button>
+		<button type="button" class="btn btn-secondary" style ="width: 80px;">이벤트</button>
+	</div>
 	<div class="col-sm-4">
-	  	<nav class="navbar navbar-expand-sm">
+	  	<nav class="navbar navbar-expand-sm" style="margin-top: 10px">
   			<!-- Brand/logo -->
   			<a class="navbar-brand" href="#" style ="margin-left: 100px">
     			<img src="https://thumb1.photo.cloud.naver.com/3472430162482377772?type=m3_2&nocache=2320101307" style="width:40px;">
@@ -38,18 +44,6 @@
   			</ul>
 		</nav>
 	</div>
-	<div class="col-sm-2 bg-danger text-white">우측 스팬</div>
-</div>
-<div class="row">
-	<div class="col-sm-2 bg-danger text-white">좌측 스팬</div>
-	<div class="col-sm-4 bg-primary text-white" >Home Page</div>
-	<div class="col-sm-4 bg-primary text-white" >
-		  <nav class="navbar navbar-expand-sm">
-			<button type="button" class="btn btn-secondary">가이드</button>
-			<button type="button" class="btn btn-secondary">24시</button>
-			<button type="button" class="btn btn-secondary">이벤트</button>
-		</nav>
-	</div>
-	<div class="col-sm-2 bg-danger text-white">우측 스팬</div>
+	<div class="col-sm-2"></div>
 </div>
 </header>
