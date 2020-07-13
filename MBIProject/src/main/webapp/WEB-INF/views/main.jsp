@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!--  Header Include -->
 <jsp:include page="header.jsp"/>
-<section style = "height : 600px; clear : both;">
+<section style = "height : 800px; clear : both;">
 	<h2>Main</h2>
 </section>
 <!-- Footer Include -->
