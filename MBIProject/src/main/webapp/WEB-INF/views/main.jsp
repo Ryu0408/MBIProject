@@ -8,6 +8,7 @@
 <!-- Footer Include -->
 <div>네번재 GIT - 네번째 커밋 테스트 입니다.</div>
 <div>테스트:허정식 Date: 2020-07-11 PM:10:34 </div>
+<div>테스트:김라은 Date: 2020-07-12 PM:21:18 </div>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
