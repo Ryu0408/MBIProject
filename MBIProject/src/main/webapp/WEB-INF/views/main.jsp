@@ -15,7 +15,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
         console.log("현재습도 : "+ resp.main.humidity);
         console.log("날씨 : "+ resp.weather[0].main );
         var weather =  resp.weather[0].main;
-        document.getElementById("imageid").src="../template/save.png";
+        document.getElementById("weather").src="${pageContext.request.contextPath }/img/" + weather +".png";
         console.log("상세날씨설명 : "+ resp.weather[0].description );
         console.log("날씨 이미지 : "+ resp.weather[0].icon );
         console.log("바람   : "+ resp.wind.speed );
@@ -64,7 +64,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 	</center>
 	</div>
 		<h5>오늘의 부산날씨</h5><br>
-		<img id = "text"  style="width:50px; height: 90px">
+		<img id = "weather"  style="width:50px; height: 90px">
 	<div class="col-sm-2">
 	</div>
 	<div class="col-sm-2"></div>
