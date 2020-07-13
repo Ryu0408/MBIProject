@@ -17,9 +17,9 @@
 <div class="row">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-4" >
-		<a class="navbar-brand" href="#"><img src="https://lh3.googleusercontent.com/proxy/xKaAS5_RywmD1MdN-leLCXJjZoxV4AFQ6Rc1Hsb4miIjr9kMMusvKeIs_FG84-cNntgkY6C3I9FILKhoyqwby63dOMuHXq9arb1QLb3177GObDlCKkN2WZov4DxmrJ5BUCjFXMw" class="rounded-circle" alt="Cinque Terre"
+		<a class="navbar-brand" href="${pageContext.request.contextPath }"><img src="https://lh3.googleusercontent.com/proxy/xKaAS5_RywmD1MdN-leLCXJjZoxV4AFQ6Rc1Hsb4miIjr9kMMusvKeIs_FG84-cNntgkY6C3I9FILKhoyqwby63dOMuHXq9arb1QLb3177GObDlCKkN2WZov4DxmrJ5BUCjFXMw" class="rounded-circle" alt="Cinque Terre"
 		style="width: 200px;height: 100px"></a>
-		<button type="button" class="btn btn-secondary" style ="width: 80px; margin-right: 70px" onclick="location.href='${pageContext.request.contextPath}/guideBoard/'">기이드</button>
+		<button type="button" class="btn btn-secondary" style ="width: 80px; margin-right: 70px" onclick="location.href='${pageContext.request.contextPath}/guideBoard/'">가이드</button>
 		<button type="button" class="btn btn-secondary" style ="width: 80px; margin-right: 70px">24시</button>
 		<button type="button" class="btn btn-secondary" style ="width: 80px;">이벤트</button>
 	</div>
@@ -36,7 +36,7 @@
     				<h6><small>(로그인 성공 시, 위치 변경 가능)</small></h6>
     			</li>
     			<li class="nav-item" style ="margin-right: 30px">
-      				<a class="nav-link" href="#" style = "color: black; text-decoration:none">로그인</a>
+      				<a class="nav-link" href="${pageContext.request.contextPath}/loginForm/" style = "color: black; text-decoration:none">로그인</a>
     			</li>
     			<li class="nav-item">
       				<a class="nav-link" href="#" style = "color: black; text-decoration:none">마이페이지</a>
