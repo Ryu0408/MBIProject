@@ -4,22 +4,25 @@
 <section style = "height : 800px; clear : both;">
 <div class="row">
   	<div class="col-sm-2"></div>
-	<div class="col-sm-2 bg-info text-white" >
+	<div class="col-sm-2 bg-info text-white" style="margin-top: 50px;">
 		<nav class="navbar bg-light">
-		  <ul class="navbar-nav">
+		  <ul class="navbar-nav" style="margin-top: 100px; text-align: center; width: 200px; height: 300px;">
 		    <li class="nav-item">
-		      <a class="nav-link" href="#">Link 1</a>
+		      <p style="color: black; font-size: 25pt;">카테고리</p>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="#">Link 2</a>
+		      <a class="nav-link" href="#" style="margin-top: 20px;">관광지</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="#">Link 3</a>
+		      <a class="nav-link" href="#" style="margin-top: 20px;">맛집</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="#" style="margin-top: 20px;">지역행사</a>
 		    </li>
 		  </ul>
 		</nav>
 	</div>
-	<div class="col-sm-6 bg-info text-white" >
+	<div class="col-sm-6 bg-info text-white" style="margin-top: 50px;">
 		<div class="content" style="border: 1px solid; margin-left: 30px;">
 			<p>컨텐츠</p>
 		</div>
