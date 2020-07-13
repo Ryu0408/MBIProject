@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class GuideController {
 	
-	@RequestMapping(value = "/guideBorder/")
+	@RequestMapping(value = "/guideBoard/")
 	public String guideBoard() {
-		return "guideBorder";
+		return "guideBoard";
 	}
 }
