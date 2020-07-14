@@ -21,6 +21,4 @@ public class MainController {
 		System.out.println(vo.get(0).getUsername());
 		return "main";
 	}
-
-	
 }

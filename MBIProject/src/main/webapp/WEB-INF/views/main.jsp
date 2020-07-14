@@ -12,7 +12,11 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
     async: "false",
     success: function(resp) {
         console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+        var temp =  (resp.main.temp- 273.15)
+        document.getElementById("temp").innerHTML= temp + "℃";
         console.log("현재습도 : "+ resp.main.humidity);
+        var humidity =  resp.main.humidity
+        document.getElementById("humidity").innerHTML= "현재습도(" + humidity + ")";
         console.log("날씨 : "+ resp.weather[0].main );
         var weather =  resp.weather[0].main;
         document.getElementById("weather").src="${pageContext.request.contextPath }/img/" + weather +".png";
@@ -59,15 +63,200 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 	<div class="col-sm-2" style="border-right-style:solid; border-right-color: gray">
 	<center>
 		<h5>이달의 추천</h5>
-		<a><img src="https://lh3.googleusercontent.com/proxy/MJ6W422Y3pRzUkXOCROt721vRPfTT3GyhE12KaL9a3N6WEpXLNFTiuGtLo2F03S7riG6gqXh1mv3uBEoPcJFPoEMVl-mNxUdOlPBIqcD1f2sZ0t5ywflLaBrEAJDF9KUy_gh66syUT0uVorbGGPsfChjYhCyq71E1xt_Uw" style="width:300px; height: 90px"></a><br><br>
-		<a><img src="https://lh3.googleusercontent.com/proxy/MJ6W422Y3pRzUkXOCROt721vRPfTT3GyhE12KaL9a3N6WEpXLNFTiuGtLo2F03S7riG6gqXh1mv3uBEoPcJFPoEMVl-mNxUdOlPBIqcD1f2sZ0t5ywflLaBrEAJDF9KUy_gh66syUT0uVorbGGPsfChjYhCyq71E1xt_Uw" style="width:300px; height: 90px"></a>
+		<a><img src="${pageContext.request.contextPath }/img/donggas.jpg" style="width:300px; height: 90px"></a><br><br>
+		<a><img src="${pageContext.request.contextPath }/img/donggas.jpg" style="width:300px; height: 90px"></a>
 	</center>
 	</div>
-		<h5>오늘의 부산날씨</h5><br>
-		<img id = "weather"  style="width:50px; height: 90px">
 	<div class="col-sm-2">
+		<center>
+		<h5>오늘의 부산날씨</h5>
+		<img id = "weather"  style="width:60px; height: 90px">
+		<b id = "temp" style="font-size: 40pt"></b><br>
+		<b id = "humidity" style="font-size: 20pt"></b>
+		</center>
 	</div>
 	<div class="col-sm-2"></div>
+</div>
+<br>
+<div class="row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<div class="container" style="padding:0px; margin: 0px;">
+<!-- 			Nav pills -->
+  			<ul class="nav nav-pills" role="tablist">
+    			<li class="nav-item" style="width:100px; text-align:center;">
+      				<a class="nav-link active" data-toggle="pill" href="#notice">공지사항</a>
+   				 </li>
+    			<li class="nav-item" style="width:100px; text-align:center;">
+      				<a class="nav-link" data-toggle="pill" href="#guide">가이드</a>
+    			</li>
+    			<li class="nav-item" style="width:100px; text-align:center;">
+      				<a class="nav-link" data-toggle="pill" href="#hour24">24시정보</a>
+    			</li>
+    			<li class="nav-item" style="width:100px; text-align:center;">
+      				<a class="nav-link" data-toggle="pill" href="#review">리뷰</a>
+    			</li>
+  			</ul>
+<!-- 		 	Tab panes -->
+		 	<br>
+  			<div class="tab-content" style = "border: 1px solid gray; height : 240px; width : 1131px">
+    			<div id="notice" class="container tab-pane active" style = "margin:0px; padding: 0px;"><br>
+    				<div style="width: 280px; margin-left:9px; float: left;">
+						<h5><b>부산광역시 공지사항1</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>   
+    				</div>
+    				<div style="width: 280px; float: left;">
+						<h5><b>부산광역시 공지사항2</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    				<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 공지사항3</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+					<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 공지사항4</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    			</div>
+    			<div id="guide" class="container tab-pane" style = "margin:0px; padding: 0px;"><br>
+    				<div style="width: 280px; margin-left:9px; float: left;">
+						<h5><b>부산광역시 가이드1</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>   
+    				</div>
+    				<div style="width: 280px; float: left;">
+						<h5><b>부산광역시 가이드2</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    				<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 가이드3</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+					<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 가이드4</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    			</div>
+    			<div id="hour24" class="container tab-pane" style = "margin:0px; padding: 0px;"><br>
+    				<div style="width: 280px; margin-left:9px; float: left;">
+						<h5><b>부산광역시 24시정보1</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>   
+    				</div>
+    				<div style="width: 280px; float: left;">
+						<h5><b>부산광역시 24시정보2</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    				<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 24시정보3</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+					<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 24시정보4</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    			</div>
+    			<div id="review" class="container tab-pane" style = "margin:0px; padding: 0px;"><br>
+    				<div style="width: 280px; margin-left:9px; float: left;">
+						<h5><b>부산광역시 리뷰1</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>   
+    				</div>
+    				<div style="width: 280px; float: left;">
+						<h5><b>부산광역시 리뷰2</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    				<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 리뷰3</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+					<div style="width: 280px;   float: left;">
+						<h5><b>부산광역시 리뷰4</b></h5>
+      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
+						</div>
+      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
+							<p style = "text-align: right;">2020-07-14</p>
+						</div>
+					</div>
+    			</div>
+  			</div>
+		</div>
+	</div>
+	<div class="col-sm-2">
+	</div>
 </div>
 
 <!-- Footer Include -->
