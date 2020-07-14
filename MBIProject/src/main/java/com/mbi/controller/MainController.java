@@ -16,9 +16,9 @@ public class MainController {
 	@Autowired testdao dao;
 	@RequestMapping(value = "/")
 	public String home() {
-		List<TestVO> vo = dao.selectAllMembers();
-		System.out.println(vo.get(0).getUserid());
-		System.out.println(vo.get(0).getUsername());
+//		List<TestVO> vo = dao.selectAllMembers();
+//		System.out.println(vo.get(0).getUserid());
+//		System.out.println(vo.get(0).getUsername());
 		return "main";
 	}
 }
