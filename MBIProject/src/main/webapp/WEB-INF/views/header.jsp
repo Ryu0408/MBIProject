@@ -27,7 +27,7 @@
 	  	<nav class="navbar navbar-expand-sm" style="margin-top: 10px">
   			<!-- Brand/logo -->
   			<a class="navbar-brand" href="#" style ="margin-left: 100px">
-    			<img src="https://thumb1.photo.cloud.naver.com/3472430162482377772?type=m3_2&nocache=2320101307" style="width:40px;">
+    			<img src="${pageContext.request.contextPath }/img/login.jpg" style="width:40px;">
   			</a> 
   			<!-- Links -->
   			<ul class="navbar-nav">
