@@ -10,4 +10,8 @@ public class GuideController {
 	public String guideBoard() {
 		return "guideBoard";
 	}
+	@RequestMapping(value = "/guideBoard/writeBoard/")
+	public String writeBoard() {
+		return "writeBoard";
+	}
 }
