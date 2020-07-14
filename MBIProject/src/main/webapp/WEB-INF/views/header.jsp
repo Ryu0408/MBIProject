@@ -20,7 +20,7 @@
 		<a class="navbar-brand" href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/img/logo.png" alt="Cinque Terre"
 		style="width: 200px;height: 100px"></a>
 		<button type="button" class="btn btn-secondary" style ="width: 100px; margin-right: 30px" onclick="location.href='${pageContext.request.contextPath}/guideBoard/'">가이드</button>
-		<button type="button" class="btn btn-secondary" style ="width: 100px; margin-right: 30px">24시정보</button>
+		<button type="button" class="btn btn-secondary" style ="width: 100px; margin-right: 30px" onclick="location.href='${pageContext.request.contextPath}/hours24/'">24시정보</button>
 		<button type="button" class="btn btn-secondary" style ="width: 100px;">이벤트</button>
 	</div>
 	<div class="col-sm-4">
