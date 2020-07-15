@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
     
-	<title>MBI Homepage</title>
+	<title>MBI Login</title>
 </head>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -114,7 +114,8 @@
 
 <body>
 <div class="login-form">
-	<a class="navbar-brand" href="${pageContext.request.contextPath }"><img src="https://lh3.googleusercontent.com/proxy/xKaAS5_RywmD1MdN-leLCXJjZoxV4AFQ6Rc1Hsb4miIjr9kMMusvKeIs_FG84-cNntgkY6C3I9FILKhoyqwby63dOMuHXq9arb1QLb3177GObDlCKkN2WZov4DxmrJ5BUCjFXMw" class="rounded-circle" alt="Cinque Terre"
+	<a class="navbar-brand" href="${pageContext.request.contextPath }">
+	<img src="${pageContext.request.contextPath }/img/logo.png" class="rounded-circle" alt="Cinque Terre"
 		style="width: 350px;height: 150px"></a>
 	<hr>
     <form action="" method="post">
@@ -133,8 +134,8 @@
             <a href="#" class="float-right">비밀번호 찾기</a>
         </div>        
     </form>
-    <p class="text-center"><a 
-    	href="${pageContext.request.contextPath }/loginForm/loginJoin/">회원 가입</a></p>
+    <p class="text-center">
+    <a href="${pageContext.request.contextPath }/loginForm/joinUse/">회원 가입</a></p>
 </div>
 
 </body>
