@@ -6,10 +6,8 @@ public class GuideBoardVO {
 	public String boardtitle;
 	public String boardid;
 	public int boardtype;
-	public String registdate;
 	public int boardview;
 	public int boardgood;
-	
 	public int getBoardsid() {
 		return boardsid;
 	}
@@ -40,12 +38,6 @@ public class GuideBoardVO {
 	public void setBoardtype(int boardtype) {
 		this.boardtype = boardtype;
 	}
-	public String getRegistdate() {
-		return registdate;
-	}
-	public void setRegistdate(String registdate) {
-		this.registdate = registdate;
-	}
 	public int getBoardview() {
 		return boardview;
 	}
@@ -58,6 +50,6 @@ public class GuideBoardVO {
 	public void setBoardgood(int boardgood) {
 		this.boardgood = boardgood;
 	}
-
+	
 	
 }

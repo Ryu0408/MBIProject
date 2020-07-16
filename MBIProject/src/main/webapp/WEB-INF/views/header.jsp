@@ -21,7 +21,7 @@
 		style="width: 200px;height: 100px"></a>
 		<button type="button" class="btn btn-secondary" style ="width: 100px; margin-right: 30px" onclick="location.href='${pageContext.request.contextPath}/guideBoard/'">가이드</button>
 		<button type="button" class="btn btn-secondary" style ="width: 100px; margin-right: 30px" onclick="location.href='${pageContext.request.contextPath}/hours24/'">24시정보</button>
-		<button type="button" class="btn btn-secondary" style ="width: 100px;">이벤트</button>
+		<button type="button" class="btn btn-secondary" style ="width: 100px;" onclick="location.href='${pageContext.request.contextPath}/noticeList/'">공지사항</button>
 	</div>
 	<div class="col-sm-4">
 	  	<nav class="navbar navbar-expand-sm" style="margin-top: 10px">
