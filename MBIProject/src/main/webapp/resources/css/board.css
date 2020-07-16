@@ -1,0 +1,41 @@
+
+#notice-content {margin-top:50px; font-size: 16px; line-height:0.3; color :#333;  }
+#notice-content .notice_in{max-width:1000px; width:100%; margin:0 auto;}
+table.notice {
+	border : 1px solid #333; 
+	max-width:1000px; width:100%; 
+	
+	margin: 0 auto;
+	margin-top:20px;
+	margin-bottom:50px;
+	
+}
+
+table.notice, tr, td, th{border: 1px solid #333; }
+table.notice, tr{ height:50px;}
+table.notice td, th{line-height:50px;}
+
+.notice-group{margin-left:auto; max-width:250px;  font-size:1.0rem;}
+
+#notice-content .notice_in a{text-decoration:none; color:#333;}
+.navi{display:flex; justify-content:center;}
+
+#notice-content .notice_in .btnGroup .btn{display:block; max-width:100px; width:100%; height:40px; 
+								line-height:40px; font-size:16px; padding: 0 !important; background-color:white; cursor:pointer}	
+
+.noticeWrite th, td{line-height:30px;}
+.noticeWrite tr:nth-child(3){height:250px;}
+
+.noticeWrite .btn-w,
+.noticeRead .btn-w
+{max-width:100px; width:100%;}
+
+#notice-content .notice_in table{border: 1px solid #333;}
+#notice-content .notice_in table tr,
+#notice-content .notice_in table td, 
+#notice-content .notice_in table th{border: 1px solid #333;}
+
+
+/* noticeRead */
+
+.noticeRead  .btn-w:first-child{margin-left:20px;}
