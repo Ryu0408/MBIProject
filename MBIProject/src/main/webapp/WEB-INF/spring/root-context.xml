@@ -39,6 +39,7 @@
 			<list>
 				<value>classpath:config/test.xml</value>
 				<value>classpath:config/guideboard.xml</value>
+				<value>classpath:config/noticeboard.xml</value>
 			</list>
 		</property>
 	</bean>

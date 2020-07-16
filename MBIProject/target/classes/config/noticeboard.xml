@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.mbi.dao.NoticeBoardDAO">
+	<insert id="create" parameterType="com.mbi.vo.NoticeBoardVO"  >
+		INSERT INTO NOTICEBOARD 
+		(
+			noticecontent,
+			noticetitle,
+			noticeid,
+			noticetype,
+			noticeview
+		)
+		
+		VALUES 
+		(
+			#{vo.noticecontent},
+			#{vo.noticetitle},
+			#{vo.noticeid},
+			#{vo.noticetype},
+			#{vo.noticeview}
+		)
+	</insert>
+	
+	<select id="select" resultType="com.mbi.vo.NoticeBoardVO">
+		SELECT * FROM NOTICEBOARD ORDER BY registdate DESC
+	</select>
+</mapper>
