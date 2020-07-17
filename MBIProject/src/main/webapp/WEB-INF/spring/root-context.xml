@@ -38,7 +38,10 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:config/guideboard.xml</value>
+
 				<value>classpath:config/userlogin.xml</value>
+
+				<value>classpath:config/noticeboard.xml</value>
 			</list>
 		</property>
 	</bean>

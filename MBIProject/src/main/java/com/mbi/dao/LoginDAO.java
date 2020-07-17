@@ -5,7 +5,4 @@ import com.mbi.vo.UserLoginVO;
 public interface LoginDAO {
 	
 	UserLoginVO login(String userid);
-
-	
-	
 }

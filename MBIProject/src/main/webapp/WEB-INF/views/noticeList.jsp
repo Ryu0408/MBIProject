@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/notice.css"/>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section id="notice-content">
 	<div class="notice_in">
 		<form>
@@ -22,45 +22,15 @@
 				<th>조회수</th>
 			</tr>
 			
-			<tr>
-				<td>1</td>
-				<td><a href="#" target="_self">장소의 위치를 알고 싶어요.~~</a></td>
-				<td>아방가르드</td>
-				<td>2020.07.10</td>
-				<td>10</td>
-			</tr>
-			
-			<tr>
-				<td>1</td>
-				<td><a href="#" target="_self">장소의 위치를 알고 싶어요.~~</a></td>
-				<td>아방가르드</td>
-				<td>2020.07.10</td>
-				<td>10</td>
-			</tr>
-			
-			<tr>
-				<td>1</td>
-				<td><a href="#" target="_self">장소의 위치를 알고 싶어요.~~</a></td>
-				<td>아방가르드</td>
-				<td>2020.07.10</td>
-				<td>10</td>
-			</tr>
-			
-			<tr>
-				<td>1</td>
-				<td><a href="#" target="_self">장소의 위치를 알고 싶어요.~~</a></td>
-				<td>아방가르드</td>
-				<td>2020.07.10</td>
-				<td>10</td>
-			</tr>
-			
-			<tr>
-				<td>1</td>
-				<td><a href="#" target="_self">장소의 위치를 알고 싶어요.~~</a></td>
-				<td>아방가르드</td>
-				<td>2020.07.10</td>
-				<td>10</td>
-			</tr>
+			<c:forEach var="nlist" begin="1"  end="${list.size}" step="1" varStatus="no" items="${list}">
+				<tr>
+					<td>${no }</td>
+					<td>${nlist.noticecontent }</td>
+					<td>${nlist.noticeid }</td>
+					<td>${nlist.registdate }</td>
+					<td>${nlist.noticeview }</td>
+				</tr>
+			</c:forEach>
 		</table>
 		
 		<div class="btnGroup w-100">
