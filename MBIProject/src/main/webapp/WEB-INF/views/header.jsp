@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,11 +34,20 @@
   			<!-- Links -->
   			<ul class="navbar-nav">
     			<li class="nav-item" style ="margin-right: 40px">
-    				OOO님 환영합니다<br>
-    				<h6><small>(로그인 성공 시, 위치 변경 가능)</small></h6>
+    			<c:set var="vo" value="${userSession}" scope="session" />
+    			<c:if test="${not empty vo}">    				
+    				<h6><small><c:out value="${vo.username}님이 " /></small></h6>
+    				<br>
+    				<h6><small>접속 중입니다</small></h6>
+    			</c:if>
     			</li>
     			<li class="nav-item" style ="margin-right: 30px">
+    			<c:if test="${empty vo}">
       				<a class="nav-link" href="${pageContext.request.contextPath}/loginForm/" style = "color: black; text-decoration:none">로그인</a>
+      			</c:if>
+      			<c:if test="${not empty vo}">
+      				<a class="nav-link" href="${pageContext.request.contextPath}/logout/" style = "color: black; text-decoration:none">로그아웃</a>
+      			</c:if>
     			</li>
     			<li class="nav-item">
       				<a class="nav-link" href="#" style = "color: black; text-decoration:none">마이페이지</a>

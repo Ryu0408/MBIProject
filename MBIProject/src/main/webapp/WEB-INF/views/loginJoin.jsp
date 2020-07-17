@@ -92,36 +92,36 @@
 <body>
 <div class="signup-form">
 	<hr>
-	<div>
-		<div class="form-group">
-            <button type="button" class="btn btn-outline-dark">Dark</button>
-            <img class="size" src="${pageContext.request.contextPath }/img/arrow1.png">
-        </div>
-	</div>
+	
 	<br>
-    <form action="/examples/actions/confirmation.php" method="post">
-		<h2>회원 가입</h2>
+    <form action="${pageContext.request.contextPath }/" method="post">
+		<h2 align="center">회원 가입</h2>
 		<hr>
 		<div class="form-group">
-        	<input type="text" class="form-control" name="username" placeholder="성명" required="required">
+        	<input type="text" style="text-align: center;" class="form-control" name="username" placeholder="성명" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" class="form-control" name="userjumin" placeholder="주민번호('-'생략가능)" required="required">
+        	<input type="text" style="text-align: center;" class="form-control" name="userjumina" placeholder="주민번호(앞 6자리)" required="required"> - 
+        	<input type="text" style="text-align: center;" class="form-control" name="userjuminb" placeholder="주민번호(뒤 7자리)" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" class="form-control" name="userid" placeholder="사용할 아이디" required="required">
+        	<input type="text" style="text-align: center;" class="form-control" name="userid" placeholder="사용할 아이디" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="userpw" placeholder="비밀번호(숫자, 영문자, 특수기호 사용하여 13자리 이상)" required="required">
+            <input type="password" style="text-align: center;" class="form-control" name="userpw" placeholder="비밀번호(숫자, 영문자, 특수기호 사용하여 13자리 이상)" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_pw" placeholder="비밀번호 재입력" required="required">
+            <input type="password" style="text-align: center;" class="form-control" name="confirm_pw" placeholder="비밀번호 재입력" required="required">
         </div>        
-		<div class="form-group">
+		<div class="form-group" align="center">
             <button type="submit" class="btn btn-primary btn-lg">회원 가입</button>
         </div>
     </form>
-	<div class="hint-text">이미 계정이 있으신가요? <a href="#">&nbsp&nbsp로그인 바로가기</a></div>
+    
+	<div class="hint-text">이미 계정이 있으신가요? 
+	<a href="${pageContext.request.contextPath}/loginForm/">&nbsp&nbsp로그인 바로가기</a>
+	</div>
+	
 </div>
 
 </body>

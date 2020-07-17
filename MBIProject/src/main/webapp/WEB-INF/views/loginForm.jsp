@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
     
-	<title>MBI Homepage</title>
+	<title>MBI Login</title>
 </head>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -113,28 +114,68 @@
 </style>
 
 <body>
+<c:if test="${not empty cookie.user_check}">
+	<c:set value="checked" var="checked"/>
+</c:if>
+
+<script>
+$('#loginBtn').click(function() {
+	var id = $('#userid').val();
+	var pw = $('#userpw').val();
+	var remember_us = $('#remember_userid').is(':checked');
+		$.ajax({
+		type : 'post',
+		url : '${pageContext.request.contextPath}/',
+		data : {
+			user_id : id,
+			user_pw : pw,
+			remember_userId : remember_us
+			},
+// 			success : function(data) {
+// 				if (data == 0) { //로그인 실패시
+// 					console.log(data);
+// 					location.href='${pageContext.request.contextPath}/loginForm/';
+// 					$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
+// 				}  else if(data == 1){ //로그인 성공시
+// 					console.log(data);
+// 					location.href = '${pageContext.request.contextPath}/';
+// 				}
+// 			}
+		});
+	});
+	
+</script>
+
 <div class="login-form">
-	<a class="navbar-brand" href="${pageContext.request.contextPath }"><img src="https://lh3.googleusercontent.com/proxy/xKaAS5_RywmD1MdN-leLCXJjZoxV4AFQ6Rc1Hsb4miIjr9kMMusvKeIs_FG84-cNntgkY6C3I9FILKhoyqwby63dOMuHXq9arb1QLb3177GObDlCKkN2WZov4DxmrJ5BUCjFXMw" class="rounded-circle" alt="Cinque Terre"
+	<a class="navbar-brand" href="${pageContext.request.contextPath }/">
+	<img src="${pageContext.request.contextPath }/img/logo.png" class="rounded-circle" alt="Cinque Terre"
 		style="width: 350px;height: 150px"></a>
 	<hr>
-    <form action="" method="post">
-        <h2 class="text-center">Log in</h2>       
+    <form method="post">
+        <h2 class="text-center">로그인</h2>       
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="아이디" required="required">
+            <input type="text" name="userid" class="form-control" id="userid"
+            	value="${cookie.user_check.value}" placeholder="아이디" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="비밀번호" required="required">
+            <input type="password" name="userpw" class="form-control" 
+            	id="userpw" placeholder="비밀번호" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">로그인</button>
+					<span class="font-weight-bold text-white bg-dark"
+						id="spanLoginCheck"></span>
+		</div>
+        <div class="form-group">
+            <button type="submit" id="loginBtn" class="btn btn-primary btn-block">로그인</button>
         </div>
         <div class="clearfix">
-            <label class="float-left form-check-label"><input type="checkbox">아이디 저장</label>
+            <label class="float-left form-check-label">
+            <input type="checkbox" name="remember_userid"${checked}>아이디 저장</label>
             <a href="#" class="float-right">비밀번호 찾기</a>
         </div>        
     </form>
-    <p class="text-center"><a 
-    	href="${pageContext.request.contextPath }/loginForm/loginJoin/">회원 가입</a></p>
+    <p class="text-center">
+    <a href="${pageContext.request.contextPath }/loginForm/joinUse/">회원 가입</a></p>
 </div>
 
 </body>
