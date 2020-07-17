@@ -94,14 +94,15 @@
 	<hr>
 	
 	<br>
-    <form action="joinResult/" method="post">
+    <form action="${pageContext.request.contextPath }/" method="post">
 		<h2 align="center">회원 가입</h2>
 		<hr>
 		<div class="form-group">
         	<input type="text" style="text-align: center;" class="form-control" name="username" placeholder="성명" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" style="text-align: center;" class="form-control" name="userjumin" placeholder="주민번호('-'생략가능)" required="required">
+        	<input type="text" style="text-align: center;" class="form-control" name="userjumina" placeholder="주민번호(앞 6자리)" required="required"> - 
+        	<input type="text" style="text-align: center;" class="form-control" name="userjuminb" placeholder="주민번호(뒤 7자리)" required="required">
         </div>
         <div class="form-group">
         	<input type="text" style="text-align: center;" class="form-control" name="userid" placeholder="사용할 아이디" required="required">
@@ -116,7 +117,11 @@
             <button type="submit" class="btn btn-primary btn-lg">회원 가입</button>
         </div>
     </form>
-	<div class="hint-text">이미 계정이 있으신가요? <a href="s/loginForm">&nbsp&nbsp로그인 바로가기</a></div>
+    
+	<div class="hint-text">이미 계정이 있으신가요? 
+	<a href="${pageContext.request.contextPath}/loginForm/">&nbsp&nbsp로그인 바로가기</a>
+	</div>
+	
 </div>
 
 </body>
