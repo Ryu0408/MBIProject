@@ -7,9 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import com.mbi.vo.GuideBoardVO;
 
 public interface GuideBoardDAO {
-
-	List<GuideBoardVO> select();
+	
+	List<GuideBoardVO> selectAll();
 	
 	void create(@Param("gvo") GuideBoardVO gvo);
+
+	GuideBoardVO selectOne(@Param("gvo")int boardsid);
 
 }

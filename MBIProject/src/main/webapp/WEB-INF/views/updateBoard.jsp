@@ -50,12 +50,11 @@
 								<tr>
 									<td colspan="1 ml-auto"><input type="button"
 										class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.href='${pageContext.request.contextPath}/guideBoard/'"
-										value="삭제" /></td>
+										onclick="location.replace('${pageContext.request.contextPath}/updateBoard/${vo.boardsid}/')"
+										value="취소" /></td>
 									<td colspan="4 ml-auto">
-									<td colspan="1 ml-auto"><input type="button"
+									<td colspan="1 ml-auto"><input type="submit"
 										class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'"
 										value="수정" /></td>
 								</tr>
 							</thead>

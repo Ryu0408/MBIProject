@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/twbs-pagination/jquery.twbsPagination.js"> --%>
+<!-- </script> -->
 <section style="height: 800px; clear: both;">
 	<div class="row">
 		<div class="col-sm-2"></div>
@@ -33,87 +37,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>7</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>8</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>9</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-						<tr>
-							<td>10</td>
-							<td>부산 동래구맛집 서창재식당에 다녀오다</td>
-							<td>ckdwo3259@gmail.com</td>
-							<td>2000</td>
-							<td>500</td>
-						</tr>
-
+						<c:forEach var="vo" items="${vo }">
+							<tr onClick="location.href='${pageContext.request.contextPath }/guideBoard/readBoard/${vo.boardsid }/'" style="cursor:pointer;">
+								<td class="boardsid"> ${vo.boardsid }</td>
+								<td class="boardtitle"> ${vo.boardtitle}</td>
+								<td class="boardid"> ${vo.boardid }</td>
+								<td class="boardview"> ${vo.boardview }</td>
+								<td class="boardgood"> ${vo.boardgood }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
+
 			<div id="write" style="float: right;">
 				<button onclick="location.href='${pageContext.request.contextPath}/guideBoard/writeBoard/'">글쓰기</button>
 			</div>
