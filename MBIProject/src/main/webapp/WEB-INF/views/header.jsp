@@ -34,18 +34,17 @@
   			<!-- Links -->
   			<ul class="navbar-nav">
     			<li class="nav-item" style ="margin-right: 40px">
-    			<c:set var="vo" value="${userSession}" scope="session" />
-    			<c:if test="${not empty vo}">    				
-    				<h6><small><c:out value="${vo.username}님이 " /></small></h6>
-    				<br>
-    				<h6><small>접속 중입니다</small></h6>
+    			<c:set var="vos" value="${userSession}" scope="session" />
+    			<c:if test="${not empty vos}">   				
+    				<h6><small><c:out value="${vos.username}님 " /></small></h6>
+    				<h6><small>환영합니다.</small></h6>
     			</c:if>
     			</li>
     			<li class="nav-item" style ="margin-right: 30px">
-    			<c:if test="${empty vo}">
+    			<c:if test="${empty vos}">
       				<a class="nav-link" href="${pageContext.request.contextPath}/loginForm/" style = "color: black; text-decoration:none">로그인</a>
       			</c:if>
-      			<c:if test="${not empty vo}">
+      			<c:if test="${not empty vos}">
       				<a class="nav-link" href="${pageContext.request.contextPath}/logout/" style = "color: black; text-decoration:none">로그아웃</a>
       			</c:if>
     			</li>
