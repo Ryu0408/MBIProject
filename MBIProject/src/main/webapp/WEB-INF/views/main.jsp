@@ -12,7 +12,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
     async: "false",
     success: function(resp) {
         console.log("현재온도 : "+ (resp.main.temp- 273.15) );
-        var temp =  (resp.main.temp- 273.15)
+        var temp =  Math.floor((resp.main.temp- 273.15));
         document.getElementById("temp").innerHTML= temp + "℃";
         console.log("현재습도 : "+ resp.main.humidity);
         var humidity =  resp.main.humidity
@@ -29,6 +29,14 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
     }
 	})
 </script>
+<div class="row">
+	<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<img src="/homepage/img/광안대교8.jpg" style="height:300px; width: 1280px">
+		</div>
+	<div class="col-sm-2"></div>
+</div><br>
+
 <div class="row">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-4">
