@@ -94,18 +94,18 @@
 	<hr>
 	
 	<br>
-    <form action="${pageContext.request.contextPath }/" method="post">
+    <form method="POST">
 		<h2 align="center">회원 가입</h2>
 		<hr>
 		<div class="form-group">
         	<input type="text" style="text-align: center;" class="form-control" name="username" placeholder="성명" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" style="text-align: center;" class="form-control" name="userjumina" placeholder="주민번호(앞 6자리)" required="required"> - 
-        	<input type="text" style="text-align: center;" class="form-control" name="userjuminb" placeholder="주민번호(뒤 7자리)" required="required">
+        	<input type="text" style="text-align: center;" class="form-control" name="userjuminA" placeholder="주민번호(앞 6자리)" required="required"> - 
+        	<input type="text" style="text-align: center;" class="form-control" name="userjuminB" placeholder="주민번호(뒤 7자리)" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" style="text-align: center;" class="form-control" name="userid" placeholder="사용할 아이디" required="required">
+        	<input type="email" style="text-align: center;" class="form-control" name="userid" placeholder="사용할 아이디" required="required">
         </div>
 		<div class="form-group">
             <input type="password" style="text-align: center;" class="form-control" name="userpw" placeholder="비밀번호(숫자, 영문자, 특수기호 사용하여 13자리 이상)" required="required">

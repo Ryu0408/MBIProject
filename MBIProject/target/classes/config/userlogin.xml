@@ -7,5 +7,16 @@
 	<select id="login" resultType="com.mbi.vo.UserLoginVO">
 		select * from USERLOGIN where userid = #{userid}
 	</select>
+	
+	<insert id="join" parameterType="com.mbi.vo.UserLoginVO">
+		insert into USERLOGIN (
+			userid, userpw, username,
+			userjumina, userjuminb
+		)
+		values (
+			#{vo.userid}, #{vo.userpw}, #{vo.username},
+			#{vo.userjuminA}, #{vo.userjuminB}
+		)
+	</insert>
 
 </mapper>

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mbi.service.LoginService;
 import com.mbi.vo.UserLoginVO;
-
-//import com.mbi.service.LoginService;
 
 @Controller
 public class LoginController {
@@ -31,22 +28,27 @@ public class LoginController {
 		return mav;
 	}
 	
-	// 약관이동
-	@RequestMapping(value="/loginForm/joinUse/", method=RequestMethod.GET)
-	public ModelAndView joinUse() {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("이용약관 페이지");
-		mav.setViewName("joinUse");
-		return mav;
+	// 회원 가입으로 이동
+	@RequestMapping(value="/loginForm/loginJoin/", method=RequestMethod.GET)
+	public String joinUse() {
+		return "loginJoin";
 	}
 	
-	// 회원 가입 폼 이동
-	@RequestMapping(value="/loginForm/joinUse/loginJoin/", method=RequestMethod.POST)
-	public ModelAndView loginJoin() {
-		ModelAndView mav = new ModelAndView();
-		System.out.println("회원가입 예제");
-		mav.setViewName("loginJoin");
-		return mav;
+	// 회원 가입 폼 이동(x, 잠깐 보류)
+//	@RequestMapping(value="/loginForm/joinUse/", method=RequestMethod.POST)
+//	public ModelAndView loginJoin() {
+//		ModelAndView mav = new ModelAndView();
+//		System.out.println("회원가입 예제");
+//		mav.setViewName("loginJoin");
+//		return mav;
+//	}
+	
+	// 회원 가입 후 로그인 페이지 이동
+	@RequestMapping(value="loginForm/loginJoin/", method=RequestMethod.POST)
+	public String join(UserLoginVO userVO) {
+		System.out.println("회원가입 넘어옴");
+		ls.userJoin(userVO);
+		return "redirect:/loginForm/";
 	}
 	
 	// 로그인
@@ -57,6 +59,7 @@ public class LoginController {
 		
 		String check = request.getParameter("remember_userid"); 	// 아이디 저장 값 들고오기
 
+		System.out.println("check : " + check);
 //		String userpw = userVO.getUserpw();
 //		userVO.setUserpw(userpw);
 		

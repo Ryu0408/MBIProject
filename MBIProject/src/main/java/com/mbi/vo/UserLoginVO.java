@@ -1,7 +1,6 @@
 package com.mbi.vo;
 
-import java.util.Date;
-
+// 커맨드 객체
 public class UserLoginVO {
 	
 	private int loginSid;
@@ -47,5 +46,30 @@ public class UserLoginVO {
 	public void setUserjuminB(String userjuminB) {
 		this.userjuminB = userjuminB;
 	}
+	
+}
 
+class Agreement {
+	private int agreement1;
+	private int agreement2;
+	private int agreement3;
+	
+	public int getAgreement1() {
+		return agreement1;
+	}
+	public void setAgreement1(int agreement1) {
+		this.agreement1 = agreement1;
+	}
+	public int getAgreement2() {
+		return agreement2;
+	}
+	public void setAgreement2(int agreement2) {
+		this.agreement2 = agreement2;
+	}
+	public int getAgreement3() {
+		return agreement3;
+	}
+	public void setAgreement3(int agreement3) {
+		this.agreement3 = agreement3;
+	}
 }

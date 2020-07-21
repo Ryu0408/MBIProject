@@ -154,8 +154,8 @@ $('#loginBtn').click(function() {
     <form method="post">
         <h2 class="text-center">로그인</h2>       
         <div class="form-group">
-            <input type="text" name="userid" class="form-control" id="userid"
-            	value="${cookie.user_check.value}" placeholder="아이디" required="required">
+            <input type="email" name="userid" class="form-control" id="userid"
+            	value="${cookie.check.value}" placeholder="아이디" required="required">
         </div>
         <div class="form-group">
             <input type="password" name="userpw" class="form-control" 
@@ -170,12 +170,18 @@ $('#loginBtn').click(function() {
         </div>
         <div class="clearfix">
             <label class="float-left form-check-label">
-            <input type="checkbox" name="remember_userid"${checked}>아이디 저장</label>
+            <c:if test="${empty cookie.user_check}">
+            <input type="checkbox" name="remember_userid"${checked} checked="checked">
+            </c:if>
+            <c:if test="${not empty cookie.user_check}">
+            <input type="checkbox" name="remember_userid"${checked}>
+            </c:if>
+            아이디 저장</label>
             <a href="#" class="float-right">비밀번호 찾기</a>
         </div>        
     </form>
     <p class="text-center">
-    <a href="${pageContext.request.contextPath }/loginForm/joinUse/">회원 가입</a></p>
+    <a href="${pageContext.request.contextPath }/loginForm/loginJoin/">회원 가입</a></p>
 </div>
 
 </body>
