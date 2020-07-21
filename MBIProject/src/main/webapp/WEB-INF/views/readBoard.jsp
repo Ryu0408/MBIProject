@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/board.css" />
@@ -28,6 +29,7 @@
 									<th class="text-center">조회수</th>
 									<td>${gvo.boardview}</td>
 								</tr>
+								<!-- 세션이 있으면 수정삭제 보여주고 없으면 안보여죽 -->
 
 								<tr>
 									<th class="text-center">글제목</th>
@@ -47,17 +49,23 @@
 											onblur="this.placeholder='내용을 입력해주세요. (최대 1000자)'"
 											placeholder="내용을 입력해주세요. (최대 1000자)" style="resize: none;">${gvo.boardcontent} </textarea></td>
 								</tr>
-								<tr>
-									<td colspan="1 ml-auto"><input type="button"
-										class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.href='${pageContext.request.contextPath}/guideBoard/'"
-										value="삭제" /></td>
-									<td colspan="4 ml-auto">
-									<td colspan="1 ml-auto"><input type="button"
-										class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'"
-										value="수정" /></td>
-								</tr>
+								<c:if test="${userSession.userid == gvo.boardid}">
+									<tr>
+										<td colspan="1 ml-auto"><input type="button"
+											class="btn btn-outline-primary btn-w d-block ml-auto"
+											onclick="location.href='${pageContext.request.contextPath}/guideBoard/'"
+											value="삭제" /></td>
+										<td colspan="4 ml-auto">
+										<td colspan="1 ml-auto"><input type="button"
+											class="btn btn-outline-primary btn-w d-block ml-auto"
+											onclick="location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'"
+											value="수정" /></td>
+									</tr>
+								</c:if>
+								<c:if test="${userSession.username == null}">
+									<tr>
+									</tr>
+								</c:if>
 							</thead>
 						</table>
 					</form>

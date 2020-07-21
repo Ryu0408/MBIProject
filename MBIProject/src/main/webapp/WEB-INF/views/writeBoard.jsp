@@ -13,7 +13,7 @@
 				<thead>
 					<tr>
 						<th class="text-center">작성자</th>
-						<td><input type="text" name="boardid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" /></td>
+						<td><input type="text" name="boardid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="${userSession.userid }" readonly /></td>
 						<th class="text-center">카테고리</th>
 						<td>
 							<select name="boardtype" class="form-control form-control-sm notice-group">
@@ -37,7 +37,7 @@
 					<!--글내용 -->
 					<tr>
 						<td colspan="6"><textarea rows="10" cols="136" name="boardcontent"
-						onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요. (최대 1000자)'" placeholder="내용을 입력해주세요. (최대 1000자)" style="resize: none;">}</textarea></td>
+						onfocus="this.placeholder=''" onblur="this.placeholder='내용을 입력해주세요. (최대 1000자)'" placeholder="내용을 입력해주세요. (최대 1000자)" style="resize: none;"></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="6 ml-auto"><input type="submit" class="btn btn-outline-primary btn-w d-block ml-auto" /></td>
