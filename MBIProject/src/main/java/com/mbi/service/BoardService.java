@@ -16,6 +16,7 @@ public class BoardService{
 	@Autowired GuideBoardDAO gdao;
 	
 	public void create(GuideBoardVO gvo) {
+		System.out.println("create : " + gvo);
 		gdao.create(gvo);
 	}
 	
@@ -29,16 +30,24 @@ public class BoardService{
 	public ModelAndView readBoard(int boardsid, HttpSession session) {
 		ModelAndView mav = new ModelAndView("readBoard");
 		GuideBoardVO gvo = gdao.selectOne(boardsid);
-		System.out.println(gvo.getBoardid());
+//		System.out.println(gvo.getBoardid());
 		mav.addObject("gvo", gvo);
 		return mav;
 	}
 
 	public ModelAndView updateBoard(int boardsid) {
 		ModelAndView mav = new ModelAndView("updateBoard");
-		GuideBoardVO gvo = gdao.selectOne(boardsid);
-		System.out.println(gvo.getBoardid());
-		mav.addObject("gvo", gvo);
+		mav.addObject("gvo", gdao.selectOne(boardsid));
 		return mav;
+	}
+
+	public void updateBoardPost(GuideBoardVO gvo) {
+//		System.out.println("update" + gdao);
+		gdao.updateBoard(gvo);
+	}
+	
+	public int deleteBoard(int boardsid) {
+	
+		return boardsid;
 	}
 }

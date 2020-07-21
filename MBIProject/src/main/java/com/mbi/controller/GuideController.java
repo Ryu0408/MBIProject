@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mbi.dao.GuideBoardDAO;
@@ -45,7 +47,7 @@ public class GuideController {
 	//글쓰기POST
 	@RequestMapping(value = "/guideBoard/writeBoard/", method = RequestMethod.POST)
 	public String writeBoardPost(GuideBoardVO gvo) {
-		
+		System.out.println("create" + gvo.getBoardcontent());
 		boardservice.create(gvo);
 		return "writeBoard";
 	}
@@ -56,7 +58,8 @@ public class GuideController {
 		try{
 			//로그인 되어있으면
 			HttpSession session = req.getSession();
-			UserLoginVO vo = (UserLoginVO)session.getAttribute("userSession");	
+			UserLoginVO vo = (UserLoginVO)session.getAttribute("userSession");
+	
 			return boardservice.readBoard(sid, session);
 		}catch(NullPointerException e){
 			//로그인 안되있으면
@@ -74,11 +77,23 @@ public class GuideController {
 	@RequestMapping(value = "/guideBoard/updateBoard/{sid}/", method = RequestMethod.GET)
 	public ModelAndView updateBoard(@PathVariable int sid) {
 		return boardservice.updateBoard(sid);
-		
 	}
+
 	//글수정 POST
 	@RequestMapping(value = "/guideBoard/updateBoard/{sid}/", method = RequestMethod.POST)
-	public String updateBoardPost() {
+	public String updateBoardPost(@PathVariable int sid, GuideBoardVO gvo) {
+		System.out.println("글내용 : " + gvo.getBoardcontent());
+		System.out.println("글제목 : " + gvo.getBoardtitle());
+		System.out.println("타입 : " + gvo.getBoardtype());
+		System.out.println("sid : " + gvo.getBoardsid());
+		boardservice.updateBoardPost(gvo);
 		return "updateBoard";
 	}
+	//글삭제
+	@RequestMapping(value="/guideBoard/readBoard/{sid}/delete/")
+	public int deleteBoard(@PathVariable int sid) {
+		
+		return boardservice.deleteBoard(sid);
+	}
+	
 }
