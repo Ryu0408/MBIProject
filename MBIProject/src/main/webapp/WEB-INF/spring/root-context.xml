@@ -42,6 +42,8 @@
 				<value>classpath:config/userlogin.xml</value>
 
 				<value>classpath:config/noticeboard.xml</value>
+				
+				<value>classpath:config/hours24.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace = "com.mbi.dao.HoursDAO">
+	<select id = "selectAll" resultType="com.mbi.vo.HoursVO">
+		select * from everyday 
+	</select>
+	
+<!-- 	<select id = "selectOne" resultType="com.mbi.vo.HoursBoardVO" parameterType="int"> -->
+<!-- 		select * from everyday -->
+<!-- 		where boardsid = ${gvo} -->
+<!-- 	</select> -->
+	
+</mapper>
