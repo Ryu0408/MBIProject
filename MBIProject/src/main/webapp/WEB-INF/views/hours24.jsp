@@ -11,6 +11,41 @@
 	}
 	article {		display: none;	} 
 	article.on {	display: inline-block;	}
+	.placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
+	.placeinfo_wrap .after {content:'';
+	position:relative;
+	margin-left:-12px;
+	left:50%;width:22px;
+	height:12px;
+	background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+	}
+	.placeinfo {
+	position:relative; 
+	width:100%; 
+	border-radius:6px; 
+	border: 1px solid #ccc; 
+	border-bottom:2px solid #ddd; 
+	padding-bottom: 10px; 
+	background: #fff;
+	}
+	.placeinfo span {display: block; 
+	text-overflow: ellipsis; 
+	overflow: hidden; 
+	white-space: nowrap; 
+	margin:5px 5px 0 5px; 
+	cursor: default; 
+	font-size:13px;
+	}
+	.placeinfo .title {font-weight: bold; 
+	font-size:14px;
+	border-radius: 6px 6px 0 0;
+	margin: -1px -1px 0 -1px;
+	padding:10px; 
+	color: #fff;
+	background: #d95050;
+	background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+	}
+	.placeinfo .tel {color:#0f7833;}
 </style>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f208c8186518ea31e042273cb8e359d&libraries=services,clusterer,drawing"></script>
@@ -53,6 +88,7 @@
     var marker = new kakao.maps.Marker();
        	 
 </script>
+
 	<div class="btn-group d-flex">
 		<button type="button" id="restaurant" class="btn btn-primary btn-lg raun" style="width: 80px;">식당</button>
 		<button type="button" id="parmercy" class="btn btn-primary btn-lg raun" style="width: 80px;">약국</button>
@@ -60,112 +96,74 @@
 		<button type="button" id="hospital" class="btn btn-primary btn-lg raun" style="width: 80px;">병원</button>
 	</div>
 	
-	<article id="restaurantArticle">
-	    <div class="card text-white bg-primary mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Primary card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-	    
-	    <div class="card text-white bg-secondary mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Secondary card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-    </article>
-    
-    <article id="parmercyArticle">
-	    <div class="card text-white bg-success mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Success card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-	    <div class="card text-white bg-danger mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Danger card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-    </article>
-    
-    <article id="cafeArticle">
-	    <div class="card text-white bg-warning mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Warning card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-	    <div class="card text-white bg-info mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Info card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-    </article>
-    
-    <article id="hospitalArticle">
-	    <div class="card bg-light mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Light card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-	    <div class="card text-white bg-dark mb-3" style="width: 20rem;">
-	        <div class="card-body">
-	            <h5 class="card-title">Dark card title</h5>
-	            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at.</p>
-	        </div>
-	    </div>
-	</article>
 	
+	<div class="btn-group d-flex">
+		<button type="button" id="restaurant" class="btn btn-primary btn-lg search" style="width: 80px;">현재위치에서찾기</button>
+	</div>
 <script>
 
 // 버튼 쿼리 다 가져오기
 btns = document.querySelectorAll('.raun');
+search = document.querySelectorAll('.search');
 // article 태그 가져오기
-art = document.querySelectorAll('article');
+// art = document.querySelectorAll('article');
 
+
+	
+
+var addrs = [];
+var names = [];
+var phones = [];
+var rates = [];
+var types = [];
+<c:forEach items="${list}" var = "hvo" varStatus="index">
+	addrs.push("${hvo.storeAddr}");
+	names.push("${hvo.storeName}");
+	phones.push("${hvo.storePhone}");
+	rates.push("${hvo.storeRate}");
+	types.push("${hvo.storeType}");
+</c:forEach>
 var parmercyPositions = [];
 var parmercyAddrs = [];
 var parmercyNames = [];
+var parmercyPhones = [];
+var parmercyRates = [];
 var hospitalPositions = [];
 var hospitalAddrs = [];
 var cafePositions = [];
 var restaurantPositions = [];
 var placeOverlay = new kakao.maps.CustomOverlay();
 
-var markerImageSrc = '${pageContext.request.contextPath }/img/markerimg.ico';
+var markerImageSrc = '${pageContext.request.contextPath }/img/image4.png';
 var parmercyMarkers = [];
 var hospitalMarkers = [];
 var cafeMarkers = [];
 var restaurantMarkers = [];
+var btset;
 
-//================================================================================================================================
+var imageSize =  new kakao.maps.Size(50, 36);
+var imageOptions = {  
+    spriteOrigin: new kakao.maps.Point(10, 0),    
+    spriteSize: new kakao.maps.Size(43, 36)  
+};  
+var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);   
+
 btns.forEach( (bt) => {
 	// 버튼눌렀을 시 
 	bt.addEventListener('click', (event) => {
-	    addrs = ['부산광역시 동구 망양로 533-3', '부산광역시 남구 진남로 135', '부산광역시 수영구 광안해변로 209', 
-		'부산광역시 부산진구 동천로 91-4', '부산광역시 중구 용미길10번길 1', '부산광역시 부산진구 당감동 가야대로 721'];
-		names = ['초량1941', '메그네이트', '카페오뜨', '넉아웃', 'Sel Roasters', '온 종합병원'];
-		store = ['약국', '식당', '카페', '약국', '약국', '병원'];
 		btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
 		event.target.className += ' on';		
-		art.forEach( (other) => { other.className = ''; })
-		document.getElementById(event.target.id + 'Article').className = 'on';
 	 	addrs.forEach(function(addr, index) {
 			if(bt.innerHTML === '약국'){
-				if(store[index] === '약국'){
+				if(types[index] === '0'){
+					btset = bt;
 					geocoder.addressSearch(addr, function(result, status) {
 		    			if (status === kakao.maps.services.Status.OK) {
-		    				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), result[0].y, result[0].x) < 100000) {
-		    		 			parmercyPositions.push(new kakao.maps.LatLng(result[0].y,  result[0].x));
-		    		 			parmercyAddrs.push(addrs[index]);
-		    		 			parmercyNames.push(names[index]);
-		    		 		}
+		    		 		parmercyPositions.push(new kakao.maps.LatLng(result[0].y,  result[0].x));
+			    		 	parmercyAddrs.push(addrs[index]);
+			    		 	parmercyNames.push(names[index]);
+			    		 	parmercyPhones.push(phones[index]);
+			    		 	parmercyRates.push(rates[index]);
 		    			}
 					});
 				}
@@ -206,41 +204,54 @@ btns.forEach( (bt) => {
 				}
 	    	}
 	 	});
-//================================================================================================================================
-		createParmercyMarkers();
-	    setParmercyMarkers(map);
-	    
-		createRestaurantMarkers();
-		setRestaurantMarkers(map);
-		
-		createCafeMarkers();
-		setCafeMarkers(map);
-		
-		createHospitalMarkers();
-		setHospitalMarkers(map);
-		
-		setParmercyMarkers(null);
-		setRestaurantMarkers(null);
-		setCafeMarkers(null);
-		setHospitalMarkers(null);
+	});
 
-		if(bt.innerHTML === '약국'){
-			createParmercyMarkers();
- 	        setParmercyMarkers(map);
- 	       	parmercyMarkers.forEach((marker) => {
+});
+
+
+search.forEach( (sc) => {
+	sc.addEventListener('click', (event) => {
+		if(btset.innerHTML === '약국'){
+			console.log(parmercyMarkers[0]);
+			if(parmercyMarkers[0] !== undefined){
+				setParmercyMarkers(null);
+			    placeOverlay.setMap(null);
+				parmercyMarkers = [];
+			}
+			for(i=0;i<parmercyPositions.length;i++){
+		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), parmercyPositions[i].getLat(), parmercyPositions[i].getLng()) < 2000) {
+		            marker = createMarker(parmercyPositions[i], markerImage, parmercyNames[i]+"@"+parmercyAddrs[i]+"@"+parmercyPhones[i]+"@"+parmercyRates[i]);  
+			        // 생성된 마커를 커피숍 마커 배열에 추가합니다
+			        parmercyMarkers.push(marker);
+			        console.log("if문 실행");
+		 		}
+			}
+			setParmercyMarkers(map);
+			parmercyMarkers.forEach((marker) => {
+				console.log("marker 실행");
 				kakao.maps.event.addListener(marker, 'click', function() {
 					if(placeOverlay.getContent()!== null){
-	 				    placeOverlay.setMap(null);
+						    placeOverlay.setMap(null);
 					};
 				    contentNode = document.createElement('div'); // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
+				  //커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
+				    contentNode.className = 'placeinfo_wrap';
 				    var fullName = marker.getTitle();
 				    var strArray = fullName.split("@");
- 				    contentNode.innerHTML = "주소 : " + strArray[0] + "<br> 가게명 : " + strArray[1];
+				    var content = '<div class="placeinfo">' + strArray[0]
+				    		+ '    <span title="' + strArray[1] + '">' + strArray[1] + '</span>' 
+				    		+ '    <span class="tel">' + strArray[2] + '</span>'
+				    		+ '    <span class="rate">' + strArray[3] + '</span>' + '</div>'
+				    		+ '<div class="after"></div>';
+				
+				    contentNode.innerHTML = content;
+//					    contentNode.innerHTML = "가게명 : " + strArray[0] + "<br> 주소 : " + strArray[1];
+//					    contentNode.innerHTML = "번호 : " + strArray[2] + "<br> 평점 : " + strArray[3];
 
 				    console.log("0번째배열(주소) :" + strArray[0] + "1번째배열(가게명) :" + strArray[1])
- 				    placeOverlay.setPosition(new kakao.maps.LatLng(marker.getPosition().Ha, marker.getPosition().Ga));
-    				placeOverlay.setContent(contentNode);
- 				    placeOverlay.setMap(map);
+					    placeOverlay.setPosition(new kakao.maps.LatLng(marker.getPosition().Ha, marker.getPosition().Ga));
+					placeOverlay.setContent(contentNode);
+					    placeOverlay.setMap(map);
 				});
 			});
 		}else if(bt.innerHTML === '식당'){
@@ -267,6 +278,7 @@ btns.forEach( (bt) => {
     	}
 	});
 });
+
 //================================================================================================================================
 //x,y좌표값을 받아서 2키로 이내 좌표인지 확인해주는 함수(단위 미터)
 function calcDistance(cenLat, cenLng, y, x) {
@@ -289,6 +301,8 @@ function deg2rad(deg) {
 function rad2deg(rad) {
 	return (rad * 180 / Math.PI);
 }
+
+
 //================================================================================================================================
 function createMarkerImage(src, size, options) {
     var markerImage = new kakao.maps.MarkerImage(src, size, options);
@@ -305,27 +319,12 @@ function createMarker(position, image, title) {
 }   
 //================================================================================================================================
 function setParmercyMarkers(map) {        
-    for (var i = 0; i < parmercyPositions.length; i++) {  
+    for (var i = 0; i < parmercyMarkers.length; i++) {  
     	parmercyMarkers[i].setMap(map);
     }        
 }
 
-function createParmercyMarkers() {
-    for (var i = 0; i < parmercyPositions.length; i++) {  
-        var imageSize =  new kakao.maps.Size(31, 35);
-            imageOptions = {  
-                spriteOrigin: new kakao.maps.Point(10, 0),    
-                spriteSize: new kakao.maps.Size(36, 98)  
-            };     
-        
-        // 마커이미지와 마커를 생성합니다
-        var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),    
-            marker = createMarker(parmercyPositions[i], markerImage, parmercyAddrs[i]+"@"+parmercyNames[i]);  
-        // 생성된 마커를 커피숍 마커 배열에 추가합니다
-        parmercyMarkers.push(marker);
-        
-    }     
-}
+
 //================================================================================================================================
 function setRestaurantMarkers(map) {        
     for (var i = 0; i < restaurantPositions.length; i++) {  
