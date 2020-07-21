@@ -49,10 +49,13 @@
 					</tbody>
 				</table>
 			</div>
-
-			<div id="write" style="float: right;">
-				<button onclick="location.href='${pageContext.request.contextPath}/guideBoard/writeBoard/'">글쓰기</button>
-			</div>
+			<c:set var="vos" value="${userSession}" scope="session" />
+			<c:if test="${not empty vos }">
+				<div id="write" style="float: right;">
+					<button onclick="location.href='${pageContext.request.contextPath}/guideBoard/writeBoard/'">글쓰기</button>
+				</div>
+			</c:if>
+			
 		</div>
 		<div class="col-sm-2"></div>
 	</div>

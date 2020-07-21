@@ -1,5 +1,7 @@
 package com.mbi.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +26,7 @@ public class BoardService{
 		return mav;
 	}
 
-	public ModelAndView readBoard(int boardsid) {
+	public ModelAndView readBoard(int boardsid, HttpSession session) {
 		ModelAndView mav = new ModelAndView("readBoard");
 		GuideBoardVO gvo = gdao.selectOne(boardsid);
 		System.out.println(gvo.getBoardid());
