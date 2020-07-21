@@ -4,6 +4,15 @@
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/board.css" />
+<script>
+	function del(boardsid){
+		var chk = confirm("정말 삭제하시겠습니까?")
+		if(chk){
+			location.href='delete'+boardsid+'/'
+		}
+	}
+</script>
+	
 <section style="height: 800px; clear: both;">
 	<div class="row">
 		<div class="col-sm-2"></div>
@@ -11,21 +20,20 @@
 			<section id="notice-content">
 				<div class="notice_in">
 					<form method="POST">
+					 	<input type="hidden" name="boardsid" value="${gvo.boardsid }">
 						<table class="table noticeWrite">
 							<thead>
 								<tr>
 									<th class="text-center">작성자</th>
-									<td><input type="text" name="id" class="form-control"
+									<td><input type="text" name="boardid" class="form-control"
 										aria-label="Sizing example input"
 										aria-describedby="inputGroup-sizing-sm"
 										value=" ${gvo.boardid}" readOnly /></td>
 									<th class="text-center">카테고리</th>
-									<td><select name="selectType"
-										class="form-control form-control-sm notice-group">
-											<option value="0">관광지</option>
-											<option value="1">맛집</option>
-											<option value="2">지역행사</option>
-									</select></td>
+									<td><input type="text" name="boardtype"
+										class="form-control" aria-label="Sizing example input"
+										aria-describedby="inputGroup-sizing-sm" value="${gvo.boardtype }" readonly style="width: 100px;">
+									</td>
 									<th class="text-center">조회수</th>
 									<td>${gvo.boardview}</td>
 								</tr>
@@ -33,27 +41,27 @@
 
 								<tr>
 									<th class="text-center">글제목</th>
-									<td colspan="3"><input type="text" name="contents"
+									<td colspan="3"><input type="text" name="boardtitle"
 										class="form-control" aria-label="Sizing example input"
 										aria-describedby="inputGroup-sizing-sm" required
 										onfocus="this.placeholder=''"
 										onblur="this.placeholder='글제목을 입력해주세요. (최대 50자)'"
-										placeholder="글제목을 입력해주세요. (최대 50자)" value="${gvo.boardtitle}"></td>
+										placeholder="글제목을 입력해주세요. (최대 50자)" value="${gvo.boardtitle}" readonly></td>
 									<th class="text-center">좋아요</th>
 									<td>${gvo.boardgood}</td>
 								</tr>
 								<!--글내용 -->
 								<tr>
-									<td colspan="6"><textarea rows="10" cols="136"
+									<td colspan="6"><textarea rows="10" cols="136" name="boardcontent"
 											onfocus="this.placeholder=''"
 											onblur="this.placeholder='내용을 입력해주세요. (최대 1000자)'"
-											placeholder="내용을 입력해주세요. (최대 1000자)" style="resize: none;">${gvo.boardcontent} </textarea></td>
+											placeholder="내용을 입력해주세요. (최대 1000자)" readonly style="resize: none;" >${gvo.boardcontent} </textarea></td>
 								</tr>
 								<c:if test="${userSession.userid == gvo.boardid}">
 									<tr>
 										<td colspan="1 ml-auto"><input type="button"
 											class="btn btn-outline-primary btn-w d-block ml-auto"
-											onclick="location.href='${pageContext.request.contextPath}/guideBoard/'"
+											onclick="del(${board.boardsid})"
 											value="삭제" /></td>
 										<td colspan="4 ml-auto">
 										<td colspan="1 ml-auto"><input type="button"

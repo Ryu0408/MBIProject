@@ -14,4 +14,7 @@ public interface GuideBoardDAO {
 
 	GuideBoardVO selectOne(@Param("gvo")int boardsid);
 
+	void updateBoard(@Param("gvo") GuideBoardVO gvo);
+
+	int deleteBoard(int boardsid);
 }

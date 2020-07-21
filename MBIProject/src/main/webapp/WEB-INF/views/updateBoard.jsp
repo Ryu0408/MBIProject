@@ -10,16 +10,17 @@
 			<section id="notice-content">
 				<div class="notice_in">
 					<form method="POST">
+ 			           <input type="hidden" name="boardsid" value="${gvo.boardsid }">
 						<table class="table noticeWrite">
 							<thead>
 								<tr>
 									<th class="text-center">작성자</th>
-									<td><input type="text" name="id" class="form-control"
+									<td><input type="text" name="boardid" class="form-control"
 										aria-label="Sizing example input"
 										aria-describedby="inputGroup-sizing-sm"
 										value=" ${gvo.boardid}" readOnly /></td>
 									<th class="text-center">카테고리</th>
-									<td><select name="selectType"
+									<td><select name="boardtype"
 										class="form-control form-control-sm notice-group">
 											<option value="0">관광지</option>
 											<option value="1">맛집</option>
@@ -31,7 +32,7 @@
 
 								<tr>
 									<th class="text-center">글제목</th>
-									<td colspan="3"><input type="text" name="contents"
+									<td colspan="3"><input type="text" name="boardtitle"
 										class="form-control" aria-label="Sizing example input"
 										aria-describedby="inputGroup-sizing-sm" required
 										onfocus="this.placeholder=''"
@@ -42,10 +43,10 @@
 								</tr>
 								<!--글내용 -->
 								<tr>
-									<td colspan="6"><textarea rows="10" cols="136"
+									<td colspan="6"><textarea rows="10" cols="136" name="boardcontent"
 											onfocus="this.placeholder=''"
 											onblur="this.placeholder='내용을 입력해주세요. (최대 1000자)'"
-											placeholder="내용을 입력해주세요. (최대 1000자)" style="resize: none;">${gvo.boardcontent} </textarea></td>
+											placeholder="내용을 입력해주세요. (최대 1000자)" style="resize: none;">${gvo.boardcontent}</textarea></td>
 								</tr>
 								<tr>
 									<td colspan="1 ml-auto"><input type="button"

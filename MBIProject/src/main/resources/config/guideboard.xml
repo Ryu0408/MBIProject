@@ -24,4 +24,14 @@
 		where boardsid = ${gvo}
 	</select>
 	
+	<update id = "updateBoard" parameterType="com.mbi.vo.GuideBoardVO" >
+		update guideboard 
+		set 
+		boardcontent=#{gvo.boardcontent}, boardtitle=#{gvo.boardtitle}, boardtype=#{gvo.boardtype}
+		where boardsid = ${gvo.boardsid}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from guideboard where boardsid = ${boardsid}
+	</delete>
 </mapper>
