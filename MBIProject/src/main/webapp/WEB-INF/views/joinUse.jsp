@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
 
-
 <hr><br>
 <h3 style="margin-left: 26%;"><b>이용약관</b></h3>
 <br><br>
-<form action="loginJoin/" method="POST">
+<form action="${pageContext.request.contextPath}/loginForm/joinUse/loginJoin/" method="POST">
     <div>
     	<div align="center">
 	    	<textarea rows="10" cols="100">
@@ -42,9 +41,9 @@
 3. 이용자가 변경된 약관에 동의하지 않는 경우 서비스 이용을 중단하고 본인의 회원등록을 취소할 수 있으며, 계속 사용하시는 경우에는 약관 변경에 동의한 것으로 간주하며 변경된 약관은 전항과 같은 방법으로 효력이 발생합니다.
 			</textarea>
 		</div>
-		<div align="right" style="margin-right: 26%;"s>
+		<div align="right" style="margin-right: 26%;">
         <label>
-            <input type="checkbox" name="agreement1" required />
+            <input type="checkbox" name="agreement1" value="1" required />
             <span>이용약관에 동의합니다.(필수)</span>
         </label>
         </div>
@@ -65,7 +64,7 @@
 		</div>
 		<div align="right" style="margin-right: 26%;">
         <label>
-            <input type="checkbox" name="agreement2" required />
+            <input type="checkbox" name="agreement2" value="1" required />
             <span>개인정보 제공에 동의합니다.(필수)</span>
         </label>
         </div>
@@ -86,7 +85,7 @@
 		</div>
 		<div align="right" style="margin-right: 26%;">
         <label>
-            <input type="checkbox" name="agreement3" />
+            <input type="checkbox" name="agreement3" value="" />
             <span>광고 및 컨텐츠수신에 동의합니다.(선택)</span>
         </label>
         </div>
