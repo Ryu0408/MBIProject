@@ -32,6 +32,10 @@
 	</update>
 	
 	<delete id="deleteBoard" parameterType="int">
-		delete from guideboard where boardsid = ${boardsid}
+		delete from guideboard where boardsid = #{boardsid}
 	</delete>
+	
+	<update id = "updateView" parameterType="int">
+		update guideboard set boardview = boardview+1 where boardsid = ${vvo}
+	</update>
 </mapper>

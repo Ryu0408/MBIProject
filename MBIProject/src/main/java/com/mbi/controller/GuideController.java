@@ -36,7 +36,7 @@ public class GuideController {
 //		String userid = (String)session.getAttribute("userid");
 //		
 //		System.out.println(userid);
-		
+		System.out.println("보더로 이동");
 		return boardservice.guideBoard();
 	}
 	//글쓰기GET
@@ -90,10 +90,10 @@ public class GuideController {
 		return "updateBoard";
 	}
 	//글삭제
-	@RequestMapping(value="/guideBoard/readBoard/{sid}/delete/")
-	public int deleteBoard(@PathVariable int sid) {
-		
-		return boardservice.deleteBoard(sid);
+	@RequestMapping(value="/guideBoard/readBoard/delete/{sid}/")
+	public String deleteBoard(@PathVariable int sid, HttpServletRequest request) {
+		boardservice.deleteBoard(sid);
+		return "redirect:/guideBoard/";
 	}
 	
 }

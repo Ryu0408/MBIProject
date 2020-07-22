@@ -29,9 +29,11 @@ public class BoardService{
 
 	public ModelAndView readBoard(int boardsid, HttpSession session) {
 		ModelAndView mav = new ModelAndView("readBoard");
+		gdao.updateView(boardsid);
 		GuideBoardVO gvo = gdao.selectOne(boardsid);
-//		System.out.println(gvo.getBoardid());
+//		mav.addObject("vvo", vvo);
 		mav.addObject("gvo", gvo);
+		System.out.println(gvo.getBoardview());
 		return mav;
 	}
 
@@ -45,9 +47,10 @@ public class BoardService{
 //		System.out.println("update" + gdao);
 		gdao.updateBoard(gvo);
 	}
-	
-	public int deleteBoard(int boardsid) {
-	
-		return boardsid;
+	//삭제서비스
+	public void deleteBoard(int boardsid) {
+//		System.out.println("딜리트 서비스 실행");
+		gdao.deleteBoard(boardsid);
 	}
+
 }

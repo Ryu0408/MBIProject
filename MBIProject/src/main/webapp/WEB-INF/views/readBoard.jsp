@@ -7,9 +7,15 @@
 <script>
 	function del(boardsid){
 		var chk = confirm("정말 삭제하시겠습니까?")
+		console.log("실행이 됩니까?")
+		console.log(boardsid)
 		if(chk){
-			location.href='delete'+boardsid+'/'
+			location.href = '${pageContext.request.contextPath }/guideBoard/readBoard/delete/'+boardsid+'/';
 		}
+// 		    response.sendRedirect("${pageContext.request.contextPath }/guideBoard/")
+// 		    console.log("111")
+// 		    history.go(-1)
+// 		location.href = '${pageContext.request.contextPath }/guideBoard/'
 	}
 </script>
 	
@@ -35,7 +41,7 @@
 										aria-describedby="inputGroup-sizing-sm" value="${gvo.boardtype }" readonly style="width: 100px;">
 									</td>
 									<th class="text-center">조회수</th>
-									<td>${gvo.boardview}</td>
+									<td name="boardview">${gvo.boardview}</td>
 								</tr>
 								<!-- 세션이 있으면 수정삭제 보여주고 없으면 안보여죽 -->
 
@@ -59,10 +65,10 @@
 								</tr>
 								<c:if test="${userSession.userid == gvo.boardid}">
 									<tr>
-										<td colspan="1 ml-auto"><input type="button"
+										<td colspan="1 ml-auto"><button type = "button"
 											class="btn btn-outline-primary btn-w d-block ml-auto"
-											onclick="del(${board.boardsid})"
-											value="삭제" /></td>
+											onclick="del(${gvo.boardsid})"
+											>삭제</button></td>
 										<td colspan="4 ml-auto">
 										<td colspan="1 ml-auto"><input type="button"
 											class="btn btn-outline-primary btn-w d-block ml-auto"

@@ -13,8 +13,10 @@ public interface GuideBoardDAO {
 	void create(@Param("gvo") GuideBoardVO gvo);
 
 	GuideBoardVO selectOne(@Param("gvo")int boardsid);
+	void updateView(@Param("vvo")int boardsid);
 
 	void updateBoard(@Param("gvo") GuideBoardVO gvo);
 
-	int deleteBoard(int boardsid);
+	void deleteBoard(int boardsid);
+	
 }
