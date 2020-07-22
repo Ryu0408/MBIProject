@@ -49,7 +49,7 @@
       			</c:if>
     			</li>
     			<li class="nav-item">
-      				<a class="nav-link" href="#" style = "color: black; text-decoration:none">마이페이지</a>
+      				<a class="nav-link" href="#" style = "color: black; text-decoration:none" onclick="location.href='${pageContext.request.contextPath}/mypage/'">마이페이지</a>
     			</li>
   			</ul>
 		</nav>
