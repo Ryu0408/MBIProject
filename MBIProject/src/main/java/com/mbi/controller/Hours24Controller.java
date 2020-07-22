@@ -13,7 +13,7 @@ public class Hours24Controller {
 	@Autowired HoursService hs;
 	
 	@RequestMapping(value = "/hours24/")
-	public ModelAndView hours24() {
+	public ModelAndView hourss24() {
 		return hs.getList();
 	}
 
