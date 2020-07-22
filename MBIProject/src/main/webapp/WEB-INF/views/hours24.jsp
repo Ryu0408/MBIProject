@@ -6,11 +6,6 @@
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 <style>
-	.card {
-		display: inline-block;
-	}
-	article {		display: none;	} 
-	article.on {	display: inline-block;	}
 	.placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
 	.placeinfo_wrap .after {content:'';
 	position:relative;
@@ -77,7 +72,6 @@
         var message = '<p>지도 레벨은 ' + levelj + ' 이고</p>';
         message += '<p>중심 좌표는 위도 ' + latlngj.getLat() + ', 경도 ' + latlngj.getLng() + '입니다</p>';
 
-        console.log(message);
 
     });
     
@@ -100,185 +94,184 @@
 	<div class="btn-group d-flex">
 		<button type="button" id="restaurant" class="btn btn-primary btn-lg search" style="width: 80px;">현재위치에서찾기</button>
 	</div>
+	
 <script>
-
 // 버튼 쿼리 다 가져오기
 btns = document.querySelectorAll('.raun');
 search = document.querySelectorAll('.search');
-// article 태그 가져오기
-// art = document.querySelectorAll('article');
 
+var storeArray = new Array();
+var parmercyArray = new Array();
+var hospitalArray = new Array();
+var cafeArray = new Array();
+var restaurantArray = new Array();
 
-	
-
-var addrs = [];
-var names = [];
-var phones = [];
-var rates = [];
-var types = [];
 <c:forEach items="${list}" var = "hvo" varStatus="index">
-	addrs.push("${hvo.storeAddr}");
-	names.push("${hvo.storeName}");
-	phones.push("${hvo.storePhone}");
-	rates.push("${hvo.storeRate}");
-	types.push("${hvo.storeType}");
+	var store = new Object();
+	store.addr = "${hvo.storeAddr}";
+	store.name = "${hvo.storeName}";
+	store.phone = "${hvo.storePhone}";
+	store.rate = "${hvo.storeRate}";
+	store.type = "${hvo.storeType}";
+	storeArray.push(store);
 </c:forEach>
-var parmercyPositions = [];
-var parmercyAddrs = [];
-var parmercyNames = [];
-var parmercyPhones = [];
-var parmercyRates = [];
-var hospitalPositions = [];
-var hospitalAddrs = [];
-var cafePositions = [];
-var restaurantPositions = [];
+
 var placeOverlay = new kakao.maps.CustomOverlay();
 
-var markerImageSrc = '${pageContext.request.contextPath }/img/image4.png';
-var parmercyMarkers = [];
-var hospitalMarkers = [];
-var cafeMarkers = [];
-var restaurantMarkers = [];
+var markers = [];
 var btset;
-
-var imageSize =  new kakao.maps.Size(50, 36);
-var imageOptions = {  
-    spriteOrigin: new kakao.maps.Point(10, 0),    
-    spriteSize: new kakao.maps.Size(43, 36)  
-};  
-var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions);   
 
 btns.forEach( (bt) => {
 	// 버튼눌렀을 시 
 	bt.addEventListener('click', (event) => {
 		btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
 		event.target.className += ' on';		
-	 	addrs.forEach(function(addr, index) {
+	 	storeArray.forEach(function(store, index) {
 			if(bt.innerHTML === '약국'){
-				if(types[index] === '0'){
+				if(store.type === '1'){
 					btset = bt;
-					geocoder.addressSearch(addr, function(result, status) {
+					geocoder.addressSearch(store.addr, function(result, status) {
 		    			if (status === kakao.maps.services.Status.OK) {
-		    		 		parmercyPositions.push(new kakao.maps.LatLng(result[0].y,  result[0].x));
-			    		 	parmercyAddrs.push(addrs[index]);
-			    		 	parmercyNames.push(names[index]);
-			    		 	parmercyPhones.push(phones[index]);
-			    		 	parmercyRates.push(rates[index]);
+		    				var value = new Object();
+		    				value.position = new kakao.maps.LatLng(result[0].y,  result[0].x);
+		    				value.addr = store.addr;
+		    				value.name = store.name;
+		    				value.phone = store.phone;
+		    				value.rate = store.rate;
+		    				parmercyArray.push(value);
 		    			}
 					});
 				}
 			}
 		 	else if(bt.innerHTML === '식당'){
-				if(store[index] === '식당'){
-					geocoder.addressSearch(addr, function(result, status) {
+				if(store.type === '0'){
+					btset = bt;
+					geocoder.addressSearch(store.addr, function(result, status) {
 		    			if (status === kakao.maps.services.Status.OK) {
-		    				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), result[0].y, result[0].x) < 100000) {
-		    		 			restaurantPositions.push(new kakao.maps.LatLng(result[0].y,  result[0].x));
-		    		 		}
+		    				var value = new Object();
+		    				value.position = new kakao.maps.LatLng(result[0].y,  result[0].x);
+		    				value.addr = store.addr;
+		    				value.name = store.name;
+		    				value.phone = store.phone;
+		    				value.rate = store.rate;
+		    				restaurantArray.push(value);
 		    			}
 					});
 				}
 	    	}else if(bt.innerHTML === '카페'){
-				if(store[index] === '카페'){
-					geocoder.addressSearch(addr, function(result, status) {
+				if(store.type === '2'){
+					btset = bt;
+					geocoder.addressSearch(store.addr, function(result, status) {
 		    			if (status === kakao.maps.services.Status.OK) {
-		    				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), result[0].y, result[0].x) < 100000) {
-		    		 			cafePositions.push(new kakao.maps.LatLng(result[0].y,  result[0].x));
-		    		 		}
+		    				var value = new Object();
+		    				value.position = new kakao.maps.LatLng(result[0].y,  result[0].x);
+		    				value.addr = store.addr;
+		    				value.name = store.name;
+		    				value.phone = store.phone;
+		    				value.rate = store.rate;
+		    				cafeArray.push(value);
 		    			}
 					});
 				}
 	    	}else if(bt.innerHTML === '병원'){
-				if(store[index] === '병원'){
-					geocoder.addressSearch(addr, function(result, status) {
+				if(store.type === '3'){
+					btset = bt;
+					geocoder.addressSearch(store.addr, function(result, status) {
 		    			if (status === kakao.maps.services.Status.OK) {
-		    				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), result[0].y, result[0].x) < 100000) {
-		    		 			hospitalPositions.push(new kakao.maps.LatLng(result[0].y,  result[0].x));
-		    		 			hospitalAddrs.push(addrs[index]);
-		    		 		}
+		    				var value = new Object();
+		    				value.position = new kakao.maps.LatLng(result[0].y,  result[0].x);
+		    				value.addr = store.addr;
+		    				value.name = store.name;
+		    				value.phone = store.phone;
+		    				value.rate = store.rate;
+		    				hospitalArray.push(value);
 		    			}
 					});
 				}
 	    	}
 	 	});
 	});
-
 });
-
-
+//================================================================================================================================
+function infoBox(marker) {
+	if(placeOverlay.getContent()!== null){
+		placeOverlay.setMap(null);
+	};
+	contentNode = document.createElement('div'); // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
+	//커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
+	contentNode.className = 'placeinfo_wrap';
+	var fullName = marker.getTitle();
+	var strArray = fullName.split("@");
+	var content = '<div class="placeinfo">' + strArray[0]
+				+ '    <span title="' + strArray[1] + '">' + strArray[1] + '</span>' 
+				+ '    <span class="tel">' + strArray[2] + '</span>' + '</div>'
+				+ '<div class="after"></div>';
+					
+	contentNode.innerHTML = content;
+	// contentNode.innerHTML = "가게명 : " + strArray[0] + "<br> 주소 : " + strArray[1];
+	// contentNode.innerHTML = "번호 : " + strArray[2] + "<br> 평점 : " + strArray[3];
+	
+	placeOverlay.setPosition(new kakao.maps.LatLng(marker.getPosition().Ha, marker.getPosition().Ga));
+	placeOverlay.setContent(contentNode);
+	placeOverlay.setMap(map);
+}
+//================================================================================================================================
 search.forEach( (sc) => {
 	sc.addEventListener('click', (event) => {
+		placeOverlay.setMap(null);	//지도에 표시되고 있는 info를 제거합니다
+		removeMarker();				//지도에 표시되고 있는 마커를 제거합니다
+		console.log(btset.innerHTML);
 		if(btset.innerHTML === '약국'){
-			console.log(parmercyMarkers[0]);
-			if(parmercyMarkers[0] !== undefined){
-				setParmercyMarkers(null);
-			    placeOverlay.setMap(null);
-				parmercyMarkers = [];
-			}
-			for(i=0;i<parmercyPositions.length;i++){
-		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), parmercyPositions[i].getLat(), parmercyPositions[i].getLng()) < 2000) {
-		            marker = createMarker(parmercyPositions[i], markerImage, parmercyNames[i]+"@"+parmercyAddrs[i]+"@"+parmercyPhones[i]+"@"+parmercyRates[i]);  
-			        // 생성된 마커를 커피숍 마커 배열에 추가합니다
-			        parmercyMarkers.push(marker);
-			        console.log("if문 실행");
+			for(i=0;i<parmercyArray.length;i++){
+		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), parmercyArray[i].position.getLat(),parmercyArray[i].position.getLng()) < 2000) {
+		            marker = addMarker(parmercyArray[i].position,  parmercyArray[i].name+"@"+parmercyArray[i].addr+"@"+parmercyArray[i].phone+"@"
+		            		+parmercyArray[i].rate);
+		            markers.forEach( (marker) => {
+		            	kakao.maps.event.addListener(marker, 'click', function() {
+							infoBox(marker);
+		            	});
+		            });
 		 		}
 			}
-			setParmercyMarkers(map);
-			parmercyMarkers.forEach((marker) => {
-				console.log("marker 실행");
-				kakao.maps.event.addListener(marker, 'click', function() {
-					if(placeOverlay.getContent()!== null){
-						    placeOverlay.setMap(null);
-					};
-				    contentNode = document.createElement('div'); // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
-				  //커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
-				    contentNode.className = 'placeinfo_wrap';
-				    var fullName = marker.getTitle();
-				    var strArray = fullName.split("@");
-				    var content = '<div class="placeinfo">' + strArray[0]
-				    		+ '    <span title="' + strArray[1] + '">' + strArray[1] + '</span>' 
-				    		+ '    <span class="tel">' + strArray[2] + '</span>'
-				    		+ '    <span class="rate">' + strArray[3] + '</span>' + '</div>'
-				    		+ '<div class="after"></div>';
-				
-				    contentNode.innerHTML = content;
-//					    contentNode.innerHTML = "가게명 : " + strArray[0] + "<br> 주소 : " + strArray[1];
-//					    contentNode.innerHTML = "번호 : " + strArray[2] + "<br> 평점 : " + strArray[3];
-
-				    console.log("0번째배열(주소) :" + strArray[0] + "1번째배열(가게명) :" + strArray[1])
-					    placeOverlay.setPosition(new kakao.maps.LatLng(marker.getPosition().Ha, marker.getPosition().Ga));
-					placeOverlay.setContent(contentNode);
-					    placeOverlay.setMap(map);
-				});
-			});
-		}else if(bt.innerHTML === '식당'){
-			createRestaurantMarkers();
-			setRestaurantMarkers(map);
-		}else if(bt.innerHTML === '카페'){
-			createCafeMarkers();
-			setCafeMarkers(map);
-    	}else if(bt.innerHTML === '병원'){
-			createHospitalMarkers();
-			setHospitalMarkers(map);
-			hospitalMarkers.forEach((marker) => {
-				kakao.maps.event.addListener(marker, 'click', function() {
-					if(placeOverlay.getContent()!== null){
-	 				    placeOverlay.setMap(null);
-					};
-				    contentNode = document.createElement('div'); // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
-				    contentNode.innerHTML = marker.getTitle();
- 				    placeOverlay.setPosition(new kakao.maps.LatLng(marker.getPosition().Ha, marker.getPosition().Ga));
-    				placeOverlay.setContent(contentNode);
- 				    placeOverlay.setMap(map);
-				});
-			});
+		}else if(btset.innerHTML === '식당'){
+			for(i=0;i<restaurantArray.length;i++){
+		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), restaurantArray[i].position.getLat(),restaurantArray[i].position.getLng()) < 2000) {
+		            marker = addMarker(restaurantArray[i].position,  restaurantArray[i].name+"@"+restaurantArray[i].addr+"@"+restaurantArray[i].phone+"@"
+		            		+restaurantArray[i].rate);
+		            markers.forEach( (marker) => {
+		            	kakao.maps.event.addListener(marker, 'click', function() {
+							infoBox(marker);
+		            	});
+		            });
+		 		}
+			}
+		}else if(btset.innerHTML === '카페'){
+			for(i=0;i<cafeArray.length;i++){
+		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), cafeArray[i].position.getLat(), cafeArray[i].position.getLng()) < 2000) {
+		            marker = addMarker(cafeArray[i].position,  cafeArray[i].name+"@"+cafeArray[i].addr+"@"+cafeArray[i].phone+"@"
+		            		+cafeArray[i].rate);
+		            markers.forEach( (marker) => {
+		            	kakao.maps.event.addListener(marker, 'click', function() {
+							infoBox(marker);
+		            	});
+		            });
+		 		}
+			}
+    	}else if(btset.innerHTML === '병원'){
+			for(i=0;i<hospitalArray.length;i++){
+		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), hospitalArray[i].position.getLat(), hospitalArray[i].position.getLng()) < 2000) {
+		            marker = addMarker(hospitalArray[i].position,  hospitalArray[i].name+"@"+hospitalArray[i].addr+"@"+hospitalArray[i].phone+"@"
+		            		+hospitalArray[i].rate);
+		            markers.forEach( (marker) => {
+		            	kakao.maps.event.addListener(marker, 'click', function() {
+							infoBox(marker);
+		            	});
+		            });
+		 		}
+			}
     	}
 	});
 });
-
 //================================================================================================================================
 //x,y좌표값을 받아서 2키로 이내 좌표인지 확인해주는 함수(단위 미터)
 function calcDistance(cenLat, cenLng, y, x) {
@@ -302,99 +295,34 @@ function rad2deg(rad) {
 	return (rad * 180 / Math.PI);
 }
 
+// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+function addMarker(position, title) {
+    var imageSrc = '${pageContext.request.contextPath }/img/image4.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(50, 36),  // 마커 이미지의 크기
+        imgOptions =  {
+            spriteSize : new kakao.maps.Size(43, 36), // 스프라이트 이미지의 크기
+            spriteOrigin : new kakao.maps.Point(10, 0), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        },
+        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+            marker = new kakao.maps.Marker({
+            position: position, // 마커의 위치
+            image: markerImage, 
+            title: title
+        });
 
-//================================================================================================================================
-function createMarkerImage(src, size, options) {
-    var markerImage = new kakao.maps.MarkerImage(src, size, options);
-    return markerImage;            
-}
+    marker.setMap(map); // 지도 위에 마커를 표출합니다
+    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
-function createMarker(position, image, title) {
-    var marker = new kakao.maps.Marker({
-        position: position,
-        image: image,
-        title:title
-    });
-    return marker;  
-}   
-//================================================================================================================================
-function setParmercyMarkers(map) {        
-    for (var i = 0; i < parmercyMarkers.length; i++) {  
-    	parmercyMarkers[i].setMap(map);
-    }        
-}
-
-
-//================================================================================================================================
-function setRestaurantMarkers(map) {        
-    for (var i = 0; i < restaurantPositions.length; i++) {  
-    	restaurantMarkers[i].setMap(map);
-    }        
+    return marker;
 }
 
-function createRestaurantMarkers() {
-    for (var i = 0; i < restaurantPositions.length; i++) {  
-        var imageSize = new kakao.maps.Size(22, 26),
-            imageOptions = {  
-                spriteOrigin: new kakao.maps.Point(10, 0),    
-                spriteSize: new kakao.maps.Size(36, 98)  
-            };     
-        
-        // 마커이미지와 마커를 생성합니다
-        var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),    
-            marker = createMarker(restaurantPositions[i], markerImage, restaurantAddrs[i]);  
-       
-        // 생성된 마커를 커피숍 마커 배열에 추가합니다
-        restaurantMarkers.push(marker);
-    }     
+//지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
 }
-//================================================================================================================================
-function setCafeMarkers(map) {        
-    for (var i = 0; i < cafePositions.length; i++) {  
-    	cafeMarkers[i].setMap(map);
-    }        
-}
-
-function createCafeMarkers() {
-    for (var i = 0; i < cafePositions.length; i++) {  
-        var imageSize = new kakao.maps.Size(22, 26),
-            imageOptions = {  
-                spriteOrigin: new kakao.maps.Point(10, 0),    
-                spriteSize: new kakao.maps.Size(36, 98)  
-            };     
-        
-        // 마커이미지와 마커를 생성합니다
-        var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),    
-            marker = createMarker(cafePositions[i], markerImage, cafeAddrs[i]);  
-       
-        // 생성된 마커를 커피숍 마커 배열에 추가합니다
-        cafeMarkers.push(marker);
-    }     
-}
-//================================================================================================================================
-function setHospitalMarkers(map) {        
-    for (var i = 0; i < hospitalPositions.length; i++) {  
-    	hospitalMarkers[i].setMap(map);
-    }        
-}
-
-function createHospitalMarkers() {
-    for (var i = 0; i < hospitalPositions.length; i++) {  
-        var imageSize = new kakao.maps.Size(22, 26),
-            imageOptions = {  
-                spriteOrigin: new kakao.maps.Point(10, 0),    
-                spriteSize: new kakao.maps.Size(36, 98)  
-            };     
-        
-        // 마커이미지와 마커를 생성합니다
-        var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),    
-            marker = createMarker(hospitalPositions[i], markerImage, hospitalAddrs[i]);  
-       
-        // 생성된 마커를 커피숍 마커 배열에 추가합니다
-        hospitalMarkers.push(marker);
-    }     
-}
-//================================================================================================================================
 
 </script>
 
