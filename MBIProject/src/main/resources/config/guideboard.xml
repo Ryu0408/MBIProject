@@ -9,14 +9,21 @@
 		(boardcontent,
 		 boardtitle,
 		 boardid,
-		 boardtype)
+		 boardtype,
+		 boardview,
+		 boardgood)
 		values 
-		(#{gvo.boardcontent}, #{gvo.boardtitle}, #{gvo.boardid}, ${gvo.boardtype})
+		(#{gvo.boardcontent}, #{gvo.boardtitle}, #{gvo.boardid}, ${gvo.boardtype}, ${gvo.boardview}, ${gvo.boardgood})
 	</insert>
 
 	<select id = "selectAll" resultType="com.mbi.vo.GuideBoardVO">
-		select * from guideboard 
-		order by boardsid desc
+		select * from 
+			(select rownum as st, A.* from 
+				(select * from  guideboard
+				order by boardsid desc) 
+			A where rownum <![CDATA[ <= ]]> #{end}) 
+		where st <![CDATA[ >= ]]> #{start}
+			
 	</select>
 	
 	<select id = "selectOne" resultType="com.mbi.vo.GuideBoardVO" parameterType="int">
@@ -38,4 +45,8 @@
 	<update id = "updateView" parameterType="int">
 		update guideboard set boardview = boardview+1 where boardsid = ${vvo}
 	</update>
+	
+	<select id="selectCount" resultType="int" parameterType="com.mbi.vo.Pageing">
+		select count(*) from guideboard
+	</select>
 </mapper>

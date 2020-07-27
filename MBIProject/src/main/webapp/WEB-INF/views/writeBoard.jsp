@@ -9,6 +9,8 @@
 <section id="notice-content">
 	<div class="notice_in">
 		<form method="POST" action="${pageContext.request.contextPath }/guideBoard/writeBoard/" >
+			<input type="hidden" name="boardview" value="0">
+			<input type="hidden" name="boardgood" value="0">
 			<table class="table noticeWrite">
 				<thead>
 					<tr>

@@ -18,7 +18,8 @@
 // 		location.href = '${pageContext.request.contextPath }/guideBoard/'
 	}
 </script>
-	
+
+<!-- 디테일에서 좋아요를 누르면 좋아요버튼이 클릭되어 db에 1저장 -->
 <section style="height: 800px; clear: both;">
 	<div class="row">
 		<div class="col-sm-2"></div>
@@ -41,7 +42,7 @@
 										aria-describedby="inputGroup-sizing-sm" value="${gvo.boardtype }" readonly style="width: 100px;">
 									</td>
 									<th class="text-center">조회수</th>
-									<td name="boardview">${gvo.boardview}</td>
+									<td>${gvo.boardview}</td>
 								</tr>
 								<!-- 세션이 있으면 수정삭제 보여주고 없으면 안보여죽 -->
 
