@@ -26,4 +26,29 @@
 	<select id="select" resultType="com.mbi.vo.NoticeBoardVO">
 		SELECT * FROM NOTICEBOARD ORDER BY registdate DESC
 	</select>
+	
+	<select id="selectType" resultType="com.mbi.vo.NoticeBoardVO">
+		SELECT * FROM NOTICEBOARD 
+		WHERE noticetype = #{type} ORDER BY noticesid DESC
+	</select>
+	
+	<select id="read" parameterType="int" resultType="com.mbi.vo.NoticeBoardVO">
+		SELECT * FROM NOTICEBOARD 
+		WHERE noticesid = #{sid}  
+	</select>
+	
+	<update id="viewUp" parameterType="int" >
+		UPDATE NOTICEBOARD SET 
+		noticeview = noticeview + 1 WHERE noticesid = #{view}
+	</update>
+	
+	<update id="modify" parameterType="hashmap">
+		UPDATE NOTICEBOARD SET
+		noticetitle=#{data.noticetitle}, noticecontent=#{data.noticecontent}, noticetype=#{data.noticetype} WHERE noticesid=#{data.noticesid}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM NOTICEBOARD WHERE noticesid=#{delId}
+	</delete>
+	
 </mapper>

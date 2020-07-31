@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/notice.css"/>
 <section id="notice-content">
@@ -9,7 +10,9 @@
 				<thead>
 					<tr>
 						<th class="text-center">작성자</th>
-						<td><input type="text" name="noticeid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" /></td>
+						<c:if test="${user.userid != null}">
+							<td><input type="text" name="noticeid" value="${user.userid }"class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"  readonly /></td>
+						</c:if>
 						<th class="text-center">GROUP</th>
 						<td>
 							<select name="noticetype" class="form-control form-control-sm notice-group">
