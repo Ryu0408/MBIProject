@@ -51,7 +51,7 @@
 								<tr>
 									<td colspan="1 ml-auto"><input type="button"
 										class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.replace('${pageContext.request.contextPath}/updateBoard/${vo.boardsid}/')"
+										onclick="location.replace('${pageContext.request.contextPath}/guideBoard/readBoard/${gvo.boardsid}/')"
 										value="취소" /></td>
 									<td colspan="4 ml-auto">
 									<td colspan="1 ml-auto"><input type="submit"
