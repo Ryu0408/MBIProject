@@ -16,7 +16,7 @@
 		(#{gvo.boardcontent}, #{gvo.boardtitle}, #{gvo.boardid}, ${gvo.boardtype}, ${gvo.boardview}, ${gvo.boardgood})
 	</insert>
 
-	<select id = "selectAll" resultType="com.mbi.vo.GuideBoardVO">
+	<select id = "selectAll" resultType="com.mbi.vo.GuideBoardVO" parameterType="int">
 		select * from 
 			(select rownum as st, A.* from 
 				(select * from  guideboard
@@ -25,6 +25,47 @@
 		where st <![CDATA[ >= ]]> #{start}
 			
 	</select>
+
+	<select id="selectAllpg" resultType="com.mbi.vo.GuideBoardVO"
+		parameterType="int">
+		select * from
+			(select rownum as st, A.* from
+				(select * from guideboard where BOARDTYPE = 0
+					order by boardsid desc)
+						A where rownum <![CDATA[ <= ]]>	
+					#{end})
+				where st <![CDATA[ >= ]]>
+			#{start}
+<!-- 		and BOARDTYPE = 1 -->
+	</select>
+	
+	<select id="selectAllpg3" resultType="com.mbi.vo.GuideBoardVO"
+		parameterType="int">
+		select * from
+			(select rownum as st, A.* from
+				(select * from guideboard where BOARDTYPE = 1
+					order by boardsid desc)
+						A where rownum <![CDATA[ <= ]]>	
+					#{end})
+				where st <![CDATA[ >= ]]>
+			#{start}
+<!-- 		and BOARDTYPE = 1 -->
+	</select>
+	
+	<select id="selectAllpg4" resultType="com.mbi.vo.GuideBoardVO"
+		parameterType="int">
+		select * from
+			(select rownum as st, A.* from
+				(select * from guideboard where BOARDTYPE = 2
+					order by boardsid desc)
+						A where rownum <![CDATA[ <= ]]>	
+					#{end})
+				where st <![CDATA[ >= ]]>
+			#{start}
+<!-- 		and BOARDTYPE = 1 -->
+	</select>
+	
+	
 	
 	<select id = "selectOne" resultType="com.mbi.vo.GuideBoardVO" parameterType="int">
 		select * from guideboard
@@ -43,10 +84,21 @@
 	</delete>
 	
 	<update id = "updateView" parameterType="int">
-		update guideboard set boardview = boardview+1 where boardsid = ${vvo}
+		update guideboard set 
+		boardview = boardview+1
+		where boardsid = ${vvo}
 	</update>
 	
 	<select id="selectCount" resultType="int" parameterType="com.mbi.vo.Pageing">
 		select count(*) from guideboard
+	</select>
+	<select id="selectCount2" resultType="int" parameterType="com.mbi.vo.Pageing">
+		select count(*) from guideboard where boardtype = 0
+	</select>
+		<select id="selectCount3" resultType="int" parameterType="com.mbi.vo.Pageing">
+		select count(*) from guideboard where boardtype = 1
+	</select>
+		<select id="selectCount4" resultType="int" parameterType="com.mbi.vo.Pageing">
+		select count(*) from guideboard where boardtype = 2
 	</select>
 </mapper>
