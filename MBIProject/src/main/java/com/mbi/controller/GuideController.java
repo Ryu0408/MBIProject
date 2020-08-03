@@ -28,17 +28,14 @@ public class GuideController {
 	
 	@RequestMapping(value = "/guideBoard/")
 	public ModelAndView guideBoard(HttpServletRequest req) throws NullPointerException {
-//		HttpSession session = req.getSession();
-//		UserLoginVO vo = (UserLoginVO)session.getAttribute("userSession");
-//		System.out.println(vo.getUserid());
-//		System.out.println(vo.getUsername());
-		 
-//		String userid = (String)session.getAttribute("userid");
-//		
-//		System.out.println(userid);
-		
-		return boardservice.guideBoard();
+
+		return board(1,req);
 	}
+	@RequestMapping(value="/guideBoard/{page}/")
+	public ModelAndView board(@PathVariable("page")int page, HttpServletRequest request) {
+		return boardservice.guideBoardList(page, request);
+	}
+	
 	//글쓰기GET
 	@RequestMapping(value = "/guideBoard/writeBoard/", method = RequestMethod.GET)
 	public String writeBoard() {
@@ -49,7 +46,7 @@ public class GuideController {
 	public String writeBoardPost(GuideBoardVO gvo) {
 		System.out.println("create" + gvo.getBoardcontent());
 		boardservice.create(gvo);
-		return "writeBoard";
+		return "redirect:/guideBoard/";
 	}
 	//글읽기 GET
 	@RequestMapping(value = "/guideBoard/readBoard/{sid}/", method = RequestMethod.GET)
@@ -87,13 +84,13 @@ public class GuideController {
 		System.out.println("타입 : " + gvo.getBoardtype());
 		System.out.println("sid : " + gvo.getBoardsid());
 		boardservice.updateBoardPost(gvo);
-		return "updateBoard";
+		return "redirect:/guideBoard/readBoard/{sid}/";
 	}
 	//글삭제
-	@RequestMapping(value="/guideBoard/readBoard/{sid}/delete/")
-	public int deleteBoard(@PathVariable int sid) {
-		
-		return boardservice.deleteBoard(sid);
+	@RequestMapping(value="/guideBoard/readBoard/delete/{sid}/")
+	public String deleteBoard(@PathVariable int sid, HttpServletRequest request) {
+		boardservice.deleteBoard(sid);
+		return "redirect:/guideBoard/";
 	}
 	
 }

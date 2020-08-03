@@ -7,12 +7,19 @@
 <script>
 	function del(boardsid){
 		var chk = confirm("정말 삭제하시겠습니까?")
+		console.log("실행이 됩니까?")
+		console.log(boardsid)
 		if(chk){
-			location.href='delete'+boardsid+'/'
+			location.href = '${pageContext.request.contextPath }/guideBoard/readBoard/delete/'+boardsid+'/';
 		}
+// 		    response.sendRedirect("${pageContext.request.contextPath }/guideBoard/")
+// 		    console.log("111")
+// 		    history.go(-1)
+// 		location.href = '${pageContext.request.contextPath }/guideBoard/'
 	}
 </script>
-	
+
+<!-- 디테일에서 좋아요를 누르면 좋아요버튼이 클릭되어 db에 1저장 -->
 <section style="height: 800px; clear: both;">
 	<div class="row">
 		<div class="col-sm-2"></div>
@@ -59,10 +66,10 @@
 								</tr>
 								<c:if test="${userSession.userid == gvo.boardid}">
 									<tr>
-										<td colspan="1 ml-auto"><input type="button"
+										<td colspan="1 ml-auto"><button type = "button"
 											class="btn btn-outline-primary btn-w d-block ml-auto"
-											onclick="del(${board.boardsid})"
-											value="삭제" /></td>
+											onclick="del(${gvo.boardsid})"
+											>삭제</button></td>
 										<td colspan="4 ml-auto">
 										<td colspan="1 ml-auto"><input type="button"
 											class="btn btn-outline-primary btn-w d-block ml-auto"
