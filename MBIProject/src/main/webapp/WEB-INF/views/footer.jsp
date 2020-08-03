@@ -1,7 +1,8 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!-- Footer -->
-<footer class="page-footer font-small mdb-color lighten-3 pt-4">
+<footer class="page-footer font-small mdb-color lighten-3 pt-4" style="background-color:black; margin-top:60px; color:white;">
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left">
@@ -25,7 +26,7 @@
       <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mb-4">제작자</h5>
+        <h5 class="font-weight-bold text-uppercase mb-4 font-color-white">제작자</h5>
 
         <ul class="list-unstyled">
           <li>
