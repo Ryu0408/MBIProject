@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <!--  Header Include -->
 <jsp:include page="header.jsp"/>
+<style>
+ul li {display:inline-block; list-style:none; font-size:12pt;}
+a {text-decoration:none; color:black;}
+a:hover {text-decoration:none; color:black; }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270d5d20879442caf9b0de7496e703";
@@ -68,7 +73,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
   			</a>
 		</div>
 	</div>
-	<div class="col-sm-2" style="border-right-style:solid; border-right-color: gray">
+	<div class="col-sm-2">
 	<center>
 		<h5>이달의 추천</h5>
 		<a><img src="${pageContext.request.contextPath }/img/donggas.jpg" style="width:300px; height: 90px"></a><br><br>
@@ -107,7 +112,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
   			</ul>
 <!-- 		 	Tab panes -->
 		 	<br>
-  			<div class="tab-content" style = "border: 1px solid gray; height : 240px; width : 1131px">
+  			<div class="tab-content" style = "border: 1px solid gray; height : 240px; width : 1273px; padding-left:70px;">
     			<div id="notice" class="container tab-pane active" style = "margin:0px; padding: 0px;"><br>
     				<div style="width: 280px; margin-left:9px; float: left;">
 						<h5><b>부산광역시 공지사항1</b></h5>
@@ -265,6 +270,48 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 	</div>
 	<div class="col-sm-2">
 	</div>
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8" style="background-color:#f5f5f5; margin-top:60px; padding:30px;">
+		<ul>
+			<li class="link1">
+				<a href="http://www.busan.go.kr/expo/index" target="_blank" title="새창열기">
+				<span><img src="/homepage/img/icons8-globe-earth-96.png" style="height:70px; width:70px"></span>
+				<span>2030부산월드엑스포</span>
+				</a>
+			</li>
+			<li class="link1">
+				<a href="http://lifemap.busan.go.kr/" target="_blank" title="새창열기">
+				<span><img src="/homepage/img/icons8-region-96.png" style="height:70px; width:70px"></span>
+				<span>부산생활지도</span>
+				</a>
+			</li>
+			<li class="link1">
+				<a href="http://www.busan.go.kr/young/index" target="_blank" title="새창열기">
+				<span><img src="/homepage/img/icons8-commercial-96.png" style="height:70px; width:70px"></span>
+				<span>부산청년플랫폼</span>
+				</a>
+			</li>
+			<li class="link1">
+				<a href="http://www.busan.go.kr/jumin" target="_blank" title="새창열기">
+				<span><img src="/homepage/img/icons8-handshake-96.png" style="height:70px; width:70px"></span>
+				<span>주민자치회</span>
+				</a>
+			</li>
+			<li class="link1">
+				<a href="https://www.busan.go.kr/minwon/guide" target="_blank" title="새창열기">
+				<span><img src="/homepage/img/icons8-siren-96.png" style="height:70px; width:70px"></span>
+				<span>신고센터</span>
+				</a>
+			</li>
+			<li class="link1">
+				<a href="http://www.safetyreport.go.kr/" target="_blank" title="새창열기">
+				<span><img src="/homepage/img/icons8-user-shield-96.png" style="height:70px; width:70px"></span>
+				<span>안전신문고</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="col-sm-2"></div>
 </div>
 
 <!-- Footer Include -->
