@@ -12,11 +12,11 @@
 					<li class="nav-item">
 						<p style="color: black; font-size: 25pt;">카테고리</p>
 					</li>
-					<li class="nav-item"><a class="nav-link navType" href="#"
+					<li class="nav-item"><a class="nav-link navType" href='${pageContext.request.contextPath}/noticeBoard/guide/'
 						style="margin-top: 20px;">가이드</a></li>
-					<li class="nav-item"><a class="nav-link navType" href="#"
+					<li class="nav-item"><a class="nav-link navType" href='${pageContext.request.contextPath}/noticeBoard/24hour/'
 						style="margin-top: 20px;">24시</a></li>
-					<li class="nav-item"><a class="nav-link navType" href="#"
+					<li class="nav-item"><a class="nav-link navType" href='${pageContext.request.contextPath}/noticeBoard/event/'
 						style="margin-top: 20px;">이벤트</a></li>
 				</ul>
 			</nav>
@@ -34,6 +34,7 @@
 						</tr>
 					</thead>
 					<tbody id="content">
+						<!-- 
 						<c:forEach var="nlist" begin="1"  end="10" step="1" varStatus="i" items="${list}">
 							<tr onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeRead/${nlist.noticesid }/'"  style='cursor:pointer;'>
 								<td>${i.count }</td>
@@ -43,17 +44,52 @@
 								<td>${nlist.noticeview }</td>
 							</tr>
 						</c:forEach>
+						 -->
+						 <c:forEach var="nlist" items="${list }">
+						 	<tr onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeRead/${nlist.noticesid }/'"  style='cursor:pointer;'>
+								<td>${nlist.noticesid }</td>
+								<td>${nlist.noticecontent }</td>
+								<td>${nlist.noticeid }</td>
+								<td>${nlist.registdate }</td>
+								<td>${nlist.noticeview }</td>
+							</tr>
+						 </c:forEach>
 					</tbody>
 				</table>
 			</div>
-			<div id="write" style="float: right;">
-				<button onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeWrite/'">글쓰기</button>
+			
+			<div class="paging" style="color: black; margin: auto; text-align: center;">
+				<c:if test="${prev }">
+					<a href="${pageContext.request.contextPath}/noticeBoard/${begin - 1}/">◀</a>
+				</c:if>
+				<c:forEach var="i" begin="${begin}" end="${end}">
+				<c:if test="${i == page }">
+					<strong>[${i }]</strong>
+				</c:if>
+				<c:if test="${i != page }">
+					<a href="${pageContext.request.contextPath}/noticeBoard/${i }/">
+				 		[${i }]
+					</a>
+				</c:if>
+				</c:forEach>
+				<c:if test="${next }">
+					<a href="${pageContext.request.contextPath}/noticeBoard/${end + 1}/">▶</a>
+				</c:if>
 			</div>
+			
+			<c:if test="${session } != null">
+				<div id="write" style="float: right;">
+					<button onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeWrite/'">글쓰기</button>
+				</div>
+			</c:if>
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
 </section>
+
 <script>
+
+/*
     // writeBtn
     let btnw = document.getElementById('write');
     console.log('${user.userid}');
@@ -145,7 +181,6 @@
 						console.log("val : " + j);
 						console.log("호출1: " + cnt);
 						
-						
 						//console.log("res : " + result[i][j].hasOwnProperty(noticesid));
 						console.log("결과: " + cnt);
 						
@@ -183,8 +218,9 @@
 	  }
 	  request.send();
    }
-	
+*/	
 </script>
+
 <jsp:include page="footer.jsp" />
 </body>
 </html>

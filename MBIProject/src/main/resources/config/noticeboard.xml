@@ -23,15 +23,65 @@
 		)
 	</insert>
 	
-	<select id="select" resultType="com.mbi.vo.NoticeBoardVO">
-		SELECT * FROM NOTICEBOARD ORDER BY registdate DESC
+	<select id="selectAll" resultType="com.mbi.vo.NoticeBoardVO" parameterType="com.mbi.vo.Pageing">
+		select * from 
+			(select rownum as st, A.* from 
+				(select * from noticeboard
+				order by noticesid desc) 
+			A where rownum <![CDATA[ <= ]]> #{end}) 
+		where st <![CDATA[ >= ]]> #{start}
 	</select>
 	
-	<select id="selectType" resultType="com.mbi.vo.NoticeBoardVO">
+	<select id="selectGuidelist" resultType="com.mbi.vo.NoticeBoardVO" parameterType="com.mbi.vo.Pageing">
+		select * from 
+			(select rownum as st, A.* from 
+				(select * from noticeboard 
+				where noticetype = 0 order by noticesid desc) 
+			A where rownum <![CDATA[ <= ]]> #{end}) 
+		where st <![CDATA[ >= ]]> #{start}
+	</select>
+	
+	<select id="select24hourlist" resultType="com.mbi.vo.NoticeBoardVO" parameterType="com.mbi.vo.Pageing">
+		select * from 
+			(select rownum as st, A.* from 
+				(select * from noticeboard 
+				where noticetype = 1 order by noticesid desc) 
+			A where rownum <![CDATA[ <= ]]> #{end}) 
+		where st <![CDATA[ >= ]]> #{start}
+	</select>
+	
+	<select id="selectEventlist" resultType="com.mbi.vo.NoticeBoardVO" parameterType="com.mbi.vo.Pageing">
+		select * from 
+			(select rownum as st, A.* from 
+				(select * from noticeboard 
+				where noticetype = 2 order by noticesid desc) 
+			A where rownum <![CDATA[ <= ]]> #{end}) 
+		where st <![CDATA[ >= ]]> #{start}
+	</select>
+	
+	<!--  
+	<select id="selectType" resultType="com.mbi.vo.NoticeBoardVO" >
 		SELECT * FROM NOTICEBOARD 
 		WHERE noticetype = #{type} ORDER BY noticesid DESC
 	</select>
+	-->	
 	
+	<select id="selectCount" resultType="int" parameterType="com.mbi.vo.Pageing" >
+		select count(*) from noticeBoard
+	</select>
+	
+	<select id="selectGuideCount" resultType="int" parameterType="com.mbi.vo.Pageing" >
+		select count(*) from noticeBoard WHERE noticetype = 0 ORDER BY noticesid DESC
+	</select>
+	 
+	<select id="select24hourCount" resultType="int" parameterType="com.mbi.vo.Pageing" >
+		select count(*) from noticeBoard WHERE noticetype = 1 ORDER BY noticesid DESC
+	</select>
+	
+	<select id="selectEventCount" resultType="int" parameterType="com.mbi.vo.Pageing" >
+		select count(*) from noticeBoard WHERE noticetype = 2 ORDER BY noticesid DESC
+	</select>
+		
 	<select id="read" parameterType="int" resultType="com.mbi.vo.NoticeBoardVO">
 		SELECT * FROM NOTICEBOARD 
 		WHERE noticesid = #{sid}  
