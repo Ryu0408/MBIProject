@@ -1,18 +1,13 @@
 package com.mbi.controller;
 
-
-import java.net.http.HttpRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mbi.dao.GuideBoardDAO;
@@ -25,15 +20,49 @@ public class GuideController {
 
 	@Autowired BoardService boardservice;
 	@Autowired GuideBoardDAO gdao;
-	
+	//일반
 	@RequestMapping(value = "/guideBoard/")
 	public ModelAndView guideBoard(HttpServletRequest req) throws NullPointerException {
 
 		return board(1,req);
 	}
+	//일반페이지
 	@RequestMapping(value="/guideBoard/{page}/")
 	public ModelAndView board(@PathVariable("page")int page, HttpServletRequest request) {
 		return boardservice.guideBoardList(page, request);
+	}
+	//타입 가이드
+	@RequestMapping(value = "/guideBoard/guide/")
+	public ModelAndView guideBoardtype(HttpServletRequest req) throws NullPointerException {
+
+		return board2(1,req);
+	}
+	//타입페이지 가이드
+	@RequestMapping(value = "/guideBoard/guide/{page2}")
+	public ModelAndView board2(@PathVariable("page2")int page, HttpServletRequest request) {
+		return boardservice.guideBoardList2(page, request);
+	}
+	//타입 맛집
+	@RequestMapping(value = "/guideBoard/delicious/")
+	public ModelAndView guideBoardtype3(HttpServletRequest req) throws NullPointerException {
+
+		return board3(1,req);
+	}
+	//타입페이지 맛집
+	@RequestMapping(value = "/guideBoard/delicious/{page3}")
+	public ModelAndView board3(@PathVariable("page3")int page, HttpServletRequest request) {
+		return boardservice.guideBoardList3(page, request);
+	}
+	//타입 지역행사
+	@RequestMapping(value = "/guideBoard/area/")
+	public ModelAndView guideBoardtype4(HttpServletRequest req) throws NullPointerException {
+
+		return board4(1,req);
+	}
+	//타입페이지 지역행사
+	@RequestMapping(value = "/guideBoard/area/{page4}")
+	public ModelAndView board4(@PathVariable("page4")int page, HttpServletRequest request) {
+		return boardservice.guideBoardList4(page, request);
 	}
 	
 	//글쓰기GET
@@ -44,7 +73,7 @@ public class GuideController {
 	//글쓰기POST
 	@RequestMapping(value = "/guideBoard/writeBoard/", method = RequestMethod.POST)
 	public String writeBoardPost(GuideBoardVO gvo) {
-		System.out.println("create" + gvo.getBoardcontent());
+//		System.out.println("create" + gvo.getBoardcontent());
 		boardservice.create(gvo);
 		return "redirect:/guideBoard/";
 	}
@@ -57,11 +86,11 @@ public class GuideController {
 			HttpSession session = req.getSession();
 			UserLoginVO vo = (UserLoginVO)session.getAttribute("userSession");
 	
-			return boardservice.readBoard(sid, session);
+			return boardservice.readBoard(sid);
 		}catch(NullPointerException e){
 			//로그인 안되있으면
 			e.printStackTrace();
-			return boardservice.readBoard(sid, null);
+			return boardservice.readBoard(sid);
 		}
 	}
 	//글읽기POST
@@ -79,10 +108,10 @@ public class GuideController {
 	//글수정 POST
 	@RequestMapping(value = "/guideBoard/updateBoard/{sid}/", method = RequestMethod.POST)
 	public String updateBoardPost(@PathVariable int sid, GuideBoardVO gvo) {
-		System.out.println("글내용 : " + gvo.getBoardcontent());
-		System.out.println("글제목 : " + gvo.getBoardtitle());
-		System.out.println("타입 : " + gvo.getBoardtype());
-		System.out.println("sid : " + gvo.getBoardsid());
+//		System.out.println("글내용 : " + gvo.getBoardcontent());
+//		System.out.println("글제목 : " + gvo.getBoardtitle());
+//		System.out.println("타입 : " + gvo.getBoardtype());
+//		System.out.println("sid : " + gvo.getBoardsid());
 		boardservice.updateBoardPost(gvo);
 		return "redirect:/guideBoard/readBoard/{sid}/";
 	}
