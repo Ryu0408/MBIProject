@@ -1,19 +1,16 @@
 package com.mbi.controller;
 
-import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mbi.service.NoticeService;
 import com.mbi.vo.NoticeBoardVO;
@@ -27,39 +24,55 @@ public class NoticeController {
 	
 	// 리스트
 	@RequestMapping(value= "/noticeBoard/")
-	public String noticeList(Model model, HttpServletRequest request) {
-		UserLoginVO uvo = null;
-		if(request.getSession() != null){ uvo = (UserLoginVO)request.getSession().getAttribute("userSession"); }
-		else { uvo = null; }
-		
-		model.addAttribute("list", ns.noticeListAll());
-		model.addAttribute( "user", uvo);
-		return "noticeBoard";
+	public ModelAndView noticeList(HttpServletRequest request) throws NullPointerException{
+		return board(1, request);
 	}
 	
-	@RequestMapping(value="/noticeBoard/{typeData}/", method=RequestMethod.GET, produces="application/text;charset=utf-8")
-	@ResponseBody
-	public String noticeTypelist(@PathVariable("typeData")int typeData) {
-		System.out.println("data: " + typeData);
-		System.out.println("호출한다.!!!");
-		
-		//typeData = typeData - 1;
-//		ArrayList<HashMap<String, Object>>vo
-		//List<NoticeBoardVO>vo
-		List<NoticeBoardVO>vo = ns.noticeTypelist(typeData);
-		System.out.println("size: " + vo.size());
-		String jsonString = null;
-		ObjectMapper jsonMapper = new ObjectMapper();
-		
-		try {
-			jsonString = jsonMapper.writeValueAsString(vo);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("JSON 파싱 실패");
-		}
-		System.out.println("res: " + vo != null ? jsonString : null);
-		return vo != null ? jsonString : null;
+	@RequestMapping(value="/noticeBoard/{page}/")
+	public ModelAndView board(@PathVariable("page")int page, HttpServletRequest request) {
+		return ns.noticeBoardList(page, request);
 	}
+	
+	@RequestMapping(value="/noticeBoard/guide/")
+	public ModelAndView noticeGuide(HttpServletRequest request) throws NullPointerException{
+		return guideBoard(1, request);
+	}
+	
+	@RequestMapping(value= "/noticeBoard/guide/{page2}")
+	public ModelAndView guideBoard(@PathVariable("page2")int page, HttpServletRequest request) {
+		return ns.noticeBoardList1(page, request);
+	}
+	
+	@RequestMapping(value= "/noticeBoard/24hour/")
+	public ModelAndView notice24hour(HttpServletRequest request) throws NullPointerException{
+		return infoBoard(1, request);
+	}
+	
+	@RequestMapping(value= "/noticeBoard/24hour/{page3}")
+	public ModelAndView infoBoard(@PathVariable("page3")int page, HttpServletRequest request) {
+		return ns.noticeBoardList2(page, request);
+	}
+	
+	
+	@RequestMapping(value= "/noticeBoard/event/")
+	public ModelAndView noticeEvent(HttpServletRequest request) throws NullPointerException{
+		return eventBoard(1, request);
+	}
+	
+	@RequestMapping(value= "/noticeBoard/event/{page4}")
+	public ModelAndView eventBoard(@PathVariable("page4")int page, HttpServletRequest request) {
+		return ns.noticeBoardList3(page, request);
+	}
+	
+	
+	/*
+	// 글쓰기 세션의 수정
+	// typeData,
+	@RequestMapping(value="/noticeBoard/{typeData}/", method=RequestMethod.GET)
+	public ModelAndView noticeTypelist(@PathVariable("page") int page, HttpServletRequest request, @PathVariable("typeData") String typeData) {
+		return guide(1, request, typeData);
+	}
+	*/
 	
 	// 쓰기
 	@RequestMapping(value="/noticeBoard/noticeWrite/", method=RequestMethod.GET)
