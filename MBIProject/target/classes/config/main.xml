@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.mbi.dao.MainDAO">
+	<select id = "selectNoticeBoard" resultType="com.mbi.vo.NoticeBoardVO">
+	    select * from (select * from noticeboard order by noticesid desc) where rownum <![CDATA[ <=]]> 4
+	</select>
+	
+	<select id = "selectGuideBoard" resultType="com.mbi.vo.GuideBoardVO">
+	    select * from (select * from guideboard order by boardsid desc) where rownum <![CDATA[ <=]]> 4
+	</select>
+</mapper>

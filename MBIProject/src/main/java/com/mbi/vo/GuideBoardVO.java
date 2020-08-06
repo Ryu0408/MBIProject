@@ -1,5 +1,6 @@
 package com.mbi.vo;
 
+
 public class GuideBoardVO {
 	public int boardsid;
 	public String boardcontent;
@@ -11,6 +12,14 @@ public class GuideBoardVO {
 	public int boardviewcheck;
 	
 	
+	public String registdate;
+	
+	public String getRegistdate() {
+		return registdate;
+	}
+	public void setRegistdate(String registdate) {
+		this.registdate = registdate;
+	}
 	public int getBoardsid() {
 		return boardsid;
 	}

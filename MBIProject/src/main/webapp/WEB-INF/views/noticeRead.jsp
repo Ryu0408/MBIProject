@@ -22,11 +22,9 @@
 						<td colspan="2"><input type="text" name="id" value="${nData.noticeid }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"  readonly /></td>
 						<th class="text-center">GROUP</th>
 						<td colspan="2">
-							<select class="form-control" disable>
-							  <option value="0" ${nData.noticetype == 0 ? 'selected' : nData.noticetype == 1 ? 'selected' : nData.noticetype == 2 ? 'selected' : ''}>가이드</option>
-							  <option value="1" ${nData.noticetype == 0 ? 'selected' : nData.noticetype == 1 ? 'selected' : nData.noticetype == 2 ? 'selected' : ''}>24시</option>
-							  <option value="2" ${nData.noticetype == 0 ? 'selected' : nData.noticetype == 1 ? 'selected' : nData.noticetype == 2 ? 'selected' : ''}>이벤트</option>
-							</select>
+							<input type="text" name="boardtype"
+										class="form-control" aria-label="Sizing example input"
+										aria-describedby="inputGroup-sizing-sm" value="${nData.noticetype }" readonly >
 						</td>
 					</tr>
 					
@@ -39,22 +37,33 @@
 						<td colspan="6"><textarea rows="10" cols="136" readonly >${nData.noticecontent }</textarea></td>
 					</tr>
 					
-					
-					<c:if test="${user.userid eq nData.noticeid }">
-						<tr>
-							<td colspan="1 ml-auto">
-								<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeDelete/${nData.noticesid }/'"
-											value="삭제" />
-							</td>
-							<td colspan="4 ml-auto"></td>
-							<td colspan="1 ml-auto" style="width:100px;">		
+					<c:choose>
+						<c:when test="${user.userid eq nData.noticeid }">
+							<tr>
+								<td colspan="1 ml-auto">
+									<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
+											onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeDelete/${nData.noticesid }/'"
+												value="삭제" />
+								</td>
+								<td colspan="4 ml-auto"></td>
+								<td colspan="1 ml-auto" style="width:100px;">		
 								<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
 									onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeModify/${nData.noticesid }/'"
 										value="수정" />	
-							</td>
-						</tr>
-					</c:if>
+								
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="6">
+									<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
+										onclick = 'history.go(-1)'
+										value="목록" />
+								</td>	
+							</tr>
+						</c:otherwise>
+					</c:choose>
+					
 				</thead>
 			</table>
 		</form>
