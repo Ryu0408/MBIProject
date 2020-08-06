@@ -82,7 +82,6 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 	</div>
 	<div class="col-sm-2">
 		<center>
-		<h5>오늘의 부산날씨</h5>
 		<img id = "weather"  style="width:60px; height: 90px">
 		<b id = "temp" style="font-size: 40pt"></b><br>
 		<b id = "humidity" style="font-size: 20pt"></b>
@@ -111,10 +110,10 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
     			</li>
   			</ul>
 <!-- 		 	Tab panes -->
-		 	<br>
-  			<div class="tab-content" style = "border: 1px solid gray; height : 240px; width : 1273px; padding-left:70px;">
-    			<div id="notice" class="container tab-pane active" style = "margin:0px; padding: 0px;"><br>
-    				<div style="width: 280px; margin-left:9px; float: left;">
+		 	<hr style="margin-top:0px; border:0.5px solid #007bff; width:1220px;">
+  			<div class="tab-content" style = "height : 240px; width : 1273px;">
+    			<div id="notice" class="container tab-pane active" style = "margin:0px; padding: 0px; max-width:1300px;">
+    				<div style="width: 280px; margin-right:40px; float: left;">
 						<h5><b>부산광역시 공지사항1</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -123,7 +122,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>   
     				</div>
-    				<div style="width: 280px; float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 공지사항2</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -132,7 +131,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-    				<div style="width: 280px;   float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 공지사항3</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -141,7 +140,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-					<div style="width: 280px;   float: left;">
+					<div style="width: 280px; float: left;">
 						<h5><b>부산광역시 공지사항4</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -151,8 +150,8 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 						</div>
 					</div>
     			</div>
-    			<div id="guide" class="container tab-pane" style = "margin:0px; padding: 0px;"><br>
-    				<div style="width: 280px; margin-left:9px; float: left;">
+    			<div id="guide" class="container tab-pane" style = "margin:0px; padding: 0px; max-width:1300px;">
+    				<div style="width: 280px; margin-right:40px; float: left;">
 						<h5><b>부산광역시 가이드1</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -161,7 +160,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>   
     				</div>
-    				<div style="width: 280px; float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 가이드2</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -170,7 +169,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-    				<div style="width: 280px;   float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 가이드3</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -179,7 +178,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-					<div style="width: 280px;   float: left;">
+					<div style="width: 280px; float: left;">
 						<h5><b>부산광역시 가이드4</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -189,8 +188,8 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 						</div>
 					</div>
     			</div>
-    			<div id="hour24" class="container tab-pane" style = "margin:0px; padding: 0px;"><br>
-    				<div style="width: 280px; margin-left:9px; float: left;">
+    			<div id="hour24" class="container tab-pane" style = "margin:0px; padding: 0px; max-width:1300px;">
+    				<div style="width: 280px; margin-right:40px; float: left;">
 						<h5><b>부산광역시 24시정보1</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -199,7 +198,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>   
     				</div>
-    				<div style="width: 280px; float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 24시정보2</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -208,7 +207,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-    				<div style="width: 280px;   float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 24시정보3</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -217,7 +216,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-					<div style="width: 280px;   float: left;">
+					<div style="width: 280px; float: left;">
 						<h5><b>부산광역시 24시정보4</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -227,8 +226,8 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 						</div>
 					</div>
     			</div>
-    			<div id="review" class="container tab-pane" style = "margin:0px; padding: 0px;"><br>
-    				<div style="width: 280px; margin-left:9px; float: left;">
+    			<div id="review" class="container tab-pane" style = "margin:0px; padding: 0px; max-width:1300px;">
+    				<div style="width: 280px; margin-right:40px; float: left;">
 						<h5><b>부산광역시 리뷰1</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -237,7 +236,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>   
     				</div>
-    				<div style="width: 280px; float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 리뷰2</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -246,7 +245,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-    				<div style="width: 280px;   float: left;">
+    				<div style="width: 280px; float: left; margin-right:40px;">
 						<h5><b>부산광역시 리뷰3</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -255,7 +254,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 							<p style = "text-align: right;">2020-07-14</p>
 						</div>
 					</div>
-					<div style="width: 280px;   float: left;">
+					<div style="width: 280px; float: left;">
 						<h5><b>부산광역시 리뷰4</b></h5>
       					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
 							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
@@ -271,39 +270,39 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 	<div class="col-sm-2">
 	</div>
 	<div class="col-sm-2"></div>
-	<div class="col-sm-8" style="background-color:#f5f5f5; margin-top:60px; padding:30px;">
-		<ul>
-			<li class="link1">
+	<div class="col-sm-8" style="background-color:#f5f5f5; margin-top:60px; padding:30px 0px;">
+		<ul style="padding-left:65px;">
+			<li style="width:230px;">
 				<a href="http://www.busan.go.kr/expo/index" target="_blank" title="새창열기">
 				<span><img src="/homepage/img/icons8-globe-earth-96.png" style="height:70px; width:70px"></span>
 				<span>2030부산월드엑스포</span>
 				</a>
 			</li>
-			<li class="link1">
+			<li style="width:190px;">
 				<a href="http://lifemap.busan.go.kr/" target="_blank" title="새창열기">
 				<span><img src="/homepage/img/icons8-region-96.png" style="height:70px; width:70px"></span>
 				<span>부산생활지도</span>
 				</a>
 			</li>
-			<li class="link1">
+			<li style="width:210px;">
 				<a href="http://www.busan.go.kr/young/index" target="_blank" title="새창열기">
 				<span><img src="/homepage/img/icons8-commercial-96.png" style="height:70px; width:70px"></span>
 				<span>부산청년플랫폼</span>
 				</a>
 			</li>
-			<li class="link1">
+			<li style="width:180px;">
 				<a href="http://www.busan.go.kr/jumin" target="_blank" title="새창열기">
 				<span><img src="/homepage/img/icons8-handshake-96.png" style="height:70px; width:70px"></span>
 				<span>주민자치회</span>
 				</a>
 			</li>
-			<li class="link1">
+			<li style="width:160px;">
 				<a href="https://www.busan.go.kr/minwon/guide" target="_blank" title="새창열기">
 				<span><img src="/homepage/img/icons8-siren-96.png" style="height:70px; width:70px"></span>
 				<span>신고센터</span>
 				</a>
 			</li>
-			<li class="link1">
+			<li style="width:190px;">
 				<a href="http://www.safetyreport.go.kr/" target="_blank" title="새창열기">
 				<span><img src="/homepage/img/icons8-user-shield-96.png" style="height:70px; width:70px"></span>
 				<span>안전신문고</span>
