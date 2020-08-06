@@ -4,6 +4,27 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/board.css" />
 <section style="height: 800px; clear: both;">
+<script type="text/javascript">
+function msgGoBack(boardsid){
+	var re = confirm("정말 취소하시겠습니까?")
+	if(re){
+		location.href='${pageContext.request.contextPath}/guideBoard/readBoard/${gvo.boardsid }/'		
+	}
+	else{
+		location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'
+	}
+	
+}
+function msgGoUpdate(boardsid){
+	var re = confirm("정말 수정하시겠습니까?")
+	if(re){		
+		location.href='${pageContext.request.contextPath}/guideBoard/readBoard/${gvo.boardsid }/'
+	}
+	else{
+		location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'
+	}
+}
+</script>
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-8 text-black" style="margin-top: 50px;">
@@ -38,7 +59,7 @@
 										onfocus="this.placeholder=''"
 										onblur="this.placeholder='글제목을 입력해주세요. (최대 50자)'"
 										placeholder="글제목을 입력해주세요. (최대 50자)" value="${gvo.boardtitle}"></td>
-									<th class="text-center">좋아요</th>
+									<th class="text-center">추천</th>
 									<td>${gvo.boardgood}</td>
 								</tr>
 								<!--글내용 -->
@@ -51,11 +72,12 @@
 								<tr>
 									<td colspan="1 ml-auto"><input type="button"
 										class="btn btn-outline-primary btn-w d-block ml-auto"
-										onclick="location.replace('${pageContext.request.contextPath}/guideBoard/readBoard/${gvo.boardsid}/')"
+										onclick="msgGoBack(${gvo.boardsid})"
 										value="취소" /></td>
 									<td colspan="4 ml-auto">
 									<td colspan="1 ml-auto"><input type="submit"
 										class="btn btn-outline-primary btn-w d-block ml-auto"
+										onclick="msgGoUpdate()"
 										value="수정" /></td>
 								</tr>
 							</thead>
