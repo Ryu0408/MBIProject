@@ -65,8 +65,6 @@
 <!-- 		and BOARDTYPE = 1 -->
 	</select>
 	
-	
-	
 	<select id = "selectOne" resultType="com.mbi.vo.GuideBoardVO" parameterType="int">
 		select * from guideboard
 		where boardsid = ${gvo}
@@ -95,10 +93,23 @@
 	<select id="selectCount2" resultType="int" parameterType="com.mbi.vo.Pageing">
 		select count(*) from guideboard where boardtype = 0
 	</select>
-		<select id="selectCount3" resultType="int" parameterType="com.mbi.vo.Pageing">
+	<select id="selectCount3" resultType="int" parameterType="com.mbi.vo.Pageing">
 		select count(*) from guideboard where boardtype = 1
 	</select>
-		<select id="selectCount4" resultType="int" parameterType="com.mbi.vo.Pageing">
+	<select id="selectCount4" resultType="int" parameterType="com.mbi.vo.Pageing">
 		select count(*) from guideboard where boardtype = 2
 	</select>
+	
+<!--추천 -->
+	<update id = "updateGood" parameterType="int">
+		update guideboard set 
+		boardgood = boardgood+1
+		where boardsid = ${vov}
+	</update>
+	<select id="updateGoodSelect" parameterType="int" resultType="String">
+	select boardgood from GUIDEBOARD 
+	where boardsid = ${uvou}
+	
+	</select>
+	
 </mapper>

@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath }/js/twbs-pagination/jquery.twbsPagination.js"> --%>
-<!-- </script> -->
+<style>
+a:hover {text-decoration: none; color: red;}
+</style>
 <section style="height: 800px; clear: both;">
 	<div class="row">
 		<div class="col-sm-2"></div>
@@ -13,7 +13,7 @@
 				<ul class="navbar-nav"
 					style="margin-top: 100px; text-align: center; width: 200px; height: 300px;">
 					<li class="nav-item">
-						<p style="color: black; font-size: 25pt;">카테고리</p>
+						<p style="color: black; font-size: 25pt;"><a href="${pageContext.request.contextPath }/guideBoard/" style="color: black; hover:text-decoration: none;">카테고리</a></p>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/guideBoard/guide/"
 						style="margin-top: 20px;">관광지</a>

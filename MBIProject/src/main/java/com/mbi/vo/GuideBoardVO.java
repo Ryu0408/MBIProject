@@ -9,6 +9,9 @@ public class GuideBoardVO {
 	public int boardtype;
 	public int boardview;
 	public int boardgood;
+	public int boardviewcheck;
+	
+	
 	public String registdate;
 	
 	public String getRegistdate() {
@@ -58,6 +61,12 @@ public class GuideBoardVO {
 	}
 	public void setBoardgood(int boardgood) {
 		this.boardgood = boardgood;
+	}
+	public int getBoardviewcheck() {
+		return boardviewcheck;
+	}
+	public void setBoardviewcheck(int boardviewcheck) {
+		this.boardviewcheck = boardviewcheck;
 	}
 	
 	

@@ -2,8 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
+<style>
+.button-img{
+	width: 40px;
+	height: 35px; 
+	float: right;
+	background-image: url(${pageContext.request.contextPath}/img/good.png);
+	background-size: 35px;
+	
+}
+</style>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/board.css" />
+<!-- 삭제버튼 스크립트 -->
 <script>
 	function del(boardsid){
 		var chk = confirm("정말 삭제하시겠습니까?")
@@ -12,12 +23,23 @@
 		if(chk){
 			location.href = '${pageContext.request.contextPath }/guideBoard/readBoard/delete/'+boardsid+'/';
 		}
-// 		    response.sendRedirect("${pageContext.request.contextPath }/guideBoard/")
-// 		    console.log("111")
-// 		    history.go(-1)
-// 		location.href = '${pageContext.request.contextPath }/guideBoard/'
 	}
+	function msgGoLogin(){
+		alert("로그인후 추천이 가능합니다.")
+		location.href='${pageContext.request.contextPath}/loginForm/';
+	}
+	function msgGoUpdate(boardsid){
+		var re = confirm("정말 수정하시겠습니까?")
+		if(re){
+			location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'			
+		}else{
+			location.href='${pageContext.request.contextPath}/guideBoard/readBoard/${gvo.boardsid }/'
+		}
+	}
+	
 </script>
+
+
 
 <!-- 디테일에서 좋아요를 누르면 좋아요버튼이 클릭되어 db에 1저장 -->
 <section style="height: 800px; clear: both;">
@@ -26,7 +48,7 @@
 		<div class="col-sm-8 text-black" style="margin-top: 50px;">
 			<section id="notice-content">
 				<div class="notice_in">
-					<form method="POST">
+					<form method="POST" id="board">
 					 	<input type="hidden" name="boardsid" value="${gvo.boardsid }">
 						<table class="table noticeWrite">
 							<thead>
@@ -39,7 +61,7 @@
 									<th class="text-center">카테고리</th>
 									<td><input type="text" name="boardtype"
 										class="form-control" aria-label="Sizing example input"
-										aria-describedby="inputGroup-sizing-sm" value="${gvo.boardtype }" readonly style="width: 100px;">
+										aria-describedby="inputGroup-sizing-sm" value=" ${gvo.boardtype == 0 ? '관광지' : gvo.boardtype == 1 ? '맛집' : gvo.boardtype == 2 ? '지역행사' : ''}" readonly style="width: 100px;">
 									</td>
 									<th class="text-center">조회수</th>
 									<td>${gvo.boardview}</td>
@@ -54,8 +76,18 @@
 										onfocus="this.placeholder=''"
 										onblur="this.placeholder='글제목을 입력해주세요. (최대 50자)'"
 										placeholder="글제목을 입력해주세요. (최대 50자)" value="${gvo.boardtitle}" readonly></td>
-									<th class="text-center">좋아요</th>
-									<td>${gvo.boardgood}</td>
+									<th class="text-center">추천</th>
+
+									<td>
+										<input type="hidden" name="command" value="like_it">
+										<input type="hidden" name="boardsid" value="${gvo.boardsid}">
+										<c:if test="${userSession != null}">
+											<input type="button" onclick="return like(${gvo.boardsid})" class="button-img">
+										</c:if>
+										<c:if test="${userSession == null}">
+											<input type="button" onclick="msgGoLogin()" class="button-img">
+										</c:if>
+										<div id="like_result">${gvo.boardgood}</div>
 								</tr>
 								<!--글내용 -->
 								<tr>
@@ -73,7 +105,7 @@
 										<td colspan="4 ml-auto">
 										<td colspan="1 ml-auto"><input type="button"
 											class="btn btn-outline-primary btn-w d-block ml-auto"
-											onclick="location.href='${pageContext.request.contextPath}/guideBoard/updateBoard/${gvo.boardsid }/'"
+											onclick="msgGoUpdate(${gvo.boardsid})"
 											value="수정" /></td>
 									</tr>
 								</c:if>
@@ -89,6 +121,31 @@
 		</div>
 		<div class="col-sm-2"></div>
 	</div>
+<!-- 추천버튼 스크립트 -->
+<script>
+function like(sid){
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath }/guideBoard/readBoard/ajax/"+sid+"/",
+		type: "POST",
+		dataType: "text",
+		data: {sid:sid}, 
+	success:
+	function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+		document.getElementById('like_result').innerHTML = data;
+	},
+	error:
+	function (request, status, error){
+	console.log("ajax실패")
+	}
+	});
+	}
+
+</script>
+
+<!-- <script> -->
+
+<!-- </script> -->
 </section>
 <jsp:include page="footer.jsp" />
 </body>

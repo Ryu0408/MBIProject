@@ -34,4 +34,8 @@ public interface GuideBoardDAO {
 	int selectCount3(Pageing pg3);
 	
 	int selectCount4(Pageing pg4);
+
+	void updateGood(@Param("vov")int boardsid);
+	
+	String updateGoodSelect(@Param("uvou")int boardsid);
 }
