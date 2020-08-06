@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!--  Header Include -->
 <jsp:include page="header.jsp"/>
 <style>
@@ -102,167 +104,35 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
     			<li class="nav-item" style="width:100px; text-align:center;">
       				<a class="nav-link" data-toggle="pill" href="#guide">가이드</a>
     			</li>
-    			<li class="nav-item" style="width:100px; text-align:center;">
-      				<a class="nav-link" data-toggle="pill" href="#hour24">24시정보</a>
-    			</li>
-    			<li class="nav-item" style="width:100px; text-align:center;">
-      				<a class="nav-link" data-toggle="pill" href="#review">리뷰</a>
-    			</li>
   			</ul>
 <!-- 		 	Tab panes -->
 		 	<hr style="margin-top:0px; border:0.5px solid #007bff; width:1220px;">
   			<div class="tab-content" style = "height : 240px; width : 1273px;">
     			<div id="notice" class="container tab-pane active" style = "margin:0px; padding: 0px; max-width:1300px;">
-    				<div style="width: 280px; margin-right:40px; float: left;">
-						<h5><b>부산광역시 공지사항1</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>   
-    				</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 공지사항2</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 공지사항3</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-					<div style="width: 280px; float: left;">
-						<h5><b>부산광역시 공지사항4</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
+    				<c:forEach var = "vo" items="${noticeboard}">
+    					<div style="width: 280px; margin-right:30px; float: left;">
+							<h5><b>${vo.noticetitle }</b></h5>
+		     					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+								<p style = "font-size: 15px; margin:0px;">${vo.noticecontent }</p>
+							</div>
+		     					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+								<p style = "text-align: right;">${vo.registdate }</p>
+							</div>   
+    					</div>
+    				</c:forEach>
     			</div>
     			<div id="guide" class="container tab-pane" style = "margin:0px; padding: 0px; max-width:1300px;">
-    				<div style="width: 280px; margin-right:40px; float: left;">
-						<h5><b>부산광역시 가이드1</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>   
-    				</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 가이드2</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 가이드3</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-					<div style="width: 280px; float: left;">
-						<h5><b>부산광역시 가이드4</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-    			</div>
-    			<div id="hour24" class="container tab-pane" style = "margin:0px; padding: 0px; max-width:1300px;">
-    				<div style="width: 280px; margin-right:40px; float: left;">
-						<h5><b>부산광역시 24시정보1</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>   
-    				</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 24시정보2</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 24시정보3</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-					<div style="width: 280px; float: left;">
-						<h5><b>부산광역시 24시정보4</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-    			</div>
-    			<div id="review" class="container tab-pane" style = "margin:0px; padding: 0px; max-width:1300px;">
-    				<div style="width: 280px; margin-right:40px; float: left;">
-						<h5><b>부산광역시 리뷰1</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>   
-    				</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 리뷰2</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-    				<div style="width: 280px; float: left; margin-right:40px;">
-						<h5><b>부산광역시 리뷰3</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
-					<div style="width: 280px; float: left;">
-						<h5><b>부산광역시 리뷰4</b></h5>
-      					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
-							<p style = "font-size: 15px; margin:0px;">코로나19로 취업에 어려움을 겪고 있는 시민들에게 한시적인 공공일자리를 제공하고 지역경제 회복을 위하여 부산광역시 “코로나19 극복 희망일자리사업” 참여자를 모집합니다.</p>
-						</div>
-      					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px;width: 260px; height:30px;">
-							<p style = "text-align: right;">2020-07-14</p>
-						</div>
-					</div>
+    				<c:forEach var = "vo2" items="${guideboard}">
+    					<div style="width: 280px; margin-right:30px; float: left;">
+							<h5><b>${vo2.boardtitle }</b></h5>
+		     					<div class="jumbotron" style="padding: 2px; margin:0px; width: 260px; height:130px;">
+								<p style = "font-size: 15px; margin:0px;">${vo2.boardcontent }</p>
+							</div>
+		     					<div class="jumbotron" style="padding: 2px; padding-right:20px; margin:0px; width: 260px; height:30px;">
+								<p style = "text-align: right;">${vo2.registdate }</p>
+							</div>   
+    					</div>
+    				</c:forEach>
     			</div>
   			</div>
 		</div>
