@@ -103,7 +103,6 @@ public class LoginController {
 	@ResponseBody
 	public String newPass(String useremail, Model model) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException  {
         String jsonString = null;
-        useremail = aes.encrypt(useremail);
 		List<String> list = new ArrayList<String>();
 		boolean checkEmail = ls.idcheck(useremail);
 		String useEmail = checkEmail ? "이메일이 발송되었습니다" : "해당 이메일이 없습니다. 다시 입력해주세요";
