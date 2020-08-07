@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cpath">${pageContext.request.contextPath }</c:set>
 <%@ include file="header.jsp"%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 <style>
+	.card {	display: inline-block;	}
+	article {		display: none;	} 
+	article.on {	display: inline-block;	}
 	.placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
 	.placeinfo_wrap .after {content:'';
 	position:relative;
@@ -42,9 +46,10 @@
 	}
 	.placeinfo .tel {color:#0f7833;}
 </style>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f208c8186518ea31e042273cb8e359d&libraries=services,clusterer,drawing"></script>
-	
+	<br><br>
 	<div id="map" style="text-align: center;height:400px;"></div>
 
 <script>
@@ -80,7 +85,44 @@
     
     // 좌표를 찍기위한 marker 객체 생성
     var marker = new kakao.maps.Marker();
-       	 
+    
+    var storeArray = new Array();
+    var parmercyArray = new Array();
+    var hospitalArray = new Array();
+    var cafeArray = new Array();
+    var restaurantArray = new Array();
+    var restaurantCount = 0;
+    var parmercyCount = 0;
+    var hospitalCount = 0;
+    var cafeCount = 0;
+    var perPage = 12;
+    <c:forEach items="${list}" var = "hvo" varStatus="index">
+    	var store = new Object();
+    	store.addr = "${hvo.storeAddr}";
+    	store.name = "${hvo.storeName}";
+    	store.phone = "${hvo.storePhone}";
+    	store.rate = "${hvo.storeRate}";
+    	store.type = "${hvo.storeType}";
+    	if(store.type == '0'){
+    		restaurantCount = restaurantCount + 1;
+    	}
+    	else if(store.type == '1'){
+    		parmercyCount = parmercyCount + 1;
+    	}else if(store.type == '2'){
+    		cafeCount = cafeCount + 1;
+    	}else if(store.type == '3'){
+    		hospitalCount = hospitalCount + 1;
+    	}
+    	storeArray.push(store);
+    </c:forEach>
+    var restaurantPage = Math.ceil(restaurantCount/perPage);
+    var parmercyPage = Math.ceil(parmercyCount/perPage);
+    var hospitalPage = Math.ceil(hospitalCount/perPage);
+    var cafePage = Math.ceil(cafeCount/perPage);
+    
+//     $(document).ready(function(){
+//     	paging(totalData, dataPerPage, pageCount, 1);
+//     });
 </script>
 
 	<div class="btn-group d-flex">
@@ -90,31 +132,142 @@
 		<button type="button" id="hospital" class="btn btn-primary btn-lg raun" style="width: 80px;">병원</button>
 	</div>
 	
-	
 	<div class="btn-group d-flex">
 		<button type="button" id="restaurant" class="btn btn-primary btn-lg search" style="width: 80px;">현재위치에서찾기</button>
+	</div><br><br>
+	<!-- 업체 0. 식당, 1. 약국, 2. 카페, 3. 병원 //지도 api 에 접근하는 주소가 localhost(x), 도메인, 아이피(o) -->
+	<!-- 스크립트에서 페이징, 버튼 onclick로 변경? -->
+	<div>
+		<article id="restaurantArticle">
+			<div class="card text-black mb-3" id = "restaurantCard" style="width: 20rem;">
+			</div>
+		 </article>
+		 <article id="parmercyArticle">
+			<div class="card text-black mb-3" id = "parmercyCard" style="width: 20rem;">
+			</div>
+		 </article>
+		    
+		 <article id="cafeArticle">
+			<div class="card text-black mb-3" id = "cafeCard" style="width: 20rem;">
+			</div>
+		 </article>
+		    
+		 <article id="hospitalArticle">
+			<div class="card text-black mb-3" id = "hospitalCard" style="width: 20rem;">
+			</div>
+		</article>
+		<div style = "text-align: center; position:relative">
+			<a href=# id='prev'>◀</a>
+			<a id = pageNumber></a>
+			<a href=# id='next'>▶</a>
+		</div>
 	</div>
 	
 <script>
 // 버튼 쿼리 다 가져오기
 btns = document.querySelectorAll('.raun');
 search = document.querySelectorAll('.search');
+art = document.querySelectorAll('article');
+var btnState;
+var btnStateHTML;
+btns.forEach( (bt) => {
+		bt.addEventListener('click', (event) => {
+			btnState = bt;
+			btnStateHTML = btnState.innerHTML
+			btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
+			event.target.className += ' on';
+			if(btnStateHTML === "식당"){
+				for(var i = 1 ; i <= restaurantPage ; i++){
+					$('#pageNumber').append('<button onclick="paging(\''+ 0 + '\',\'' + i + '\')">'+i+'</button>');
+				}
+			}
+			art.forEach( (other) => { other.className = ''; })
+			document.getElementById(event.target.id + 'Article').className = 'on';
+			
+		})
+	});
+	
 
-var storeArray = new Array();
-var parmercyArray = new Array();
-var hospitalArray = new Array();
-var cafeArray = new Array();
-var restaurantArray = new Array();
 
-<c:forEach items="${list}" var = "hvo" varStatus="index">
-	var store = new Object();
-	store.addr = "${hvo.storeAddr}";
-	store.name = "${hvo.storeName}";
-	store.phone = "${hvo.storePhone}";
-	store.rate = "${hvo.storeRate}";
-	store.type = "${hvo.storeType}";
-	storeArray.push(store);
-</c:forEach>
+
+function paging(type, page){
+	console.log(type);
+	console.log(page);
+	$.ajax({
+	      url:"${cpath}/hours24/"+type+"/"+page+"/",
+	      method:"GET",
+	      dataType:"text",
+	      success : function(data) {
+	         result = JSON.parse(data);
+             for (key in result) {      // 리스트 중 하나의 객체
+                 member = result[key];
+    	         $('#restaurantCard').append(member.storeName + "<br>" + member.storeAddr + "<br>" + member.storePhone)
+             }
+// 	         $('.restaurantCard').append()
+// 			 <div class="card-body">
+// 	            <h5 class="card-title">${store.storeName }</h5>
+// 	            <p class="card-text">${store.storeAddr }</p>
+// 	            <p class="card-text">${store.storePhone }</p>
+// 		    </div>
+	      },
+	      error:function(data){
+	         $("#idmsg").text('서버 통신 실패');
+	      }
+	})
+}	
+// // 페이징
+// var totalData = 345;
+// var dataPerPage = 12;
+// var pageCount = 5;
+// var j = 0;
+
+// function paging(totalData, dataPerPage, pageCount, currentPage, storetype) {
+// 	var totalPage = Math.ceil(totalData/dataPerPage);
+// 	var pageGroup = Math.ceil(currentPage/pageCount);
+	
+// 	var last = pageGroup * pageCount;
+// 	if (last > totalPage)
+// 		last = totalPage;
+// 	var first = last - (pageCount-1);
+// 	var next = last+1;
+// 	var prev = first-1;
+	
+// 	console.log("last : ", last);
+// 	console.log("first : ", first);
+// 	console.log("next : ", next);
+// 	console.log("prev : ", prev);
+	
+// 	var $pingingView = $("#paging");
+	
+// 	var html = "";
+	
+// 	if (prev > 0)
+// 		html += "<a href=# id='prev'>◀</a>";
+		
+// 	for (var i = first; i <= last; i++) {
+// 		html += "<a href='#' id=" + i + ">" + i + "</a>";
+// 	}
+	
+// 	if (last < totalPage)
+// 		html += "<a href=# id='next'>▶</a>";
+		
+// 	$("#paging").html(html);
+// 	$("#paging a").css("color", "black");
+// 	$("#paging a#" + currentPage).css({"text-decoration":"none",
+// 										"color":"black",
+// 										"font-weight":"bold"});
+	
+// 	$("#paging a").click(function(){
+// 		var $item = $(this);
+// 		var $id = $item.attr("id");
+// 		var selectedPage = $item.text();
+		
+// 		if ($id == "next")	selectedPage = next;
+// 		if ($id == "prev")	selectedPage = prev;
+		
+// 		paging(totalData, dataPerPage, pageCount, selectedPage);
+// 	});	
+// }
 
 var placeOverlay = new kakao.maps.CustomOverlay();
 

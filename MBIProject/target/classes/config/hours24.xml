@@ -5,12 +5,27 @@
 		
 <mapper namespace = "com.mbi.dao.HoursDAO">
 	<select id = "selectAll" resultType="com.mbi.vo.HoursVO">
-		select * from everyday 
+		select * from everyday
 	</select>
+	
+<!-- 	<select id="selectCount" resultType="int" parameterType="com.mbi.vo.Pageing"> -->
+<!-- 		select count(*) from everyday -->
+<!-- 	</select> -->
 	
 <!-- 	<select id = "selectOne" resultType="com.mbi.vo.HoursBoardVO" parameterType="int"> -->
 <!-- 		select * from everyday -->
 <!-- 		where boardsid = ${gvo} -->
 <!-- 	</select> -->
 	
+	
+	<select id = "getPageList" resultType="com.mbi.vo.HoursVO">
+		select * from 
+		(select rownum as st, A.* from
+		(select * from everyday where storetype = ${type}
+		order by storename)
+			A where rownum <![CDATA[<=]]>
+			${last})
+			where st <![CDATA[>=]]>
+			${first}
+	</select>
 </mapper>

@@ -204,8 +204,7 @@ function infoBox(marker) {
 	var strArray = fullName.split("@");
 	var content = '<div class="placeinfo">' + strArray[0]
 				+ '    <span title="' + strArray[1] + '">' + strArray[1] + '</span>' 
-				+ '    <span class="tel">' + strArray[2] + '</span>'
-				+ '    <span class="rate">' + strArray[3] + '</span>' + '</div>'
+				+ '    <span class="tel">' + strArray[2] + '</span>' + '</div>'
 				+ '<div class="after"></div>';
 					
 	contentNode.innerHTML = content;
