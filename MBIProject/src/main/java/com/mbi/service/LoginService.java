@@ -34,8 +34,8 @@ public class LoginService {
 
 		String userid = userVO.getUserid();
 //		System.out.println("userid(암호화 전) : " + userid);
-		userid = aes.encrypt(userid);		
-		userVO.setUserid(userid);		
+//		userid = aes.encrypt(userid);		
+//		userVO.setUserid(userid);		
 //		System.out.println("userid(암호화 후) : " + userid);
 //		System.out.println("userid(복호화 후) : " + aes.decrypt(userid));
 		
@@ -70,7 +70,7 @@ public class LoginService {
 			// 아이디와 비밀번호가 동일할 경우
 //				System.out.println("2단계");
 				// 쿠키 체크 확인
-				Cookie c = new Cookie("check", aes.decrypt(userid));		// 쿠키를 생성하여 보관
+				Cookie c = new Cookie("check", userid);		// 쿠키를 생성하여 보관
 				if(check != null) {	// 아이디 저장을 체크 하였을 경우					
 					c.setMaxAge(365 * 24 * 60 * 60);	// 쿠키 시간 설정 값
 					response.addCookie(c);
@@ -106,36 +106,20 @@ public class LoginService {
 	public ModelAndView userJoin(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
 //		System.out.println("회원가입 넘어오나?");
 		
-//		String salt = new String(Base64.getEncoder().encode(userid.getBytes()));
-//		
-//		MessageDigest mdHash = MessageDigest.getInstance("SHA-512");
-//		mdHash.update(salt.getBytes());
-//		mdHash.update(userpw.getBytes());
-//		String hash = String.format("%128x", new BigInteger(1, mdHash.digest()));
-		
-//		String salt = SHA256Util.generateSalt();
-//		userVO.setSalt(salt);
-		
-//		userpw = SHA256Util.getEncrypt(userpw, salt);
 		ModelAndView mav = new ModelAndView("redirect:/loginForm/");
 		
-		String userid = userVO.getUserid();
 		String userpw = userVO.getUserpw();
 		String userJuminB = userVO.getUserjuminB();
 		
-		userid = aes.encrypt(userid);
 		userpw = aes.encrypt(userpw);
 		userJuminB = aes.encrypt(userJuminB);
 		
-		System.out.println("userid(암호화 후) : " + userid);
 		System.out.println("userpw(암호화 후) : " + userpw);
 		System.out.println("userJuminB(암호화 후) : " + userJuminB);
 		
-		System.out.println("userid(복호화 후) : " + aes.decrypt(userid));
 		System.out.println("userpw(복호화 후) : " + aes.decrypt(userpw));
 		System.out.println("userJuminB(암호화 후) : " + aes.decrypt(userJuminB));
 		
-		userVO.setUserid(userid);
 		userVO.setUserpw(userpw);
 		userVO.setUserjuminB(userJuminB);
 
@@ -151,8 +135,6 @@ public class LoginService {
 	
 	public String getPassword(String userid) throws NoSuchAlgorithmException, 
 	UnsupportedEncodingException, GeneralSecurityException {
-//		userid = aes.encrypt(userid);
-//		System.out.println("userid : " + userid);
 		String password = lDAO.getPassword(userid);
 		password = aes.decrypt(password);
 		System.out.println(password);
