@@ -1,5 +1,7 @@
 package com.mbi.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mbi.classes.AES256Util;
 import com.mbi.dao.NoticeBoardDAO;
 import com.mbi.vo.NoticeBoardVO;
 import com.mbi.vo.Pageing;
@@ -19,6 +22,8 @@ import com.mbi.vo.UserLoginVO;
 public class NoticeService {
 	@Autowired
 	NoticeBoardDAO nbDao;
+	@Autowired AES256Util aes;
+	
 	private final int perPage = 10;		// 페이지 당 출력할 글의 개수
 	
 	// 리스트
@@ -30,8 +35,8 @@ public class NoticeService {
 		ModelAndView mav = new ModelAndView("noticeBoard");
 		
 		HttpSession hSession = req.getSession();
-		UserLoginVO uvo = (UserLoginVO)hSession.getAttribute("userSession");
-		
+		UserLoginVO uvo = writeIdDecrypt(hSession);
+			
 		// 검색 파라미터 처리 
 		Pageing bp = new Pageing();
 		
@@ -75,7 +80,6 @@ public class NoticeService {
 		mav.addObject("next", boardCount > perPage * end);
 		mav.addObject("session", uvo);
 		
-		
 		return mav;
 	}
 	
@@ -84,7 +88,7 @@ public class NoticeService {
 		ModelAndView mav = new ModelAndView("noticeBoard");
 		
 		HttpSession hSession = req.getSession();
-		UserLoginVO uvo = (UserLoginVO)hSession.getAttribute("userSession");
+		UserLoginVO uvo = writeIdDecrypt(hSession);
 		
 		// 검색 파라미터 처리 
 		Pageing bp = new Pageing();
@@ -136,7 +140,7 @@ public class NoticeService {
 		ModelAndView mav = new ModelAndView("noticeBoard");
 		
 		HttpSession hSession = req.getSession();
-		UserLoginVO uvo = (UserLoginVO)hSession.getAttribute("userSession");
+		UserLoginVO uvo = writeIdDecrypt(hSession);
 		
 		// 검색 파라미터 처리 
 		Pageing bp = new Pageing();
@@ -186,8 +190,9 @@ public class NoticeService {
 	
 	public ModelAndView noticeBoardList3(int page, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("noticeBoard");
+		
 		HttpSession hSession = req.getSession();
-		UserLoginVO uvo = (UserLoginVO)hSession.getAttribute("userSession");
+		UserLoginVO uvo = writeIdDecrypt(hSession);
 		
 		// 검색 파라미터 처리 
 		Pageing bp = new Pageing();
@@ -240,7 +245,10 @@ public class NoticeService {
 	public int select24hourCount(Pageing pb) { return nbDao.select24hourCount(pb); }
 	public int selectEventCount(Pageing pb) { return nbDao.selectEventCount(pb); }
 	
-	
+	public UserLoginVO writeIdDecrypt(HttpSession session) {
+		UserLoginVO uvo = (UserLoginVO)session.getAttribute("userSession");
+		return uvo;
+	}
 	
 	
 	// 쓰기
