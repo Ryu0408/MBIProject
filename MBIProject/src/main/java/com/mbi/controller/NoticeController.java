@@ -1,5 +1,8 @@
 package com.mbi.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +27,7 @@ public class NoticeController {
 	
 	// 리스트
 	@RequestMapping(value= "/noticeBoard/")
-	public ModelAndView noticeList(HttpServletRequest request) throws NullPointerException{
+	public ModelAndView noticeList(HttpServletRequest request) {
 		return board(1, request);
 	}
 	
@@ -34,7 +37,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/noticeBoard/guide/")
-	public ModelAndView noticeGuide(HttpServletRequest request) throws NullPointerException{
+	public ModelAndView noticeGuide(HttpServletRequest request) {
 		return guideBoard(1, request);
 	}
 	
@@ -44,7 +47,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value= "/noticeBoard/24hour/")
-	public ModelAndView notice24hour(HttpServletRequest request) throws NullPointerException{
+	public ModelAndView notice24hour(HttpServletRequest request){
 		return infoBoard(1, request);
 	}
 	
@@ -55,7 +58,7 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value= "/noticeBoard/event/")
-	public ModelAndView noticeEvent(HttpServletRequest request) throws NullPointerException{
+	public ModelAndView noticeEvent(HttpServletRequest request) {
 		return eventBoard(1, request);
 	}
 	
