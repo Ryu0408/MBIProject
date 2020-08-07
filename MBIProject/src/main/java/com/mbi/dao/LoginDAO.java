@@ -8,5 +8,8 @@ public interface LoginDAO {
 	
 	UserLoginVO login(String userid);
 	void join(@Param("vo")UserLoginVO userVO);
-
+	UserLoginVO selectUser(String userid);
+	String getSaltById(String userid);
+	String getPassword(@Param("userid") String userid);
+	
 }
