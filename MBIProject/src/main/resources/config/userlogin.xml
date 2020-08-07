@@ -19,4 +19,16 @@
 		)
 	</insert>
 
+	<select id="selectUser" resultType="com.mbi.vo.UserLoginVO" parameterType="String">
+		select * from USERLOGIN where userid = #{userid}
+	</select>
+	
+	<select id="getSaltById" parameterType="string" resultType="string">
+		select salt from USERLOGIN where userid = #{userid}
+	</select>
+	
+	<select id="getPassword" parameterType="string" resultType="string">
+		select userpw from USERLOGIN where userid = #{userid}
+	</select>
+	
 </mapper>

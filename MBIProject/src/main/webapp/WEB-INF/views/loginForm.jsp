@@ -16,7 +16,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
@@ -110,8 +110,83 @@
     min-height: 38px;
     border-radius: 2px;
 }
-.btn {        
+
+ /* The Modal (background) */
+.searchModal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 10; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.search-modal-content {
+background-color: #fefefe;
+margin: 15% auto; /* 15% from the top and centered */
+padding: 20px;
+border: 1px solid #888;
+width: 800px; /* Could be more or less, depending on screen size */
+height: 270px; 
+} 
+
 </style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_GnLkKTTJ6lngC5rUgUvDI");
+   })();
+</script>
+<script>
+
+// 비밀번호 찾기 Modal창
+
+function closeModal() {
+	$('.searchModal').hide();
+}
+
+function openModel(){
+	console.log("모달 실행")
+ 	$("#modal").show();
+}
+
+function postEmail(){
+   const useremail = $("#userpw2").val();
+   if(useremail === ''){
+      alert('이메일을 입력하세요');
+      return;
+   }
+   // Jquery를 이용한 ajax
+   $.ajax({
+      url:"${pageContext.request.contextPath}/loginForm/passwordSearch/" + useremail + "/",
+      method:"GET",
+      data:{useremail: useremail},
+      dataType:"text",
+      success : function(data) {
+          result = JSON.parse(data);
+          if (result[0] === '이메일이 발송되었습니다') {
+          	  var templateParams = {	
+                  email: useremail,
+                  sendpw: result[1],
+              };
+          emailjs.send('gmail','template_D4VrVJfG',templateParams);
+          alert(result[0]);
+          } 
+          else {
+              alert(result[0]);
+          }
+      },
+      error:function(data){
+      	  console.log('데이터 통신 실패')
+      }
+   })
+}
+</script>
+
 
 <body>
 <c:if test="${not empty cookie.user_check}">
@@ -131,16 +206,17 @@ $('#loginBtn').click(function() {
 			user_pw : pw,
 			remember_userId : remember_us
 			},
-// 			success : function(data) {
-// 				if (data == 0) { //로그인 실패시
-// 					console.log(data);
-// 					location.href='${pageContext.request.contextPath}/loginForm/';
-// 					$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');
-// 				}  else if(data == 1){ //로그인 성공시
-// 					console.log(data);
-// 					location.href = '${pageContext.request.contextPath}/';
-// 				}
-// 			}
+			success : function(data) {
+				if (data[0] === 0) { //로그인 실패시
+					console.log(data);
+					location.href='${pageContext.request.contextPath}/loginForm/';
+					alert('로그인 정보를 정확히 입력해주세요.');
+				}  
+				else if(data === 1){ //로그인 성공시
+					console.log(data);
+					location.href = '${pageContext.request.contextPath}/';
+				}
+			}
 		});
 	});
 	
@@ -151,7 +227,7 @@ $('#loginBtn').click(function() {
 	<img src="${pageContext.request.contextPath }/img/logo.png" class="rounded-circle" alt="Cinque Terre"
 		style="width: 350px;height: 150px"></a>
 	<hr>
-    <form method="post">
+    <form method="POST">
         <h2 class="text-center">로그인</h2>       
         <div class="form-group">
             <input type="email" name="userid" class="form-control" id="userid"
@@ -177,12 +253,44 @@ $('#loginBtn').click(function() {
             <input type="checkbox" name="remember_userid"${checked}>
             </c:if>
             아이디 저장</label>
-            <a href="#" class="float-right">비밀번호 찾기</a>
+            <a href="#" class="float-right" onclick="openModel()">비밀번호 찾기</a>
         </div>        
     </form>
     <p class="text-center">
     <a href="${pageContext.request.contextPath }/loginForm/loginJoin/">회원 가입</a></p>
 </div>
 
-</body>
+<!-- 모달 창(비밀번호 찾기) -->
+<article>
+    <div id="modal" class="searchModal">
+		<div class="search-modal-content">
+			<div class="page-header">
+				<h3>비밀번호 찾기</h3>
+			</div>
+
+			<form method="POST">
+				<div class="form-group">
+					<input type="text" name="userid" class="form-control" 
+					id="userpw2" placeholder="아이디를 입력하세요" required="required">
+				</div>
+				<hr>
+				<div class="btn btn-primary btn-block" 
+				style="cursor:pointer; text-align: center;padding-bottom: 10px;
+				padding-top: 10px;" onClick="postEmail()">	
+					<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
+						비밀번호 전송
+					</span>
+				</div>
+				<br>
+			</form>
+			<div style="cursor:pointer;background-color:#DDDDDD;text-align: 
+			center;padding-bottom: 10px;padding-top: 10px;" onClick="closeModal();">
+
+				<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
+					닫기
+				</span>
+			</div>
+		</div>
+	</div>
+</article>
 </html>
