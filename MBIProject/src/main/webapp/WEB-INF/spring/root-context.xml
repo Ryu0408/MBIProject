@@ -46,6 +46,8 @@
 				<value>classpath:config/hours24.xml</value>
 				
 				<value>classpath:config/main.xml</value>
+
+				<value>classpath:config/mypage.xml</value>
 				
 			</list>
 		</property>
