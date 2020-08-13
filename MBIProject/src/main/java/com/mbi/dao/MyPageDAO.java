@@ -7,5 +7,7 @@ import com.mbi.vo.MypageVO;
 public interface MyPageDAO {
 	
 	List<MypageVO> MypageSelectAll(String username);
+
+	List<MypageVO> updatePw(MypageVO mypageVO);
 	
 }

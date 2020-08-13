@@ -3,6 +3,14 @@
 <jsp:include page="header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/notice.css"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+   function response_del(sid){
+	 let chk = confirm("삭제하시겠습니까?");
+	 if(chk){
+		 location.href = '${pageContext.request.contextPath}/noticeBoard/noticeDelete/'+sid+'/';
+	 }
+   }
+</script>
 <section id="notice-content">
 	<div class="notice_in">
 		<form>
@@ -42,15 +50,15 @@
 							<tr>
 								<td colspan="1 ml-auto">
 									<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
-											onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeDelete/${nData.noticesid }/'"
+											onclick="response_del(${nData.noticesid })"
 												value="삭제" />
 								</td>
+								
 								<td colspan="4 ml-auto"></td>
 								<td colspan="1 ml-auto" style="width:100px;">		
 								<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
 									onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeModify/${nData.noticesid }/'"
 										value="수정" />	
-								
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -69,3 +77,6 @@
 		</form>
 	</div>
 </section>
+<jsp:include page="footer.jsp" />
+</body>
+</html>
