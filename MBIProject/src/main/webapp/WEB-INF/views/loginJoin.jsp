@@ -7,100 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
-<style>
-.size {
-	width: 50px;
-	height: 30px;
-}
-.form-control {
-	height: 41px;
-	background: #f2f2f2;
-	box-shadow: none !important;
-	border: none;
-}
-.form-control:focus {
-	background: #e2e2e2;
-}
-.form-control, .btn {        
-	border-radius: 3px;
-}
-.signup-form {
-	width: 500px;
-	height: 700px;
-	margin: 30px auto;
-}
-.signup-form form {
-	color: #999;
-	border-radius: 3px;
-	margin-bottom: 15px;
-	background: #fff;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	padding: 30px;
-}
-.signup-form h2  {
-	color: #333;
-	font-weight: bold;
-	margin-top: 0;
-}
-.signup-form hr  {
-	margin: 0 -30px 20px;
-}    
-.signup-form .form-group {
-	font-family: 'Roboto', sans-serif;
-	margin-bottom: 20px;
-}
-.juminA {
-	width: 200px;
-	float: left;
-	font-family: 'Roboto', sans-serif;
-	margin-bottom: 20px;
-}
-.juminB {
-	width: 200px;
-	float: right;
-	font-family: 'Roboto', sans-serif;
-	margin-bottom: 20px;
-}
-.signup-form input[type="checkbox"] {
-	margin-top: 3px;
-}
-.signup-form .row div:first-child {
-	padding-right: 10px;
-}
-.signup-form .row div:last-child {
-	padding-left: 10px;
-}
-.signup-form .btn {        
-	font-size: 16px;
-	font-weight: bold;
-	background: #3598dc;
-	border: none;
-	min-width: 140px;
-}
-.signup-form .btn:hover, .signup-form .btn:focus {
-	background: #2389cd !important;
-	outline: none;
-}
-.signup-form a {
-	color: #3598dc;
-	text-decoration: none;
-}
-.signup-form a:hover {
-	text-decoration: underline;
-}
-.signup-form form a {
-	color: #3598dc;
-	text-decoration: none;
-}	
-.signup-form form a:hover {
-	text-decoration: underline;
-}
-.signup-form .hint-text  {
-	padding-bottom: 15px;
-	text-align: center;
-}
-</style>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <!-- JavaScript ajax -->
 <script>
@@ -128,10 +35,7 @@
 		}
 	
 		// 바닐라 자바스크립트
-		
 		const request = new XMLHttpRequest();
-// 	 	request.open("GET", "${pageContext.request.contextPath}/loginForm/loginJoin/checkid/?userid=" + email, true);
-// 	 	request.setRequestHeader('Content-type', 'text; charset=UTF-8');
 			
 		request.open("POST", "${pageContext.request.contextPath}/loginForm/loginJoin/checkid/", true);
 		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -289,19 +193,115 @@
 		}
 	}
 </script>
-<body>
+
+<style>
+.size {
+	width: 50px;
+	height: 30px;
+}
+.form-control {
+	height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: none;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+.form-control, .btn {        
+	border-radius: 3px;
+}
+.signup-form {
+	width: 500px;
+	height: 700px;
+	margin: 30px auto;
+}
+.signup-form form {
+	color: #999;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #fff;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+.signup-form h2  {
+	color: #333;
+	font-weight: bold;
+	margin-top: 0;
+}
+.signup-form hr  {
+	margin: 0 -30px 20px;
+}    
+.signup-form .form-group {
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 20px;
+}
+.juminA {
+	width: 200px;
+	float: left;
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 20px;
+}
+.juminB {
+	width: 200px;
+	float: right;
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 20px;
+}
+.signup-form input[type="checkbox"] {
+	margin-top: 3px;
+}
+.signup-form .row div:first-child {
+	padding-right: 10px;
+}
+.signup-form .row div:last-child {
+	padding-left: 10px;
+}
+.signup-form .btn {        
+	font-size: 16px;
+	font-weight: bold;
+	background: #3598dc;
+	border: none;
+	min-width: 140px;
+}
+.signup-form .btn:hover, .signup-form .btn:focus {
+	background: #2389cd !important;
+	outline: none;
+}
+.signup-form a {
+	color: #3598dc;
+	text-decoration: none;
+}
+.signup-form a:hover {
+	text-decoration: underline;
+}
+.signup-form form a {
+	color: #3598dc;
+	text-decoration: none;
+}	
+.signup-form form a:hover {
+	text-decoration: underline;
+}
+.signup-form .hint-text  {
+	padding-bottom: 15px;
+	text-align: center;
+}
+</style>
+
+
+<body style="overflow: hidden;">
+
 <div class="signup-form">
 	<hr>
 	
 	<br>
-    <form method="POST" id="joinForm">
+    <form method="POST">
 		<h2 align="center">회원 가입</h2>
 		<hr>
 		<div class="form-group" id="id" onblur="checkIdVanilla()">
-        	<input type="email" style="text-align: center;" class="form-control" 
+        	<input type="email" style="text-align: center;" class="form-control joinInput" 
         	name="userid" placeholder="사용할 아이디" id="userid"
-        	onfocus="this.placeholder='' "onblur="this.placeholder='사용할 아이디'"
-        	class="joinInput">
+        	onfocus="this.placeholder='' "onblur="this.placeholder='사용할 아이디'">
         	<span id="idmsg"></span>
         </div>
 		<div class="form-group" onblur="passwordComplexity(event)">
@@ -350,7 +350,6 @@
 	</div>
 	
 </div>
-
 <script>
 	function getFocus() {
 		switch(this.id) {
@@ -387,6 +386,4 @@
 	document.getElementById('loginJoin').addEventListener('click', submit);
 	
 </script>
-
-</body>
 </html>

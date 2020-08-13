@@ -7,4 +7,9 @@
 	<select id = "MypageSelectAll" resultType="com.mbi.vo.MypageVO" parameterType="String">
 		select * from USERLOGIN where username=#{username}
 	</select>
+	
+	<update id="updatePw" parameterType="com.mbi.vo.MypageVO">
+		update USERLOGIN set userpw=#{mypageVO.userpw} where userid=#{mypageVO.userid}
+	</update>
+	
 </mapper>

@@ -57,12 +57,10 @@ public class LoginController {
 	
 	// 회원 가입 후 로그인 페이지 이동
 	@RequestMapping(value="loginForm/loginJoin/", method=RequestMethod.POST)
-	@ResponseBody
 	public ModelAndView join(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
 		System.out.println("회원가입 넘어옴");
 		ModelAndView mav = new ModelAndView();
-		mav.addObject(ls.userJoin(userVO));
-		return mav;
+		return mav.addObject(ls.userJoin(userVO));
 	}
 	
 	// 로그인
