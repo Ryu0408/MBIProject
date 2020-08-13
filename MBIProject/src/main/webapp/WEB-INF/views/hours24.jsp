@@ -10,6 +10,7 @@
 	.card {	display: inline-block;	}
 	article {		display: none;	} 
 	article.on {	display: inline-block;	}
+	div.off { display: none; }
 	.placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
 	.placeinfo_wrap .after {content:'';
 	position:relative;
@@ -120,9 +121,6 @@
     var hospitalPage = Math.ceil(hospitalCount/perPage);
     var cafePage = Math.ceil(cafeCount/perPage);
     
-//     $(document).ready(function(){
-//     	paging(totalData, dataPerPage, pageCount, 1);
-//     });
 </script>
 
 	<div class="btn-group d-flex">
@@ -138,27 +136,13 @@
 	<!-- 업체 0. 식당, 1. 약국, 2. 카페, 3. 병원 //지도 api 에 접근하는 주소가 localhost(x), 도메인, 아이피(o) -->
 	<!-- 스크립트에서 페이징, 버튼 onclick로 변경? -->
 	<div>
-		<article id="restaurantArticle">
-			<div class="card text-black mb-3" id = "restaurantCard" style="width: 20rem;">
-			</div>
-		 </article>
-		 <article id="parmercyArticle">
-			<div class="card text-black mb-3" id = "parmercyCard" style="width: 20rem;">
-			</div>
-		 </article>
-		    
-		 <article id="cafeArticle">
-			<div class="card text-black mb-3" id = "cafeCard" style="width: 20rem;">
-			</div>
-		 </article>
-		    
-		 <article id="hospitalArticle">
-			<div class="card text-black mb-3" id = "hospitalCard" style="width: 20rem;">
-			</div>
-		</article>
-		<div style = "text-align: center; position:relative">
+		<article id="restaurantArticle"></article>
+		<article id="parmercyArticle"></article>
+		<article id="cafeArticle"></article>
+		<article id="hospitalArticle"></article>
+		<div style = "text-align: center; position:relative"><br>
 			<a href=# id='prev'>◀</a>
-			<a id = pageNumber></a>
+			<a id=pageNumber></a>
 			<a href=# id='next'>▶</a>
 		</div>
 	</div>
@@ -171,28 +155,49 @@ art = document.querySelectorAll('article');
 var btnState;
 var btnStateHTML;
 btns.forEach( (bt) => {
-		bt.addEventListener('click', (event) => {
-			btnState = bt;
-			btnStateHTML = btnState.innerHTML
-			btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
-			event.target.className += ' on';
-			if(btnStateHTML === "식당"){
-				for(var i = 1 ; i <= restaurantPage ; i++){
-					$('#pageNumber').append('<button onclick="paging(\''+ 0 + '\',\'' + i + '\')">'+i+'</button>');
-				}
+	bt.addEventListener('click', (event) => {
+		btnState = bt;
+		btnStateHTML = btnState.innerHTML
+		btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
+		event.target.className += ' on';
+		if(btnStateHTML === "식당"){
+			$('#pageNumber *').remove();
+			paging(0, 1);
+			for(var i = 1 ; i <= restaurantPage ; i++){
+				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 0 + '\',\'' + i + '\')">'+i+'</button>');
 			}
-			art.forEach( (other) => { other.className = ''; })
-			document.getElementById(event.target.id + 'Article').className = 'on';
-			
-		})
-	});
-	
-
-
+		}
+		else if(btnStateHTML === "약국"){
+			$('#pageNumber *').remove();
+			paging(1, 1);
+			for(var i = 1 ; i <= parmercyPage ; i++){
+				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 1 + '\',\'' + i + '\')">'+i+'</button>');
+			}
+		}
+		else if(btnStateHTML === "카페"){
+			$('#pageNumber *').remove();
+			paging(2, 1);
+			for(var i = 1 ; i <= cafePage ; i++){
+				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 2 + '\',\'' + i + '\')">'+i+'</button>');
+			}
+		}
+		else if(btnStateHTML === "병원"){
+			$('#pageNumber *').remove();
+			paging(3, 1);
+			for(var i = 1 ; i <= hospitalPage ; i++){
+				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 3 + '\',\'' + i + '\')">'+i+'</button>');
+			}
+		}
+		art.forEach( (other) => { other.className = ''; })
+		document.getElementById(event.target.id + 'Article').className = 'on';
+	})
+});
 
 function paging(type, page){
-	console.log(type);
-	console.log(page);
+	if (type === '0' || page !== 1){$("#restaurantArticle *").remove();}
+	else if (type === '1' || page !== 1){$("#parmercyArticle *").remove();}
+	else if (type === '2' || page !== 1){$("#cafeArticle *").remove();}
+	else if (type === '3' || page !== 1){$("#hospitalArticle *").remove();}
 	$.ajax({
 	      url:"${cpath}/hours24/"+type+"/"+page+"/",
 	      method:"GET",
@@ -200,74 +205,27 @@ function paging(type, page){
 	      success : function(data) {
 	         result = JSON.parse(data);
              for (key in result) {      // 리스트 중 하나의 객체
-                 member = result[key];
-    	         $('#restaurantCard').append(member.storeName + "<br>" + member.storeAddr + "<br>" + member.storePhone)
+                member = result[key];
+                card = document.createElement('div');
+                card.className = 'card';
+                body = document.createElement('div');
+                body.className = 'card-body';
+                var title = '<h5 class="card-title">' + member.storeName + '</h5>'
+                			+ '<p class="card-text">' + member.storeAddr + '</p>'
+                			+ '<p class="card-text">' + member.storePhone + '</p>';
+                body.innerHTML = title;
+                card.append(body);
+                if (type === '0'){$("#restaurantArticle").append(card);}
+            	else if (type === '1'){$("#parmercyArticle").append(card);}
+            	else if (type === '2'){$("#cafeArticle").append(card);}
+            	else if (type === '3'){$("#hospitalArticle").append(card);}
              }
-// 	         $('.restaurantCard').append()
-// 			 <div class="card-body">
-// 	            <h5 class="card-title">${store.storeName }</h5>
-// 	            <p class="card-text">${store.storeAddr }</p>
-// 	            <p class="card-text">${store.storePhone }</p>
-// 		    </div>
 	      },
 	      error:function(data){
 	         $("#idmsg").text('서버 통신 실패');
 	      }
 	})
 }	
-// // 페이징
-// var totalData = 345;
-// var dataPerPage = 12;
-// var pageCount = 5;
-// var j = 0;
-
-// function paging(totalData, dataPerPage, pageCount, currentPage, storetype) {
-// 	var totalPage = Math.ceil(totalData/dataPerPage);
-// 	var pageGroup = Math.ceil(currentPage/pageCount);
-	
-// 	var last = pageGroup * pageCount;
-// 	if (last > totalPage)
-// 		last = totalPage;
-// 	var first = last - (pageCount-1);
-// 	var next = last+1;
-// 	var prev = first-1;
-	
-// 	console.log("last : ", last);
-// 	console.log("first : ", first);
-// 	console.log("next : ", next);
-// 	console.log("prev : ", prev);
-	
-// 	var $pingingView = $("#paging");
-	
-// 	var html = "";
-	
-// 	if (prev > 0)
-// 		html += "<a href=# id='prev'>◀</a>";
-		
-// 	for (var i = first; i <= last; i++) {
-// 		html += "<a href='#' id=" + i + ">" + i + "</a>";
-// 	}
-	
-// 	if (last < totalPage)
-// 		html += "<a href=# id='next'>▶</a>";
-		
-// 	$("#paging").html(html);
-// 	$("#paging a").css("color", "black");
-// 	$("#paging a#" + currentPage).css({"text-decoration":"none",
-// 										"color":"black",
-// 										"font-weight":"bold"});
-	
-// 	$("#paging a").click(function(){
-// 		var $item = $(this);
-// 		var $id = $item.attr("id");
-// 		var selectedPage = $item.text();
-		
-// 		if ($id == "next")	selectedPage = next;
-// 		if ($id == "prev")	selectedPage = prev;
-		
-// 		paging(totalData, dataPerPage, pageCount, selectedPage);
-// 	});	
-// }
 
 var placeOverlay = new kakao.maps.CustomOverlay();
 
