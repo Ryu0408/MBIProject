@@ -31,7 +31,7 @@
 					dataType : "text",
 					data : {username:username},
 					success : function(data) {
-						console.log("아무");
+// 						console.log("아무");
 						mplist = JSON.parse(data);
 						console.log(mplist);
 						$("#name").text(mplist[0].username);
@@ -53,15 +53,17 @@
 		var confirmpw = $("#confirmPw").val();
 		var username = "<c:out value="${vos.username}" />";
 		console.log(confirmpw);
-		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-		alert('업데이트 넘어옴');
+		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;		
+// 		alert('업데이트 넘어옴');
 		
 		if(regExp.test(confirmpw) == false) {
 			alert('비밀번호는 소문자,대문자,숫자의 조합으로 6~12자리 사이로 작성하세요');
 			return false;
 		}
 		
-		$.ajax({
+		var result = confirm('정말로 바꾸시겠습니까?');
+		if(result == true){
+			$.ajax({
 					url : "${pageContext.request.contextPath}/mypage/"
 							+ username + "/",
 					method : "POST",
@@ -81,6 +83,8 @@
 						alert('서버 통신 실패2 : ');
 					}
 				})
+		}
+		else	openModel();
 	}
 	
 	function deleteConfirm() {
@@ -191,7 +195,7 @@
 								<div id="pw"></div>
 								<div class="input-group mb-3">
 									<input type="password" id="confirmPw" class="form-control"
-										placeholder="바꿀 비밀번호를 입력하세요" aria-label="Recipient's username"
+										placeholder="변경 할 비밀번호를 입력하세요" aria-label="Recipient's username"
 										aria-describedby="basic-addon2">
 									<div class="input-group-append">
 										<button class="btn btn-outline-secondary"

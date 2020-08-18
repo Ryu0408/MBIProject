@@ -167,21 +167,22 @@ function postEmail(){
       data:{useremail: useremail},
       dataType:"text",
       success : function(data) {
-          result = JSON.parse(data);
-          if (result[0] === '이메일이 발송되었습니다') {
-          	  var templateParams = {	
-                  email: useremail,
-                  sendpw: result[1],
-              };
-          emailjs.send('gmail','template_D4VrVJfG',templateParams);
-          alert(result[0]);
-          } 
-          else {
-              alert(result[0]);
-          }
+    	  result = JSON.parse(data);
+    	  if(result[0] === '이메일이 발송되었습니다') {
+    		  var templateParams = {
+    				  email: useremail,
+    				  sendpw: result[1],
+    		  };
+    		  emailjs.send('gmail', 'template_D4VrVJFG', templateParams);
+    		  alert(result[0]);
+    	  }
+    	  else {
+    		  alert(result[0]);
+    	  }
       },
-      error:function(data){
-      	  console.log('데이터 통신 실패')
+      error: function(data) {
+    	  console.log('데이터 통신 실패');
+    	  alert('아이디를 정확히 입력 해주세요');
       }
    })
 }
@@ -205,21 +206,13 @@ $('#loginBtn').click(function() {
 			user_id : id,
 			user_pw : pw,
 			remember_userId : remember_us
-			},
-			success : function(data) {
-				var result = '${data}';
-				if (result === 0) { //로그인 실패시
-					console.log(data);
-					location.href='${pageContext.request.contextPath}/loginForm/';
-					alert('로그인 정보를 정확히 입력해주세요.');
-				}  
-				else if(result === 1){ //로그인 성공시
-					console.log(data);
-					location.href = '${pageContext.request.contextPath}/';
-				}
-			}
-		});
+		},
+		error : function(data) {
+			history.back();
+			alert('일치하는 정보가 없습니다');
+		}
 	});
+});
 	
 </script>
 
@@ -229,7 +222,7 @@ $('#loginBtn').click(function() {
 		style="width: 350px;height: 150px"></a>
 	<hr>
     <form method="POST">
-        <h2 class="text-center">로그인</h2>       
+        <h2 class="text-center">로그인</h2>
         <div class="form-group">
             <input type="email" name="userid" class="form-control" id="userid"
             	value="${cookie.check.value}" placeholder="아이디" required="required">
@@ -279,7 +272,7 @@ $('#loginBtn').click(function() {
 				style="cursor:pointer; text-align: center;padding-bottom: 10px;
 				padding-top: 10px;" onClick="postEmail()">	
 					<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
-						비밀번호 전송
+						가입한 이메일로 비밀번호 전송
 					</span>
 				</div>
 				<br>
