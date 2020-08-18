@@ -110,13 +110,19 @@ public class GuideController {
 
 	//글수정 GET
 	@RequestMapping(value = "/guideBoard/updateBoard/{sid}/", method = RequestMethod.GET)
-	public ModelAndView updateBoard(@PathVariable int sid) {
+	public ModelAndView updateBoard(@PathVariable int sid, HttpServletRequest req) {
+		String old_url = req.getHeader("referer");
+		if(old_url == null) {
+			System.out.println("11111111");
+			return new ModelAndView("redirect:/");	
+		}
 		return boardservice.updateBoard(sid);
 	}
 
 	//글수정 POST
 	@RequestMapping(value = "/guideBoard/updateBoard/{sid}/", method = RequestMethod.POST)
 	public String updateBoardPost(@PathVariable int sid, GuideBoardVO gvo) {
+
 		boardservice.updateBoardPost(gvo);
 		return "redirect:/guideBoard/readBoard/{sid}/";
 	}
