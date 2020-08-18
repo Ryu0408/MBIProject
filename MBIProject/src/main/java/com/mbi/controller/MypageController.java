@@ -79,6 +79,8 @@ public class MypageController {
 //			System.out.println("요것은" + jsonString);
 //		} catch (JsonProcessingException e) {
 //			System.out.println("JSON 파싱 에러 !!");
+	
+	
 //		}
 //		return jsonString;
 //	}
