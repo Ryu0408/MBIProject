@@ -207,12 +207,13 @@ $('#loginBtn').click(function() {
 			remember_userId : remember_us
 			},
 			success : function(data) {
-				if (data[0] === 0) { //로그인 실패시
+				var result = '${data}';
+				if (result === 0) { //로그인 실패시
 					console.log(data);
 					location.href='${pageContext.request.contextPath}/loginForm/';
 					alert('로그인 정보를 정확히 입력해주세요.');
 				}  
-				else if(data === 1){ //로그인 성공시
+				else if(result === 1){ //로그인 성공시
 					console.log(data);
 					location.href = '${pageContext.request.contextPath}/';
 				}

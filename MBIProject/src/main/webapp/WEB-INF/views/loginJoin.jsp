@@ -19,7 +19,7 @@
 		if(email === '') {
 			id = document.getElementById('id');
 			idmsg = document.getElementById('idmsg');
-// 			idmsg.innerText = '아이디를 입력하세요';
+			idmsg.innerText = '';
 // 			idmsg.style.color = 'red';
 // 			alert('아이디를 입력하세요');
 // 			document.getElementById('userid').focus();
@@ -50,8 +50,6 @@
 				else {
 					idmsg.innerText = request.responseText;
 					idmsg.style.color = 'red';
-// 	 				document.getElementById('userid').focus();
-// 	 				document.getElementById('id').focus();
 					$('#userid').focus();
 					ajaxRet = false;
 				}
@@ -64,14 +62,15 @@
 <!-- password 복잡도 체크 -->
 <script>
 	function passwordComplexity(event) {
-		
-// 		const regExp = /^[a-zA-Z0-9]{6,12}$/;
 		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 		
 		const userpw = document.getElementById('userpw').value;
 		const pwmsg = document.getElementById('pwmsg');
 		
-		if(regExp.test(userpw) == false) {
+		if(userpw === ''){
+			pwmsg.innerHTML = '';
+		}
+		else if(regExp.test(userpw) == false) {
 			pwmsg.innerHTML = '비밀번호는 소문자,대문자,숫자의 조합으로 6~12자리 사이로 작성하세요';
 			pwmsg.style.color = 'red';
 			return false;
@@ -85,15 +84,20 @@
 	
 	function checkPassword(event) {
  		if(event.keyCode != 13 || event.keyCode != 9) {
-		// 		13 : Enter, 9 : Tab 			
+		// 		13 : Enter, 9 : Tab
+			const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 	 		pass1 = document.getElementById('userpw').value;
 	 		pass2 = document.getElementById('confirm_pw').value;
-	 		if(pass1 === pass2) {
+	 		
+	 		if(pass2 === '') {
+	 			document.getElementById('pwmsg2').innerHTML = '';
+	 		}
+	 		else if(regExp.test(pass2) && pass1 === pass2) {
 	 			document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치합니다';
 	 			document.getElementById('pwmsg2').style.color = 'blue';
 	 		}
 	 		else {
-	 			document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치하지 않습니다';
+	 			document.getElementById('pwmsg2').innerHTML = '비밀번호를 확인해주세요';
 	 			document.getElementById('pwmsg2').style.color = 'red';
 	 		}
  		}
@@ -167,26 +171,26 @@
 		}
 		else if(document.getElementById('userpw').value == '' 
 			|| document.getElementById('userpw').value == null){
-		alert('비밀번호를 입력해 주세요');
-		document.getElementById('userpw').focus();
+			alert('비밀번호를 입력해 주세요');
+			document.getElementById('userpw').focus();
 		}
 		else if(document.getElementById('confirm_pw').value == '' 
 			|| document.getElementById('confirm_pw').value == null 
 			|| (document.getElementById('userpw').value != document.getElementById('confirm_pw').value)){
-		alert('비밀번호 재입력을 확인 해주세요');
-		document.getElementById('confirm_pw').focus();
+			alert('비밀번호 재입력을 확인 해주세요');
+			document.getElementById('confirm_pw').focus();
 		}
 		else if(document.getElementById('name').value == '' 
 			|| document.getElementById('name').value == null){
-		alert('이름을 입력해 주세요');
-		document.getElementById('name').focus();
+			alert('이름을 입력해 주세요');
+			document.getElementById('name').focus();
 		}
 		else if(document.getElementById('jumin1').value == '' 
 			|| document.getElementById('jumin1').value == null ||
 			document.getElementById('jumin2').value == '' 
 				|| document.getElementById('jumin2').value == null){
-		alert('주민번호를 확인 해주세요');
-		document.getElementById('jumin1').focus();
+			alert('주민번호를 확인 해주세요');
+			document.getElementById('jumin1').focus();
 		}
 		else {
 			alert('가입되었습니다');
@@ -289,8 +293,8 @@
 </style>
 
 
-<body style="overflow: hidden;">
-
+<body>
+<!--  style="overflow: hidden;" -->
 <div class="signup-form">
 	<hr>
 	
@@ -351,26 +355,13 @@
 	
 </div>
 <script>
-	function getFocus() {
-		switch(this.id) {
-		case 'userid':
-// 			if(ajaxRet !== true)
-// 				this.focus(); 
-			break;
-		case 'userpw':
-// 			if(passwordComplexity() === false)
-// 				this.focus(); 
-			break;
-		}
-	}
+	
 	checkIdVanilla();
 // 	validate();
 	
 // 	document.getElementById('vanilla').checked = 'checked';
 	document.getElementById('userid').addEventListener('keyup', checkIdVanilla);
 	document.getElementById('userpw').addEventListener('keyup', passwordComplexity);
-	document.getElementById('userid').addEventListener('keyup', getFocus);
-	document.getElementById('userpw').addEventListener('keyup', getFocus);
 	document.getElementById('confirm_pw').addEventListener('keyup', checkPassword);
 	document.getElementById('jumin2').addEventListener('blur', validate);
 // 	document.getElementById('jumin2').addEventListener('keyup', maskingJum);

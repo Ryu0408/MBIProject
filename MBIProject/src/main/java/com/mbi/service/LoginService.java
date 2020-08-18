@@ -103,11 +103,12 @@ public class LoginService {
 		return mav;
 	}
 
-	public ModelAndView userJoin(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
+	public void userJoin(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
 //		System.out.println("회원가입 넘어오나?");
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/loginForm/");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("redirect:/loginForm/");
+		
 		String userpw = userVO.getUserpw();
 		String userJuminB = userVO.getUserjuminB();
 		
@@ -124,7 +125,6 @@ public class LoginService {
 		userVO.setUserjuminB(userJuminB);
 
 		lDAO.join(userVO);
-		return mav;
 	}
 
 	public boolean idcheck(String userid) {
@@ -136,6 +136,7 @@ public class LoginService {
 	public String getPassword(String userid) throws NoSuchAlgorithmException, 
 	UnsupportedEncodingException, GeneralSecurityException {
 		String password = lDAO.getPassword(userid);
+		System.out.println(password);
 		password = aes.decrypt(password);
 		System.out.println(password);
 		return password;

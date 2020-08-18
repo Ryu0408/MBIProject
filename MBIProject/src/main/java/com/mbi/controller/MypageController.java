@@ -5,6 +5,8 @@ import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class MypageController {
 	@RequestMapping(value = "mypage/{username}/",
 	         produces="application/text;charset=utf8")
 	@ResponseBody
-	public String list(@PathVariable("username") String username, String confirmpw) 
+	public String list(@PathVariable("username") String username, String confirmpw, HttpSession session) 
 			throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException {
 		System.out.println("username : " + username + ", confirmpw : " + confirmpw);
 //		List<String> list = mps.MypageSelectAll(username);
@@ -43,8 +45,13 @@ public class MypageController {
 		String jsonString = null;
 		ObjectMapper jsonMapper = new ObjectMapper();
 		try {
-			if(username != null && mypageVO.get(0).getUsername().equals(username) && confirmpw == null) {
+			if(username != null && confirmpw == null && mypageVO.get(0).getUsername().equals(username)) {
 				jsonString = jsonMapper.writeValueAsString(mps.MypageSelectAll(username));
+			}
+			else if(username != null && confirmpw != null && confirmpw.equals("del")) {
+				System.out.println("삭제까지 옴");
+				session.removeAttribute("userSession");
+				jsonString = jsonMapper.writeValueAsString(mps.delUser(username));
 			}
 			else if(username != null && confirmpw != null && !(mypageVO.get(0).getUserpw().equals(confirmpw))) {
 				System.out.println("업데이트 넘어왔음");
@@ -72,6 +79,8 @@ public class MypageController {
 //			System.out.println("요것은" + jsonString);
 //		} catch (JsonProcessingException e) {
 //			System.out.println("JSON 파싱 에러 !!");
+	
+	
 //		}
 //		return jsonString;
 //	}
