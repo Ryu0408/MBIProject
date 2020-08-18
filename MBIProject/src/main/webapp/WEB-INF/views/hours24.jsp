@@ -50,7 +50,21 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f208c8186518ea31e042273cb8e359d&libraries=services,clusterer,drawing"></script>
-	<br><br>
+	<hr>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<a href="${pageContext.request.contextPath }/">
+			<span><img src="${pageContext.request.contextPath }/img/icons8-home-96.png" style="height:30px; width:30px"></span>
+			</a>
+			<span> > </span>
+			<a href="${pageContext.request.contextPath }/hours24/" style="text-decoration:none; color:black;">
+			<span> 24시정보 </span>
+			</a>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	<hr>
 	<div id="map" style="text-align: center;height:400px;"></div>
 
 <script>

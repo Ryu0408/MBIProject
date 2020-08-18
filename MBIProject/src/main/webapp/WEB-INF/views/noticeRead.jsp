@@ -32,7 +32,7 @@
 						<td colspan="2">
 							<input type="text" name="boardtype"
 								class="form-control" aria-label="Sizing example input"
-								aria-describedby="inputGroup-sizing-sm" value="${nData.noticetype == 0 ? '가이드' : nData.noticetype == 1 ? '24시정보' : nData.noticetype == 2 ? '공지사항' : ''}" readonly="readonly" >
+								aria-describedby="inputGroup-sizing-sm" value="${nData.noticetype == 0 ? '공지사항' : nData.noticetype == 1 ? '공모전' : nData.noticetype == 2 ? '이벤트' : ''}" readonly="readonly" >
 						</td>
 					</tr>
 					

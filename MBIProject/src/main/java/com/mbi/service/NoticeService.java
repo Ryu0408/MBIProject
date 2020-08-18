@@ -85,7 +85,7 @@ public class NoticeService {
 	
 
 	public ModelAndView noticeBoardList1(int page, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView("noticeBoard");
+		ModelAndView mav = new ModelAndView("notice");
 		
 		HttpSession hSession = req.getSession();
 		UserLoginVO uvo = writeIdDecrypt(hSession);
@@ -137,7 +137,7 @@ public class NoticeService {
 	}
 	
 	public ModelAndView noticeBoardList2(int page, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView("noticeBoard");
+		ModelAndView mav = new ModelAndView("notice24");
 		
 		HttpSession hSession = req.getSession();
 		UserLoginVO uvo = writeIdDecrypt(hSession);
@@ -189,7 +189,7 @@ public class NoticeService {
 	}
 	
 	public ModelAndView noticeBoardList3(int page, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView("noticeBoard");
+		ModelAndView mav = new ModelAndView("n_event");
 		
 		HttpSession hSession = req.getSession();
 		UserLoginVO uvo = writeIdDecrypt(hSession);
