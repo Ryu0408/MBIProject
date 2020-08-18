@@ -11,12 +11,8 @@
 			<span><img src="${pageContext.request.contextPath }/img/icons8-home-96.png" style="height:30px; width:30px"></span>
 			</a>
 			<span> > </span>
-			<a href="${pageContext.request.contextPath }/noticeBoard/notice/" style="text-decoration:none; color:black;">
+			<a href="${pageContext.request.contextPath }/noticeBoard/" style="text-decoration:none; color:black;">
 			<span> 공지사항 </span>
-			</a>
-			<span> > </span>
-			<a href="${pageContext.request.contextPath }/noticeBoard/24hour/" style="text-decoration:none; color:black;">
-			<span> 공모전 </span>
 			</a>
 			<span> > </span>
 			<a href="${pageContext.request.contextPath }/noticeBoard/event/" style="text-decoration:none; color:black;">
