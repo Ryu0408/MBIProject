@@ -16,7 +16,7 @@ a:hover {text-decoration: none; color: red;}
 				<ul class="navbar-nav"
 					style="margin-top: 100px; text-align: center; width: 200px; height: 300px;">
 					<li class="nav-item">
-						<p style="color: black; font-size: 25pt;"><a href="${pageContext.request.contextPath }/guideBoard/" style="color: black; hover:text-decoration: none;">카테고리</a></p>
+						<p style="color: black; font-size: 25pt;"><a href="${pageContext.request.contextPath }/guideBoard/" style="color: black; hover:text-decoration: none;">가이드</a></p>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/guideBoard/guide/"
 						style="margin-top: 20px;">관광지</a>

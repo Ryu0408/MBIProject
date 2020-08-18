@@ -34,7 +34,7 @@
 	    			<li class="nav-item" style ="margin-right: 40px; margin-top:8px;">
 	    			<c:set var="vos" value="${userSession}" scope="session" />
 	    			<c:if test="${not empty vos}">   				
-	    				<h6><small><c:out value="${vos.username}님 " />환영합니다</small></h6>
+	    				<h6 id="sw${vos}"><small><c:out value="${vos.username}" />님 환영합니다</small></h6>
 	    			</c:if>
 	    			</li>
 	    			<li class="nav-item" style ="margin-right: 30px">

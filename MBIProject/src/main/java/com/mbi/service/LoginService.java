@@ -55,7 +55,7 @@ public class LoginService {
 //		System.out.println("로그인 객체 확인 : " + vo);
 		
 		// 로그인 결과
-		int data = 0;
+//		int data = 0;
 		
 		// 회원 정보 x
 		if(vo == null) {
@@ -86,27 +86,28 @@ public class LoginService {
 				// 세션에 객체 저장
 				session.setAttribute("userSession", vo);
 				
-				data = 1;	// 1은 Ajax 로그인 성공 값
+//				data = 1;	// 1은 Ajax 로그인 성공 값
 				viewName = "redirect:/";
 				mav.setViewName(viewName);
 				mav.addObject("name", session);
-				mav.addObject("data", data);
+//				mav.addObject("data", data);
 //				System.out.println("vo는 넘어갑니다 : " + vo.getUsername());
 			}
 			else {
 				System.out.println("로그인 실패");
 				viewName = "redirect:/loginForm/";
 				mav.setViewName(viewName);
-				mav.addObject("data", data);
+//				mav.addObject("data", data);
 			}
 		}
 		return mav;
 	}
 
-	public ModelAndView userJoin(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
+	public void userJoin(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
 //		System.out.println("회원가입 넘어오나?");
 		
-		ModelAndView mav = new ModelAndView("redirect:/loginForm/");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("redirect:/loginForm/");
 		
 		String userpw = userVO.getUserpw();
 		String userJuminB = userVO.getUserjuminB();
@@ -124,7 +125,6 @@ public class LoginService {
 		userVO.setUserjuminB(userJuminB);
 
 		lDAO.join(userVO);
-		return mav;
 	}
 
 	public boolean idcheck(String userid) {
@@ -136,6 +136,7 @@ public class LoginService {
 	public String getPassword(String userid) throws NoSuchAlgorithmException, 
 	UnsupportedEncodingException, GeneralSecurityException {
 		String password = lDAO.getPassword(userid);
+		System.out.println(password);
 		password = aes.decrypt(password);
 		System.out.println(password);
 		return password;

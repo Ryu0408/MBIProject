@@ -47,7 +47,7 @@ public class AES256Util {
 	     * @throws UnsupportedEncodingException
 	     */
 	     public String encrypt(String str) throws NoSuchAlgorithmException,
-	    GeneralSecurityException, UnsupportedEncodingException{
+	     GeneralSecurityException, UnsupportedEncodingException{
 	     Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
 	     c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
 	     byte[] encrypted = c.doFinal(str.getBytes("UTF-8"));

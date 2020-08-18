@@ -7,7 +7,197 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- JavaScript ajax -->
+<script>
+	let ajaxRet;
+	function checkIdVanilla() {
+		const email = document.querySelector('#userid').value;
+		const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		if(email === '') {
+			id = document.getElementById('id');
+			idmsg = document.getElementById('idmsg');
+			idmsg.innerText = '';
+// 			idmsg.style.color = 'red';
+// 			alert('아이디를 입력하세요');
+// 			document.getElementById('userid').focus();
+			return false;
+		}
+		else if(!(emailRule.test(email))) {
+			id = document.getElementById('id');
+			idmsg = document.getElementById('idmsg');
+			idmsg.innerHTML = '아이디는 이메일형식을 지켜 주세요';
+			idmsg.style.color = 'red';
+// 			document.getElementById('userid').focus();
+			return false;
+		}
+	
+		// 바닐라 자바스크립트
+		const request = new XMLHttpRequest();
+			
+		request.open("POST", "${pageContext.request.contextPath}/loginForm/loginJoin/checkid/", true);
+		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		
+		request.onreadystatechange = function(){
+			if (request.readyState == 4 && request.status == 200) {
+				idmsg.innerHTML = request.responseText;
+				if(request.responseText === '사용 가능한 ID입니다') {
+					idmsg.style.color = 'blue';
+					ajaxRet = true;
+				}
+				else {
+					idmsg.innerText = request.responseText;
+					idmsg.style.color = 'red';
+					$('#userid').focus();
+					ajaxRet = false;
+				}
+			}
+		}
+		request.send("userid=" + email);	// POST
+	}
+</script>
+
+<!-- password 복잡도 체크 -->
+<script>
+	function passwordComplexity(event) {
+		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		
+		const userpw = document.getElementById('userpw').value;
+		const pwmsg = document.getElementById('pwmsg');
+		
+		if(userpw === ''){
+			pwmsg.innerHTML = '';
+		}
+		else if(regExp.test(userpw) == false) {
+			pwmsg.innerHTML = '비밀번호는 소문자,대문자,숫자의 조합으로 6~12자리 사이로 작성하세요';
+			pwmsg.style.color = 'red';
+			return false;
+		}
+		else {
+			pwmsg.innerHTML = '비밀번호 검증 완료';
+			pwmsg.style.color = 'blue';
+			return true;
+		}
+	}
+	
+	function checkPassword(event) {
+ 		if(event.keyCode != 13 || event.keyCode != 9) {
+		// 		13 : Enter, 9 : Tab
+			const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	 		pass1 = document.getElementById('userpw').value;
+	 		pass2 = document.getElementById('confirm_pw').value;
+	 		
+	 		if(pass2 === '') {
+	 			document.getElementById('pwmsg2').innerHTML = '';
+	 		}
+	 		else if(regExp.test(pass2) && pass1 === pass2) {
+	 			document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치합니다';
+	 			document.getElementById('pwmsg2').style.color = 'blue';
+	 		}
+	 		else {
+	 			document.getElementById('pwmsg2').innerHTML = '비밀번호를 확인해주세요';
+	 			document.getElementById('pwmsg2').style.color = 'red';
+	 		}
+ 		}
+ 	}
+</script>
+
+<!-- 폼을 서브밋 -->
+<script>
+	function submit(){
+		
+		// form의 각 항목이 빈 값인지 확인하기
+		inputs = document.querySelectorAll('input.joinInput');
+		cnt = 0;
+		for(i = 0; i < inputs.length; i++) {
+			if(inputs[i].value === '') {
+				inputs[i].style.border = '1px solid red';
+			}
+			else {
+				inputs[i].style.border = '1px solid black';
+				cnt++;	// 값이 입력된 항목을 체크하여
+			}
+		}
+		if(cnt !== inputs.length) return;	// 모든 항목의 개수와 일치하지 않으면 강제 종료
+		document.getElementById('loginJoin').submit();
+	}
+	
+</script>
+
+<script>
+	function validate() {
+// 		var arrNum = new Array(13);
+// 		var jumin = $("#jumin1").val() + $("#jumin2").val();
+// 		var fmt = RegExp(/^\d{6}[1234]\d{6}$/)  //포멧 설정
+// 		console.log(jumin);
+// 		//주민번호 유효성 검사
+// 	    if (!fmt.test(jumin)) {
+// 			alert('주민등록번호 형식에 맞게 입력해주세요');
+// 	        $("#jumin1").focus();
+// 	        return false;
+// 	    }
+		
+// 		//주민번호 존재 검사
+// 	    for (var i = 0; i < arrNum.length; i++){
+// 	    	arrNum[i] = parseInt(jumin.charAt(i));
+// 	    }
+	 
+// 	    var multipliers = [2,3,4,5,6,7,8,9,2,3,4,5];// 밑에 더해주는 12자리 숫자들 
+// 	    var sum = 0;
+	 
+// 	    for (var i = 0; i < 12; i++){
+// 	      	sum += (arrNum[i] *= multipliers[i]);// 배열끼리12번 돌면서 
+// 	    }
+	 
+// 	    if (((11 - (sum % 11)) % 10) != arrNum[12]) {
+// 			alert('주민등록번호 형식에 맞게 입력해주세요');
+// 	        $("#jumin1").focus();
+// 	        return false;
+// 	    }
+// 	    else {
+// 			alert('주민번호 검증 완료');
+// 	    }
+	}
+</script>
+
+<script>
+	function finish_check() {
+		if(document.getElementById('userid').value == '' 
+				|| document.getElementById('userid').value == null){
+			alert('아이디를 입력해 주세요');
+			document.getElementById('userid').focus();
+		}
+		else if(document.getElementById('userpw').value == '' 
+			|| document.getElementById('userpw').value == null){
+			alert('비밀번호를 입력해 주세요');
+			document.getElementById('userpw').focus();
+		}
+		else if(document.getElementById('confirm_pw').value == '' 
+			|| document.getElementById('confirm_pw').value == null 
+			|| (document.getElementById('userpw').value != document.getElementById('confirm_pw').value)){
+			alert('비밀번호 재입력을 확인 해주세요');
+			document.getElementById('confirm_pw').focus();
+		}
+		else if(document.getElementById('name').value == '' 
+			|| document.getElementById('name').value == null){
+			alert('이름을 입력해 주세요');
+			document.getElementById('name').focus();
+		}
+		else if(document.getElementById('jumin1').value == '' 
+			|| document.getElementById('jumin1').value == null ||
+			document.getElementById('jumin2').value == '' 
+				|| document.getElementById('jumin2').value == null){
+			alert('주민번호를 확인 해주세요');
+			document.getElementById('jumin1').focus();
+		}
+		else {
+			alert('가입되었습니다');
+		}
+	}
+</script>
+
 <style>
 .size {
 	width: 50px;
@@ -102,206 +292,20 @@
 }
 </style>
 
-<!-- JavaScript ajax -->
-<script>
-	let ajaxRet;
-	function checkIdVanilla() {
-		const email = document.querySelector('#userid').value;
-		const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		
-		if(email === '') {
-			id = document.getElementById('id');
-			idmsg = document.getElementById('idmsg');
-// 			idmsg.innerText = '아이디를 입력하세요';
-// 			idmsg.style.color = 'red';
-// 			alert('아이디를 입력하세요');
-// 			document.getElementById('userid').focus();
-			return false;
-		}
-		else if(!(emailRule.test(email))) {
-			id = document.getElementById('id');
-			idmsg = document.getElementById('idmsg');
-			idmsg.innerHTML = '아이디는 이메일형식을 지켜 주세요';
-			idmsg.style.color = 'red';
-// 			document.getElementById('userid').focus();
-			return false;
-		}
-	
-		// 바닐라 자바스크립트
-		
-		const request = new XMLHttpRequest();
-// 	 	request.open("GET", "${pageContext.request.contextPath}/loginForm/loginJoin/checkid/?userid=" + email, true);
-// 	 	request.setRequestHeader('Content-type', 'text; charset=UTF-8');
-			
-		request.open("POST", "${pageContext.request.contextPath}/loginForm/loginJoin/checkid/", true);
-		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		
-		request.onreadystatechange = function(){
-			if (request.readyState == 4 && request.status == 200) {
-				idmsg.innerHTML = request.responseText;
-				if(request.responseText === '사용 가능한 ID입니다') {
-					idmsg.style.color = 'blue';
-					ajaxRet = true;
-				}
-				else {
-					idmsg.innerText = request.responseText;
-					idmsg.style.color = 'red';
-// 	 				document.getElementById('userid').focus();
-// 	 				document.getElementById('id').focus();
-					$('#userid').focus();
-					ajaxRet = false;
-				}
-			}
-		}
-		request.send("userid=" + email);	// POST
-	}
-</script>
 
-<!-- password 복잡도 체크 -->
-<script>
-	function passwordComplexity(event) {
-		
-// 		const regExp = /^[a-zA-Z0-9]{6,12}$/;
-		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-		
-		const userpw = document.getElementById('userpw').value;
-		const pwmsg = document.getElementById('pwmsg');
-		
-		if(regExp.test(userpw) == false) {
-			pwmsg.innerHTML = '비밀번호는 소문자,대문자,숫자의 조합으로 6~12자리 사이로 작성하세요';
-			pwmsg.style.color = 'red';
-			return false;
-		}
-		else {
-			pwmsg.innerHTML = '비밀번호 검증 완료';
-			pwmsg.style.color = 'blue';
-			return true;
-		}
-	}
-	
-	function checkPassword(event) {
- 		if(event.keyCode != 13 || event.keyCode != 9) {
-		// 		13 : Enter, 9 : Tab 			
-	 		pass1 = document.getElementById('userpw').value;
-	 		pass2 = document.getElementById('confirm_pw').value;
-	 		if(pass1 === pass2) {
-	 			document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치합니다';
-	 			document.getElementById('pwmsg2').style.color = 'blue';
-	 		}
-	 		else {
-	 			document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치하지 않습니다';
-	 			document.getElementById('pwmsg2').style.color = 'red';
-	 		}
- 		}
- 	}
-</script>
-
-<!-- 폼을 서브밋 -->
-<script>
-	function submit(){
-		
-		// form의 각 항목이 빈 값인지 확인하기
-		inputs = document.querySelectorAll('input.joinInput');
-		cnt = 0;
-		for(i = 0; i < inputs.length; i++) {
-			if(inputs[i].value === '') {
-				inputs[i].style.border = '1px solid red';
-			}
-			else {
-				inputs[i].style.border = '1px solid black';
-				cnt++;	// 값이 입력된 항목을 체크하여
-			}
-		}
-		if(cnt !== inputs.length) return;	// 모든 항목의 개수와 일치하지 않으면 강제 종료
-		document.getElementById('loginJoin').submit();
-	}
-	
-</script>
-
-<script>
-	function validate() {
-// 		var arrNum = new Array(13);
-// 		var jumin = $("#jumin1").val() + $("#jumin2").val();
-// 		var fmt = RegExp(/^\d{6}[1234]\d{6}$/)  //포멧 설정
-// 		console.log(jumin);
-// 		//주민번호 유효성 검사
-// 	    if (!fmt.test(jumin)) {
-// 			alert('주민등록번호 형식에 맞게 입력해주세요');
-// 	        $("#jumin1").focus();
-// 	        return false;
-// 	    }
-		
-// 		//주민번호 존재 검사
-// 	    for (var i = 0; i < arrNum.length; i++){
-// 	    	arrNum[i] = parseInt(jumin.charAt(i));
-// 	    }
-	 
-// 	    var multipliers = [2,3,4,5,6,7,8,9,2,3,4,5];// 밑에 더해주는 12자리 숫자들 
-// 	    var sum = 0;
-	 
-// 	    for (var i = 0; i < 12; i++){
-// 	      	sum += (arrNum[i] *= multipliers[i]);// 배열끼리12번 돌면서 
-// 	    }
-	 
-// 	    if (((11 - (sum % 11)) % 10) != arrNum[12]) {
-// 			alert('주민등록번호 형식에 맞게 입력해주세요');
-// 	        $("#jumin1").focus();
-// 	        return false;
-// 	    }
-// 	    else {
-// 			alert('주민번호 검증 완료');
-// 	    }
-	}
-</script>
-
-<script>
-	function finish_check() {
-		if(document.getElementById('userid').value == '' 
-				|| document.getElementById('userid').value == null){
-			alert('아이디를 입력해 주세요');
-			document.getElementById('userid').focus();
-		}
-		else if(document.getElementById('userpw').value == '' 
-			|| document.getElementById('userpw').value == null){
-		alert('비밀번호를 입력해 주세요');
-		document.getElementById('userpw').focus();
-		}
-		else if(document.getElementById('confirm_pw').value == '' 
-			|| document.getElementById('confirm_pw').value == null 
-			|| (document.getElementById('userpw').value != document.getElementById('confirm_pw').value)){
-		alert('비밀번호 재입력을 확인 해주세요');
-		document.getElementById('confirm_pw').focus();
-		}
-		else if(document.getElementById('name').value == '' 
-			|| document.getElementById('name').value == null){
-		alert('이름을 입력해 주세요');
-		document.getElementById('name').focus();
-		}
-		else if(document.getElementById('jumin1').value == '' 
-			|| document.getElementById('jumin1').value == null ||
-			document.getElementById('jumin2').value == '' 
-				|| document.getElementById('jumin2').value == null){
-		alert('주민번호를 확인 해주세요');
-		document.getElementById('jumin1').focus();
-		}
-		else {
-			alert('가입되었습니다');
-		}
-	}
-</script>
 <body>
+<!--  style="overflow: hidden;" -->
 <div class="signup-form">
 	<hr>
 	
 	<br>
-    <form method="POST" id="joinForm">
+    <form method="POST">
 		<h2 align="center">회원 가입</h2>
 		<hr>
 		<div class="form-group" id="id" onblur="checkIdVanilla()">
-        	<input type="email" style="text-align: center;" class="form-control" 
+        	<input type="email" style="text-align: center;" class="form-control joinInput" 
         	name="userid" placeholder="사용할 아이디" id="userid"
-        	onfocus="this.placeholder='' "onblur="this.placeholder='사용할 아이디'"
-        	class="joinInput">
+        	onfocus="this.placeholder='' "onblur="this.placeholder='사용할 아이디'">
         	<span id="idmsg"></span>
         </div>
 		<div class="form-group" onblur="passwordComplexity(event)">
@@ -350,28 +354,14 @@
 	</div>
 	
 </div>
-
 <script>
-	function getFocus() {
-		switch(this.id) {
-		case 'userid':
-// 			if(ajaxRet !== true)
-// 				this.focus(); 
-			break;
-		case 'userpw':
-// 			if(passwordComplexity() === false)
-// 				this.focus(); 
-			break;
-		}
-	}
+	
 	checkIdVanilla();
 // 	validate();
 	
 // 	document.getElementById('vanilla').checked = 'checked';
 	document.getElementById('userid').addEventListener('keyup', checkIdVanilla);
 	document.getElementById('userpw').addEventListener('keyup', passwordComplexity);
-	document.getElementById('userid').addEventListener('keyup', getFocus);
-	document.getElementById('userpw').addEventListener('keyup', getFocus);
 	document.getElementById('confirm_pw').addEventListener('keyup', checkPassword);
 	document.getElementById('jumin2').addEventListener('blur', validate);
 // 	document.getElementById('jumin2').addEventListener('keyup', maskingJum);
@@ -387,6 +377,4 @@
 	document.getElementById('loginJoin').addEventListener('click', submit);
 	
 </script>
-
-</body>
 </html>

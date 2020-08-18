@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace = "com.mbi.dao.MyPageDAO">
+	<select id = "MypageSelectAll" resultType="com.mbi.vo.MypageVO" parameterType="String">
+		select * from USERLOGIN where username=#{username}
+	</select>
+	
+	<update id="updatePw" parameterType="com.mbi.vo.MypageVO">
+		update USERLOGIN set userpw=#{mvo.userpw} where userid=#{mvo.userid}
+	</update>
+	
+	<delete id="delUser">
+		delete from USERLOGIN where USERNAME=#{username}
+	</delete>
+</mapper>

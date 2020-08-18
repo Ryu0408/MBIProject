@@ -41,10 +41,17 @@
 					</tr>
 					
 					<tr>
-						<td colspan="4 ml-auto"><input type="submit" class="btn btn-outline-primary btn-w d-block ml-auto" /></td>
+						<td colspan="4 ml-auto">
+							<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
+									onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeRead/${uData.noticesid }/'"
+										value="수정" />	
+						</td>
 					</tr>
 				</thead>
 			</table>
 		</form>
 	</div>
 </section>
+<jsp:include page="footer.jsp" />
+</body>
+</html>4.0
