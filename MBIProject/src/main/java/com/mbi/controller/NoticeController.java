@@ -36,13 +36,13 @@ public class NoticeController {
 		return ns.noticeBoardList(page, request);
 	}
 	
-	@RequestMapping(value="/noticeBoard/guide/")
+	@RequestMapping(value="/noticeBoard/notice/")
 	public ModelAndView noticeGuide(HttpServletRequest request) {
-		return guideBoard(1, request);
+		return noticeBoard(1, request);
 	}
 	
-	@RequestMapping(value= "/noticeBoard/guide/{page2}")
-	public ModelAndView guideBoard(@PathVariable("page2")int page, HttpServletRequest request) {
+	@RequestMapping(value= "/noticeBoard/notice/{page2}")
+	public ModelAndView noticeBoard(@PathVariable("page2")int page, HttpServletRequest request) {
 		return ns.noticeBoardList1(page, request);
 	}
 	

@@ -6,6 +6,26 @@
 a:hover {text-decoration: none; color: red;}
 </style>
 <section style="height: 800px; clear: both;">
+	<hr>
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<a href="${pageContext.request.contextPath }/">
+				<span><img src="${pageContext.request.contextPath }/img/icons8-home-96.png" style="height:30px; width:30px"></span>
+				</a>
+				<span> > </span>
+				<a href="${pageContext.request.contextPath }/guideBoard/" style="text-decoration:none; color:black;">
+				<span> 가이드 </span>
+				</a>
+				<span> > </span>
+				<!-- <a href="${pageContext.request.contextPath }/guideBoard/area/" style="text-decoration:none; color:black;"> -->
+				<a href="${pageContext.request.contextPath }/noticeBoard/event/" style="text-decoration:none; color:black;">
+				<span> 지역행사 </span>
+				</a>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	<hr>
 	<div class="row">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2 text-white" style="margin-top: 50px;">
@@ -13,16 +33,16 @@ a:hover {text-decoration: none; color: red;}
 				<ul class="navbar-nav"
 					style="margin-top: 100px; text-align: center; width: 200px; height: 300px;">
 					<li class="nav-item">
-						<p style="color: black; font-size: 25pt;"><a href="${pageContext.request.contextPath }/guideBoard/" style="color: black; hover:text-decoration: none;">카테고리</a></p>
+						<p style="color: black; font-size: 25pt;"><a href="${pageContext.request.contextPath }/guideBoard/" style="color: black; hover:text-decoration: none;">가이드</a></p>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/guideBoard/guide/"
-						style="margin-top: 20px;">관광지</a>
+						style="margin-top: 20px;text-decoration:none; color:black;">관광지</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/guideBoard/delicious/"
-						style="margin-top: 20px;">맛집</a>
+						style="margin-top: 20px;text-decoration:none; color:black;">맛집</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/guideBoard/area/"
-						style="margin-top: 20px;">지역행사</a>
+						style="margin-top: 20px;text-decoration:none; color:black;">지역행사</a>
 					</li>
 				</ul>
 			</nav>
