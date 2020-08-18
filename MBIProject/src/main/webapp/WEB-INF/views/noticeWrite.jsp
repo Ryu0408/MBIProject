@@ -16,8 +16,8 @@
 						<th class="text-center">GROUP</th>
 						<td>
 							<select name="noticetype" class="form-control form-control-sm notice-group">
-							  <option value="0" >가이드</option>
-							  <option value="1">24시</option>
+							  <option value="0" >공지사항</option>
+							  <option value="1">공모전</option>
 							  <option value="2">이벤트</option>
 							</select>
 						</td>
