@@ -15,10 +15,6 @@
 			<span> 공지사항 </span>
 			</a>
 			<span> > </span>
-			<a href="${pageContext.request.contextPath }/noticeBoard/24hour/" style="text-decoration:none; color:black;">
-			<span> 공모전 </span>
-			</a>
-			<span> > </span>
 			<a href="${pageContext.request.contextPath }/noticeBoard/event/" style="text-decoration:none; color:black;">
 			<span> 이벤트 </span>
 			</a>
