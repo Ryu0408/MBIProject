@@ -1,5 +1,7 @@
 package com.mbi.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 //import java.security.NoSuchAlgorithmException;
@@ -25,7 +27,7 @@ public class LoginService {
 	@Autowired AES256Util aes;
 
 	public ModelAndView login(UserLoginVO userVO, HttpSession session, String check, 
-			HttpServletResponse response) throws UnsupportedEncodingException, GeneralSecurityException {
+			HttpServletResponse response) throws GeneralSecurityException, IOException {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -54,13 +56,14 @@ public class LoginService {
 		UserLoginVO vo = lDAO.login(userid);
 //		System.out.println("로그인 객체 확인 : " + vo);
 		
-		// 로그인 결과
-//		int data = 0;
-		
 		// 회원 정보 x
 		if(vo == null) {
-			viewName = "redirect:/loginForm/";
-			mav.setViewName(viewName);
+//			viewName = "redirect:/loginForm/";
+//			mav.setViewName(viewName);
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('회원정보가 일치하지 않습니다.');</script>");
+            out.flush();
 		}
 		
 		// 정보가 존재 할 경우
@@ -86,18 +89,17 @@ public class LoginService {
 				// 세션에 객체 저장
 				session.setAttribute("userSession", vo);
 				
-//				data = 1;	// 1은 Ajax 로그인 성공 값
 				viewName = "redirect:/";
 				mav.setViewName(viewName);
 				mav.addObject("name", session);
-//				mav.addObject("data", data);
 //				System.out.println("vo는 넘어갑니다 : " + vo.getUsername());
 			}
 			else {
 				System.out.println("로그인 실패");
-				viewName = "redirect:/loginForm/";
-				mav.setViewName(viewName);
-//				mav.addObject("data", data);
+				response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('회원정보가 일치하지 않습니다.');</script>");
+	            out.flush();
 			}
 		}
 		return mav;

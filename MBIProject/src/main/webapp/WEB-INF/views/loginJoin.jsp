@@ -76,7 +76,7 @@
 			return false;
 		}
 		else {
-			pwmsg.innerHTML = '비밀번호 검증 완료';
+			pwmsg.innerHTML = '비밀번호 확인 완료';
 			pwmsg.style.color = 'blue';
 			return true;
 		}
@@ -92,7 +92,11 @@
 	 		if(pass2 === '') {
 	 			document.getElementById('pwmsg2').innerHTML = '';
 	 		}
-	 		else if(regExp.test(pass2) && pass1 === pass2) {
+	 		else if(regExp.test(pass1) && pass1 != pass2) {
+ 				document.getElementById('pwmsg2').innerHTML = '비밀번호를 확인해주세요';
+	 			document.getElementById('pwmsg2').style.color = 'red';
+	 		}
+	 		else if(regExp.test(pass2) && pass1 == pass2) {
 	 			document.getElementById('pwmsg2').innerHTML = '비밀번호가 일치합니다';
 	 			document.getElementById('pwmsg2').style.color = 'blue';
 	 		}
@@ -128,37 +132,37 @@
 
 <script>
 	function validate() {
-// 		var arrNum = new Array(13);
-// 		var jumin = $("#jumin1").val() + $("#jumin2").val();
-// 		var fmt = RegExp(/^\d{6}[1234]\d{6}$/)  //포멧 설정
-// 		console.log(jumin);
-// 		//주민번호 유효성 검사
-// 	    if (!fmt.test(jumin)) {
-// 			alert('주민등록번호 형식에 맞게 입력해주세요');
-// 	        $("#jumin1").focus();
-// 	        return false;
-// 	    }
+		var arrNum = new Array(13);
+		var jumin = $("#jumin1").val() + $("#jumin2").val();
+		var fmt = RegExp(/^\d{6}[1234]\d{6}$/)  //포멧 설정
+		console.log(jumin);
+		//주민번호 유효성 검사
+	    if (!fmt.test(jumin)) {
+			alert('주민등록번호 형식에 맞게 입력해주세요');
+	        $("#jumin1").focus();
+	        return false;
+	    }
 		
-// 		//주민번호 존재 검사
-// 	    for (var i = 0; i < arrNum.length; i++){
-// 	    	arrNum[i] = parseInt(jumin.charAt(i));
-// 	    }
+		//주민번호 존재 검사
+	    for (var i = 0; i < arrNum.length; i++){
+	    	arrNum[i] = parseInt(jumin.charAt(i));
+	    }
 	 
-// 	    var multipliers = [2,3,4,5,6,7,8,9,2,3,4,5];// 밑에 더해주는 12자리 숫자들 
-// 	    var sum = 0;
+	    var multipliers = [2,3,4,5,6,7,8,9,2,3,4,5];// 밑에 더해주는 12자리 숫자들 
+	    var sum = 0;
 	 
-// 	    for (var i = 0; i < 12; i++){
-// 	      	sum += (arrNum[i] *= multipliers[i]);// 배열끼리12번 돌면서 
-// 	    }
+	    for (var i = 0; i < 12; i++){
+	      	sum += (arrNum[i] *= multipliers[i]);// 배열끼리12번 돌면서 
+	    }
 	 
-// 	    if (((11 - (sum % 11)) % 10) != arrNum[12]) {
-// 			alert('주민등록번호 형식에 맞게 입력해주세요');
-// 	        $("#jumin1").focus();
-// 	        return false;
-// 	    }
-// 	    else {
-// 			alert('주민번호 검증 완료');
-// 	    }
+	    if (((11 - (sum % 11)) % 10) != arrNum[12]) {
+			alert('주민등록번호 형식에 맞게 입력해주세요');
+	        $("#jumin1").focus();
+	        return false;
+	    }
+	    else {
+			alert('주민번호 검증 완료');
+	    }
 	}
 </script>
 
@@ -362,6 +366,7 @@
 // 	document.getElementById('vanilla').checked = 'checked';
 	document.getElementById('userid').addEventListener('keyup', checkIdVanilla);
 	document.getElementById('userpw').addEventListener('keyup', passwordComplexity);
+	document.getElementById('userpw').addEventListener('keyup', checkPassword);
 	document.getElementById('confirm_pw').addEventListener('keyup', checkPassword);
 	document.getElementById('jumin2').addEventListener('blur', validate);
 // 	document.getElementById('jumin2').addEventListener('keyup', maskingJum);

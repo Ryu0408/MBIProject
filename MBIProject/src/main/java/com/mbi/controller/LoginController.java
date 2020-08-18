@@ -63,7 +63,7 @@ public class LoginController {
 			String site = "loginJoin";
 			if(userVO.getUserid() != "" && userVO.getUserpw() != "" && userVO.getUsername() != ""
 					&& userVO.getUserjuminA() != "" && userVO.getUserjuminB() != "") {
-				System.out.println("리얼 이냐??");
+//				System.out.println("리얼 이냐??");
 				ls.userJoin(userVO);
 				site = "redirect:/loginForm/";
 			}
@@ -73,9 +73,8 @@ public class LoginController {
 	
 	// 로그인
 	@RequestMapping(value="loginForm/", method=RequestMethod.POST)
-	@ResponseBody
 	public ModelAndView loginPass(UserLoginVO userVO, HttpSession session, 
-			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, GeneralSecurityException {
+			HttpServletRequest request, HttpServletResponse response) throws GeneralSecurityException, IOException {
 		
 		String check = request.getParameter("remember_userid"); 	// 아이디 저장 값 들고오기
 
