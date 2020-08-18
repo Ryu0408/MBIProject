@@ -9,7 +9,10 @@
 	</select>
 	
 	<update id="updatePw" parameterType="com.mbi.vo.MypageVO">
-		update USERLOGIN set userpw=#{mypageVO.userpw} where userid=#{mypageVO.userid}
+		update USERLOGIN set userpw=#{mvo.userpw} where userid=#{mvo.userid}
 	</update>
 	
+	<delete id="delUser">
+		delete from USERLOGIN where USERNAME=#{username}
+	</delete>
 </mapper>

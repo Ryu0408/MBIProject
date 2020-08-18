@@ -7,8 +7,113 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+	function closeModal() {
+		$('.searchModal').hide();
+	}
+
+	function openModel() {
+		$("#modal").show();
+		// Jquery를 이용한 ajax
+		var username = "<c:out value="${vos.username}" />";
+		console.log(username);
+		if(username === '') {
+			alert('로그인 한 후에 이용해 주세요');
+			location.href = '${pageContext.request.contextPath}/loginForm/';
+		}
+		
+		$.ajax({
+					url : "${pageContext.request.contextPath}/mypage/"
+							+ username + "/",
+					method : "POST",
+					dataType : "text",
+					data : {username:username},
+					success : function(data) {
+						console.log("아무");
+						mplist = JSON.parse(data);
+						console.log(mplist);
+						$("#name").text(mplist[0].username);
+						$("#id").text(mplist[0].userid);
+						$("#pw").text(mplist[0].userpw);
+						$("#regist").text(mplist[0].registdate);
+						
+					},
+					error : function(data) {
+						alert('서버 통신 실패1');
+					}
+				})
+	}
+	
+	function updatepw() {
+// 		$("#modal").show();
+		// Jquery를 이용한 ajax
+		
+		var confirmpw = $("#confirmPw").val();
+		var username = "<c:out value="${vos.username}" />";
+		console.log(confirmpw);
+		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		alert('업데이트 넘어옴');
+		
+		if(regExp.test(confirmpw) == false) {
+			alert('비밀번호는 소문자,대문자,숫자의 조합으로 6~12자리 사이로 작성하세요');
+			return false;
+		}
+		
+		$.ajax({
+					url : "${pageContext.request.contextPath}/mypage/"
+							+ username + "/",
+					method : "POST",
+					dataType : "text",
+					data : {confirmpw:confirmpw},
+					success : function(data) {
+						mplist = JSON.parse(data);
+						console.log(mplist);
+						alert('비밀번호를 바꾸었습니다.');
+						$("#name").text(mplist[0].username);
+						$("#id").text(mplist[0].userid);
+						$("#pw").text(mplist[0].userpw);
+						$("#regist").text(mplist[0].registdate);
+					},
+					error : function(data) {
+						console.log(data);
+						alert('서버 통신 실패2 : ');
+					}
+				})
+	}
+	
+	function deleteConfirm() {
+		var result = confirm('정말로 탈퇴 하시겠습니까?');
+		
+		if(result == true)	delUser();
+		else				openModel();
+	}
+	
+	function delUser() {
+		var username = "<c:out value="${vos.username}" />";
+		var delInfo = "del";
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/mypage/"
+					+ username + "/",
+			method : "POST",
+			dataType : "text",
+			data : {confirmpw:delInfo},
+			success : function(data) {
+				console.log(data);
+				alert('정상적으로 탈퇴 되었습니다.');
+				location.href = '${pageContext.request.contextPath}/';
+			},
+			error : function(data) {
+				console.log(data);
+				alert('서버 통신 실패3 : ');
+			}
+		})
+	}
+	
+</script>
+
 <style>
 .card {
 	margin-top: 65px;
@@ -57,74 +162,7 @@
 	width: 70%; /* Could be more or less, depending on screen size */
 }
 </style>
-<script>
-	function closeModal() {
-		$('.searchModal').hide();
-	};
 
-	function openModel() {
-		$("#modal").show();
-		// Jquery를 이용한 ajax
-		var username = "<c:out value="${vos.username}" />";
-		console.log(username);
-		if(username === '') {
-			alert('로그인 한 후에 이용해 주세요');
-			location.href = '${pageContext.request.contextPath}/loginForm/';
-		}
-		
-		$.ajax({
-					url : "${pageContext.request.contextPath}/mypage/"
-							+ username + "/",
-					method : "POST",
-					dataType : "text",
-					data : {username:username},
-					success : function(data) {
-						console.log("아무");
-						mplist = JSON.parse(data);
-						console.log(mplist);
-						$("#name").text(mplist[0].username);
-						$("#id").text(mplist[0].userid);
-						$("#pw").text(mplist[0].userpw);
-						$("#regist").text(mplist[0].registdate);
-						
-					},
-					error : function(data) {
-						alert('서버 통신 실패1');
-					}
-				})
-	};
-	
-	function updatepw() {
-// 		$("#modal").show();
-		// Jquery를 이용한 ajax
-		
-		var confirmpw = $("#confirmPw").val();
-		var username = "<c:out value="${vos.username}" />";
-		console.log(confirmpw);
-		alert('업데이트 넘어옴');
-		$.ajax({
-					url : "${pageContext.request.contextPath}/mypage/"
-							+ username + "/",
-					method : "POST",
-					dataType : "text",
-					data : {confirmpw:confirmpw},
-					success : function(data) {
-						mplist = JSON.parse(data);
-						console.log(mplist);
-						$("#name").text(mplist[0].username);
-						$("#id").text(mplist[0].userid);
-						$("#pw").text(mplist[0].userpw);
-						$("#regist").text(mplist[0].registdate);
-					},
-					error : function(data) {
-						console.log("아우상우실패");
-						console.log(data);
-						alert('서버 통신 실패2 : ');
-					}
-				})
-	};
-	
-</script>
 <article style="overflow: hidden;">
 	<div id="modal" class="searchModal">
 		<div class="search-modal-content">
@@ -135,16 +173,11 @@
 				<div class="col-sm-12">
 					<div class="row">
 						<div class="col-sm-12">
-
 							<div id="ListBox" style="padding-top: 20px;">
 								<div>
 									<div>이름</div>
 									<div id="name"></div>
 									<div class="input-group mb-3">
-										<input type="text" id="confirmName" class="form-control"
-											placeholder="Recipient's username"
-											aria-label="Recipient's username"
-											aria-describedby="basic-addon2">
 									</div>
 								</div>
 								<div>
@@ -173,8 +206,15 @@
 							</div>
 							<div
 								style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
-								onClick="closeModal();">
+								onclick="closeModal();">
 								<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">닫기
+								</span>
+							</div>
+							<div
+								style="cursor: pointer; background-color: #0054FF; 
+								text-align: center; padding-bottom: 10px; padding-top: 10px;"
+								onclick="deleteConfirm()">
+								<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">회원탈퇴
 								</span>
 							</div>
 						</div>

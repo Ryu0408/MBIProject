@@ -57,11 +57,19 @@ public class LoginController {
 	
 	// 회원 가입 후 로그인 페이지 이동
 	@RequestMapping(value="loginForm/loginJoin/", method=RequestMethod.POST)
-	public ModelAndView join(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
-		System.out.println("회원가입 넘어옴");
-		ModelAndView mav = new ModelAndView();
-		return mav.addObject(ls.userJoin(userVO));
-	}
+		public String join(UserLoginVO userVO) throws UnsupportedEncodingException, GeneralSecurityException {
+			System.out.println("회원가입 넘어옴");
+//			ModelAndView mav = new ModelAndView();
+			String site = "loginJoin";
+			if(userVO.getUserid() != "" && userVO.getUserpw() != "" && userVO.getUsername() != ""
+					&& userVO.getUserjuminA() != "" && userVO.getUserjuminB() != "") {
+				System.out.println("리얼 이냐??");
+				ls.userJoin(userVO);
+				site = "redirect:/loginForm/";
+			}
+			else	return site;
+			return site;
+		}
 	
 	// 로그인
 	@RequestMapping(value="loginForm/", method=RequestMethod.POST)
@@ -99,8 +107,9 @@ public class LoginController {
 	@RequestMapping(value="loginForm/passwordSearch/{email}/", method=RequestMethod.GET,
 			produces="application/text;charset=utf8")
 	@ResponseBody
-	public String newPass(String useremail, Model model) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException  {
+	public String newPass(String useremail) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException  {
         String jsonString = null;
+        System.out.println("useremail : " + useremail);
 		List<String> list = new ArrayList<String>();
 		boolean checkEmail = ls.idcheck(useremail);
 		String useEmail = checkEmail ? "이메일이 발송되었습니다" : "해당 이메일이 없습니다. 다시 입력해주세요";
