@@ -92,7 +92,7 @@
 				</c:if>
 			</div>
 			
-			<c:if test="${session != null }">
+			<c:if test="${session.userid == 'admin@admin.com' }">
 				<div id="write" style="float: right;">
 					<button  onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeWrite/'">글쓰기</button>
 				</div>
