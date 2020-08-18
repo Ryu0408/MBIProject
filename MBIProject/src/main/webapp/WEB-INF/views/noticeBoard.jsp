@@ -10,12 +10,12 @@
 				<ul class="navbar-nav"
 					style="margin-top: 100px; text-align: center; width: 200px; height: 300px;">
 					<li class="nav-item">
-						<p style="color: black; font-size: 25pt;">카테고리</p>
+						<p style="color: black; font-size: 25pt;">공지사항</p>
 					</li>
 					<li class="nav-item"><a class="nav-link navType" href='${pageContext.request.contextPath}/noticeBoard/guide/'
-						style="margin-top: 20px;">가이드</a></li>
+						style="margin-top: 20px;">공지사항</a></li>
 					<li class="nav-item"><a class="nav-link navType" href='${pageContext.request.contextPath}/noticeBoard/24hour/'
-						style="margin-top: 20px;">24시</a></li>
+						style="margin-top: 20px;">공모전</a></li>
 					<li class="nav-item"><a class="nav-link navType" href='${pageContext.request.contextPath}/noticeBoard/event/'
 						style="margin-top: 20px;">이벤트</a></li>
 				</ul>

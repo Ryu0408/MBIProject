@@ -161,29 +161,29 @@ btns.forEach( (bt) => {
 		btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
 		event.target.className += ' on';
 		if(btnStateHTML === "식당"){
+			paging('0', '1');
 			$('#pageNumber *').remove();
-			paging(0, 1);
 			for(var i = 1 ; i <= restaurantPage ; i++){
 				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 0 + '\',\'' + i + '\')">'+i+'</button>');
 			}
 		}
 		else if(btnStateHTML === "약국"){
+			paging('1', '1');
 			$('#pageNumber *').remove();
-			paging(1, 1);
 			for(var i = 1 ; i <= parmercyPage ; i++){
 				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 1 + '\',\'' + i + '\')">'+i+'</button>');
 			}
 		}
 		else if(btnStateHTML === "카페"){
+			paging('2', '1');
 			$('#pageNumber *').remove();
-			paging(2, 1);
 			for(var i = 1 ; i <= cafePage ; i++){
 				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 2 + '\',\'' + i + '\')">'+i+'</button>');
 			}
 		}
 		else if(btnStateHTML === "병원"){
+			paging('3', '1');
 			$('#pageNumber *').remove();
-			paging(3, 1);
 			for(var i = 1 ; i <= hospitalPage ; i++){
 				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 3 + '\',\'' + i + '\')">'+i+'</button>');
 			}
@@ -194,10 +194,10 @@ btns.forEach( (bt) => {
 });
 
 function paging(type, page){
-	if (type === '0' || page !== 1){$("#restaurantArticle *").remove();}
-	else if (type === '1' || page !== 1){$("#parmercyArticle *").remove();}
-	else if (type === '2' || page !== 1){$("#cafeArticle *").remove();}
-	else if (type === '3' || page !== 1){$("#hospitalArticle *").remove();}
+	if (type === '0' && page !== 1){$("#restaurantArticle *").remove();}
+	if (type === '1' && page !== 1){$("#parmercyArticle *").remove();}
+	if (type === '2' && page !== 1){$("#cafeArticle *").remove();}
+	if (type === '3' && page !== 1){$("#hospitalArticle *").remove();}
 	$.ajax({
 	      url:"${cpath}/hours24/"+type+"/"+page+"/",
 	      method:"GET",
@@ -216,9 +216,9 @@ function paging(type, page){
                 body.innerHTML = title;
                 card.append(body);
                 if (type === '0'){$("#restaurantArticle").append(card);}
-            	else if (type === '1'){$("#parmercyArticle").append(card);}
-            	else if (type === '2'){$("#cafeArticle").append(card);}
-            	else if (type === '3'){$("#hospitalArticle").append(card);}
+            	if (type === '1'){$("#parmercyArticle").append(card);}
+            	if (type === '2'){$("#cafeArticle").append(card);}
+            	if (type === '3'){$("#hospitalArticle").append(card);}
              }
 	      },
 	      error:function(data){
