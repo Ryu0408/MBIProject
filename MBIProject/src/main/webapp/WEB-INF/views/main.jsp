@@ -39,7 +39,7 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 <div class="row">
 	<div class="col-sm-2"></div>
 		<div class="col-sm-8">
-			<img src="/homepage/img/광안대교8.jpg" style="height:300px; width: 1280px">
+			<img src="${pageContext.request.contextPath }/img/광안대교8.jpg" style="height:300px; width: 1280px">
 		</div>
 	<div class="col-sm-2"></div>
 </div><br>
@@ -144,37 +144,37 @@ var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Busan&appid=8e270
 		<ul style="padding-left:65px;">
 			<li style="width:230px;">
 				<a href="http://www.busan.go.kr/expo/index" target="_blank" title="새창열기">
-				<span><img src="/homepage/img/icons8-globe-earth-96.png" style="height:70px; width:70px"></span>
+				<span><img src="${pageContext.request.contextPath }/img/icons8-globe-earth-96.png" style="height:70px; width:70px"></span>
 				<span>2030부산월드엑스포</span>
 				</a>
 			</li>
 			<li style="width:190px;">
 				<a href="http://lifemap.busan.go.kr/" target="_blank" title="새창열기">
-				<span><img src="/homepage/img/icons8-region-96.png" style="height:70px; width:70px"></span>
+				<span><img src="${pageContext.request.contextPath }/img/icons8-region-96.png" style="height:70px; width:70px"></span>
 				<span>부산생활지도</span>
 				</a>
 			</li>
 			<li style="width:210px;">
 				<a href="http://www.busan.go.kr/young/index" target="_blank" title="새창열기">
-				<span><img src="/homepage/img/icons8-commercial-96.png" style="height:70px; width:70px"></span>
+				<span><img src="${pageContext.request.contextPath }/img/icons8-commercial-96.png" style="height:70px; width:70px"></span>
 				<span>부산청년플랫폼</span>
 				</a>
 			</li>
 			<li style="width:180px;">
 				<a href="http://www.busan.go.kr/jumin" target="_blank" title="새창열기">
-				<span><img src="/homepage/img/icons8-handshake-96.png" style="height:70px; width:70px"></span>
+				<span><img src="${pageContext.request.contextPath }/img/icons8-handshake-96.png" style="height:70px; width:70px"></span>
 				<span>주민자치회</span>
 				</a>
 			</li>
 			<li style="width:160px;">
 				<a href="https://www.busan.go.kr/minwon/guide" target="_blank" title="새창열기">
-				<span><img src="/homepage/img/icons8-siren-96.png" style="height:70px; width:70px"></span>
+				<span><img src="${pageContext.request.contextPath }/img/icons8-siren-96.png" style="height:70px; width:70px"></span>
 				<span>신고센터</span>
 				</a>
 			</li>
 			<li style="width:190px;">
 				<a href="http://www.safetyreport.go.kr/" target="_blank" title="새창열기">
-				<span><img src="/homepage/img/icons8-user-shield-96.png" style="height:70px; width:70px"></span>
+				<span><img src="${pageContext.request.contextPath }/img/icons8-user-shield-96.png" style="height:70px; width:70px"></span>
 				<span>안전신문고</span>
 				</a>
 			</li>
