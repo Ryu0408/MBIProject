@@ -19,13 +19,12 @@
 								<td><input type="text" name="noticeid" value="비회원" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"  readonly /></td>
 							</c:when>
 						</c:choose>
-						
 						<th class="text-center">GROUP</th>
 						<td>
 							<select name="noticetype" class="form-control form-control-sm notice-group">
-							  <option value="0" ${uData.noticetype == 0 ? 'selected' : uData.noticetype == 1 ? 'selected' : uData.noticetype == 2 ? 'selected' : ''}>가이드</option>
-							  <option value="1" ${uData.noticetype == 0 ? 'selected' : uData.noticetype == 1 ? 'selected' : uData.noticetype == 2 ? 'selected' : ''}>24시</option>
-							  <option value="2" ${uData.noticetype == 0 ? 'selected' : uData.noticetype == 1 ? 'selected' : uData.noticetype == 2 ? 'selected' : ''}>이벤트</option>
+							  <option value="0" ${uData.noticetype == 0 ? 'selected' : ''}>공지사항</option>
+							  <option value="1" ${uData.noticetype == 1 ? 'selected' : ''}>공모전</option>
+							  <option value="2" ${uData.noticetype == 2 ? 'selected' : ''}>이벤트</option>
 							</select>
 						</td>
 					</tr>
@@ -42,9 +41,7 @@
 					
 					<tr>
 						<td colspan="4 ml-auto">
-							<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
-									onclick="location.href='${pageContext.request.contextPath}/noticeBoard/noticeRead/${uData.noticesid }/'"
-										value="수정" />	
+							<input type="submit" class="btn btn-outline-primary btn-w d-block ml-auto" value="수정" />	
 						</td>
 					</tr>
 				</thead>

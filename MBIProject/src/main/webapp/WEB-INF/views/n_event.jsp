@@ -79,20 +79,20 @@
 			
 			<div class="paging" style="color: black; margin: auto; text-align: center;">
 				<c:if test="${prev }">
-					<a href="${pageContext.request.contextPath}/noticeBoard/${begin - 1}/">◀</a>
+					<a href="${pageContext.request.contextPath}/noticeBoard/event/${begin - 1}/">◀</a>
 				</c:if>
 				<c:forEach var="i" begin="${begin}" end="${end}">
 				<c:if test="${i == page }">
 					<strong>[${i }]</strong>
 				</c:if>
 				<c:if test="${i != page }">
-					<a href="${pageContext.request.contextPath}/noticeBoard/${i }/">
+					<a href="${pageContext.request.contextPath}/noticeBoard/event/${i }/">
 				 		[${i }]
 					</a>
 				</c:if>
 				</c:forEach>
 				<c:if test="${next }">
-					<a href="${pageContext.request.contextPath}/noticeBoard/${end + 1}/">▶</a>
+					<a href="${pageContext.request.contextPath}/noticeBoard/event/${end + 1}/">▶</a>
 				</c:if>
 			</div>
 			
