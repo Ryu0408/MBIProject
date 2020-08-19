@@ -127,6 +127,12 @@ public class NoticeController {
 		model.addAttribute("uData", ns.noticeRead(sid));
 		model.addAttribute("user", uvo);
 		
+		String old_refer = request.getHeader("referer");
+		if(old_refer == null) {
+			System.out.println("여기로..~~~~");
+			return "redirect:/";	
+		}
+		
 		return "noticeModify";
 	}
 	
@@ -135,7 +141,7 @@ public class NoticeController {
 		System.out.println("수정할 SID : " + sid);
 		
 		ns.noticeModify(sid, vo);
-		return "redirect:/noticeBoard/";
+		return "redirect:/noticeBoard/noticeRead/{sid}/";
 	}
 	
 	@RequestMapping(value="/noticeBoard/noticeDelete/{sid}/", method=RequestMethod.GET)

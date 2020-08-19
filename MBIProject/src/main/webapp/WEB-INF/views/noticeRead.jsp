@@ -46,7 +46,7 @@
 					</tr>
 					
 					<c:choose>
-						<c:when test="${user.userid eq nData.noticeid }">
+						<c:when test="${user.userid eq 'admin@admin.com' }">
 							<tr>
 								<td colspan="1 ml-auto">
 									<input type="button" class="btn btn-outline-primary btn-w d-block ml-auto"
