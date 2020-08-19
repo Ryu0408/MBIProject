@@ -46,6 +46,11 @@
 	background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
 	}
 	.placeinfo .tel {color:#0f7833;}
+	.card-width {
+	width: 340px;
+	height: 180px;
+	margin: 30px;
+	}
 </style>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -149,16 +154,20 @@
 	</div><br><br>
 	<!-- 업체 0. 식당, 1. 약국, 2. 카페, 3. 병원 //지도 api 에 접근하는 주소가 localhost(x), 도메인, 아이피(o) -->
 	<!-- 스크립트에서 페이징, 버튼 onclick로 변경? -->
-	<div>
-		<article id="restaurantArticle"></article>
-		<article id="parmercyArticle"></article>
-		<article id="cafeArticle"></article>
-		<article id="hospitalArticle"></article>
-		<div style = "text-align: center; position:relative"><br>
-			<a href=# id='prev'>◀</a>
-			<a id=pageNumber></a>
-			<a href=# id='next'>▶</a>
-		</div>
+	<div class="row">
+		<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<article id="restaurantArticle"></article>
+				<article id="parmercyArticle"></article>
+				<article id="cafeArticle"></article>
+				<article id="hospitalArticle"></article>
+				<div style = "text-align: center; position:relative"><br>
+					<a href=# id='prev'>◀</a>
+					<a id=pageNumber></a>
+					<a href=# id='next'>▶</a>
+				</div>
+			</div>
+		<div class="col-sm-2"></div>
 	</div>
 	
 <script>
@@ -221,7 +230,7 @@ function paging(type, page){
              for (key in result) {      // 리스트 중 하나의 객체
                 member = result[key];
                 card = document.createElement('div');
-                card.className = 'card';
+                card.className = 'card card-width';
                 body = document.createElement('div');
                 body.className = 'card-body';
                 var title = '<h5 class="card-title">' + member.storeName + '</h5>'
