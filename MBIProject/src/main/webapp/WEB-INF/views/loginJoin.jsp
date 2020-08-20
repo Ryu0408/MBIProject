@@ -368,8 +368,7 @@
 	document.getElementById('userpw').addEventListener('keyup', passwordComplexity);
 	document.getElementById('userpw').addEventListener('keyup', checkPassword);
 	document.getElementById('confirm_pw').addEventListener('keyup', checkPassword);
-	document.getElementById('jumin2').addEventListener('blur', validate);
-// 	document.getElementById('jumin2').addEventListener('keyup', maskingJum);
+	document.getElementById('jumin2').addEventListener('focusout', validate);
 	// 키를 눌렀다가 떼는 순간 이벤트 발생 (글자가 입력된 이후에 함수 실행)
 	
 	function enter(event) {
