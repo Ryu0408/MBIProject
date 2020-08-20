@@ -106,16 +106,21 @@
     // 좌표를 찍기위한 marker 객체 생성
     var marker = new kakao.maps.Marker();
     
+    // db의 목록을 담을 상점 배열 생성
     var storeArray = new Array();
     var parmercyArray = new Array();
     var hospitalArray = new Array();
     var cafeArray = new Array();
     var restaurantArray = new Array();
+    
+    // 페이징
     var restaurantCount = 0;
     var parmercyCount = 0;
     var hospitalCount = 0;
     var cafeCount = 0;
     var perPage = 12;
+    
+    // db 자료 가져오기
     <c:forEach items="${list}" var = "hvo" varStatus="index">
     	var store = new Object();
     	store.addr = "${hvo.storeAddr}";
@@ -123,10 +128,9 @@
     	store.phone = "${hvo.storePhone}";
     	store.rate = "${hvo.storeRate}";
     	store.type = "${hvo.storeType}";
-    	if(store.type == '0'){
+    	if(store.type == '0'){	// 상점 종류별로 카운팅
     		restaurantCount = restaurantCount + 1;
-    	}
-    	else if(store.type == '1'){
+    	}else if(store.type == '1'){
     		parmercyCount = parmercyCount + 1;
     	}else if(store.type == '2'){
     		cafeCount = cafeCount + 1;
@@ -135,6 +139,7 @@
     	}
     	storeArray.push(store);
     </c:forEach>
+    // 페이징 마지막 페이지 올림
     var restaurantPage = Math.ceil(restaurantCount/perPage);
     var parmercyPage = Math.ceil(parmercyCount/perPage);
     var hospitalPage = Math.ceil(hospitalCount/perPage);
@@ -183,10 +188,11 @@ btns.forEach( (bt) => {
 		btnStateHTML = btnState.innerHTML
 		btns.forEach( (other) => { other.className = 'btn btn-primary btn-lg'; })
 		event.target.className += ' on';
-		if(btnStateHTML === "식당"){
-			paging('0', '1');
-			$('#pageNumber *').remove();
+		if(btnStateHTML === "식당"){	// 페이징
+			paging('0', '1');		// '식당' 클릭 시 1페이지 표시
+			$('#pageNumber *').remove();	// 페이지 숫자 중복 제거
 			for(var i = 1 ; i <= restaurantPage ; i++){
+				// 페이지 숫자 클릭시 해당 목록 띄우기
 				$('#pageNumber').append('<button style="border-style:none; background-color:white;" onclick="paging(\''+ 0 + '\',\'' + i + '\')">'+i+'</button>');
 			}
 		}
@@ -216,12 +222,13 @@ btns.forEach( (bt) => {
 	})
 });
 
-function paging(type, page){
+function paging(type, page){	// 페이징
+	// 페이지에 표시되던 이전 자료 지우기
 	if (type === '0' && page !== 1){$("#restaurantArticle *").remove();}
 	if (type === '1' && page !== 1){$("#parmercyArticle *").remove();}
 	if (type === '2' && page !== 1){$("#cafeArticle *").remove();}
 	if (type === '3' && page !== 1){$("#hospitalArticle *").remove();}
-	$.ajax({
+	$.ajax({	// ajax로 상점 db 불러오기
 	      url:"${cpath}/hours24/"+type+"/"+page+"/",
 	      method:"GET",
 	      dataType:"text",
@@ -238,6 +245,7 @@ function paging(type, page){
                 			+ '<p class="card-text">' + member.storePhone + '</p>';
                 body.innerHTML = title;
                 card.append(body);
+                // 상점 목록 html 에 표시
                 if (type === '0'){$("#restaurantArticle").append(card);}
             	if (type === '1'){$("#parmercyArticle").append(card);}
             	if (type === '2'){$("#cafeArticle").append(card);}
@@ -264,15 +272,16 @@ btns.forEach( (bt) => {
 			if(bt.innerHTML === '약국'){
 				if(store.type === '1'){
 					btset = bt;
+					// 도로명 주소를 x, y 좌표로 변경
 					geocoder.addressSearch(store.addr, function(result, status) {
 		    			if (status === kakao.maps.services.Status.OK) {
 		    				var value = new Object();
 		    				value.position = new kakao.maps.LatLng(result[0].y,  result[0].x);
-		    				value.addr = store.addr;
+		    				value.addr = store.addr;	// db 자료를 script에서 사용할 객체로 변경
 		    				value.name = store.name;
 		    				value.phone = store.phone;
 		    				value.rate = store.rate;
-		    				parmercyArray.push(value);
+		    				parmercyArray.push(value);	// 객체를 배열에 추가
 		    			}
 					});
 				}
@@ -327,6 +336,7 @@ btns.forEach( (bt) => {
 	});
 });
 //================================================================================================================================
+// 마커 클릭시 상점 정보 띄우기
 function infoBox(marker) {
 	if(placeOverlay.getContent()!== null){
 		placeOverlay.setMap(null);
@@ -343,8 +353,9 @@ function infoBox(marker) {
 					
 	contentNode.innerHTML = content;
 	// contentNode.innerHTML = "가게명 : " + strArray[0] + "<br> 주소 : " + strArray[1];
-	// contentNode.innerHTML = "번호 : " + strArray[2] + "<br> 평점 : " + strArray[3];
+	// contentNode.innerHTML = "번호 : " + strArray[2];
 	
+	// 마커 정보 표시할 좌표 입력
 	placeOverlay.setPosition(new kakao.maps.LatLng(marker.getPosition().Ha, marker.getPosition().Ga));
 	placeOverlay.setContent(contentNode);
 	placeOverlay.setMap(map);
@@ -357,10 +368,12 @@ search.forEach( (sc) => {
 		console.log(btset.innerHTML);
 		if(btset.innerHTML === '약국'){
 			for(i=0;i<parmercyArray.length;i++){
+				// 중심좌표로부터 2000m 이내에 있는 '약국'의 위치 마커로 모두 표시
 		 		if (calcDistance(latlngj.getLat(), latlngj.getLng(), parmercyArray[i].position.getLat(),parmercyArray[i].position.getLng()) < 2000) {
 		            marker = addMarker(parmercyArray[i].position,  parmercyArray[i].name+"@"+parmercyArray[i].addr+"@"+parmercyArray[i].phone+"@"
 		            		+parmercyArray[i].rate);
 		            markers.forEach( (marker) => {
+		            	// 마커의 정보 띄우기
 		            	kakao.maps.event.addListener(marker, 'click', function() {
 							infoBox(marker);
 		            	});
