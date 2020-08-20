@@ -47,8 +47,8 @@
 				</thead>
 			</table>
 		</form>
-	</div>
+	</div> 
 </section>
 <jsp:include page="footer.jsp" />
 </body>
-</html>4.0
+</html>
